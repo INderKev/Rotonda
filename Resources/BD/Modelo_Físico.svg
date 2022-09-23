@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="381mm" xmlns="http://www.w3.org/2000/svg" height="265mm" version="1.1" viewBox="0 0 1443 1004" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <polyline fill="none" points="1023,39 620,39" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="620,39 633,36 633,42" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="821" y="35" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Restaurante_Stock</text>
+   <polyline fill="none" points="1104,44 1341,44" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="1341,44 1328,47 1328,41" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="1223" y="40" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Stock_Ingrediente</text>
+   <polyline fill="none" points="1331,403 1030,403" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="1030,403 1043,400 1043,406" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="1180" y="399" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Producto_Ingrediente</text>
+   <polyline fill="none" points="1386,374 1386,74" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="1386,74 1389,87 1383,87" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="1385" y="228" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Producto_Ingrediente</text>
+   <polyline fill="none" points="528,35 80,35" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="80,35 93,32 93,38" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="304" y="31" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Especialidad_Restaurante</text>
+   <polyline fill="none" points="98,238 98,89 528,89" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="528,89 515,92 515,86" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="98" y="93" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Restaurante_Menu</text>
+   <polyline fill="none" points="987,330 987,101 620,101" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="620,101 633,98 633,104" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="987" y="106" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Restaurante_Producto</text>
+   <polyline fill="none" points="511,272 134,272" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="134,272 148,269 148,275" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="322" y="269" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Menu_Seleccion</text>
+   <polyline fill="none" points="98,489 98,311" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="98,311 101,324 95,324" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="98" y="403" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Menu_MenuSeleccionado</text>
+   <polyline fill="none" points="511,288 484,288 484,404 178,404 178,515 163,515" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="163,515 176,512 176,518" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="331" y="399" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">MenuSeleccionado_Seleccion</text>
+   <polyline fill="none" points="499,720 105,720 105,542" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="105,542 108,555 102,555" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="105" y="730" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Orden_MenuSeleccionado</text>
+   <polyline fill="none" points="567,352 567,491" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="567,491 564,478 570,478" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="567" y="425" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Clasificacion_Seleccion</text>
+   <polyline fill="none" points="987,416 987,518 612,518" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="612,518 625,515 625,521" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="987" y="521" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Clasificacion_Producto</text>
+   <polyline fill="none" points="523,932 343,932 343,933 164,933" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="164,933 177,930 177,936" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="343" y="928" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Cliente_Compra</text>
+   <polyline fill="none" points="557,769 557,902" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="557,902 554,889 560,889" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="556" y="838" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Compra_Orden</text>
+   <polyline fill="none" points="614,720 1003,720 1003,416" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="1003,416 1006,430 1000,430" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="1003" y="730" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Orden_Producto</text>
+   <polyline fill="none" points="626,344 945,344" stroke="#00aaaa" stroke-width="1"/>
+   <polygon fill="#00aaaa" points="945,344 932,347 932,341" stroke="#00aaaa" stroke-width="1" stroke-linejoin="miter"/>
+   <text x="786" y="340" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Seleccion_Producto</text>
+   <rect x="2" y="9" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient1" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="2" y="9" fill="url(#Gradient1)" width="78" height="53" stroke="#00aaaa" stroke-width="1"/>
+   <text x="41" y="20" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Especialidad</text>
+   <line x1="2" x2="80" y1="26" y2="26" stroke="#00aaaa" stroke-width="1"/>
+   <text x="7" y="36" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdEspecialidad</text>
+   <text x="7" y="49" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nombre</text>
+   <rect x="528" y="15" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient2" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="528" y="15" fill="url(#Gradient2)" width="92" height="112" stroke="#00aaaa" stroke-width="1"/>
+   <text x="574" y="26" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Restaurante</text>
+   <line x1="528" x2="620" y1="32" y2="32" stroke="#00aaaa" stroke-width="1"/>
+   <text x="533" y="42" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdRestaurante</text>
+   <text x="533" y="55" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdEspecialidad</text>
+   <text x="533" y="68" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nom_Restaurante</text>
+   <text x="533" y="81" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Direccion</text>
+   <text x="533" y="94" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Telefono</text>
+   <text x="533" y="107" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">User</text>
+   <text x="533" y="120" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Password</text>
+   <rect x="1023" y="2" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient3" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="1023" y="2" fill="url(#Gradient3)" width="81" height="73" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1063" y="13" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Stock</text>
+   <line x1="1023" x2="1104" y1="19" y2="19" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1027" y="29" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdIngrediente</text>
+   <text x="1027" y="42" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdRestaurante</text>
+   <text x="1027" y="55" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdStock</text>
+   <text x="1027" y="68" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Cantidad_Stock</text>
+   <rect x="62" y="238" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient4" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="62" y="238" fill="url(#Gradient4)" width="72" height="73" stroke="#00aaaa" stroke-width="1"/>
+   <text x="98" y="249" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Menu</text>
+   <line x1="62" x2="134" y1="255" y2="255" stroke="#00aaaa" stroke-width="1"/>
+   <text x="67" y="265" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdMenu</text>
+   <text x="67" y="278" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdRestaurante</text>
+   <text x="67" y="291" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nom_Menu</text>
+   <text x="67" y="304" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Precio</text>
+   <rect x="511" y="228" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient5" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="511" y="228" fill="url(#Gradient5)" width="115" height="124" stroke="#00aaaa" stroke-width="1"/>
+   <text x="568" y="239" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Seleccion</text>
+   <line x1="511" x2="626" y1="245" y2="245" stroke="#00aaaa" stroke-width="1"/>
+   <text x="515" y="255" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdSeleccion</text>
+   <text x="515" y="268" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdMenu</text>
+   <text x="515" y="281" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Men_IdMenu</text>
+   <text x="515" y="294" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdMenu_Seleccionado</text>
+   <text x="515" y="307" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdClasificacion</text>
+   <text x="515" y="320" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdProducto</text>
+   <text x="515" y="333" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Precio_Bajo</text>
+   <text x="515" y="346" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Precio_Alto</text>
+   <rect x="945" y="330" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient6" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="945" y="330" fill="url(#Gradient6)" width="85" height="86" stroke="#00aaaa" stroke-width="1"/>
+   <text x="987" y="341" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Producto</text>
+   <line x1="945" x2="1030" y1="347" y2="347" stroke="#00aaaa" stroke-width="1"/>
+   <text x="950" y="357" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdProducto</text>
+   <text x="950" y="370" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdRestaurante</text>
+   <text x="950" y="383" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdClasificacion</text>
+   <text x="950" y="396" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nom_Producto</text>
+   <text x="950" y="409" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Precio_producto</text>
+   <rect x="1341" y="14" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient7" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="1341" y="14" fill="url(#Gradient7)" width="90" height="60" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1386" y="25" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Ingrediente</text>
+   <line x1="1341" x2="1431" y1="31" y2="31" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1346" y="41" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdIngrediente</text>
+   <text x="1346" y="54" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nom_Ingrediente</text>
+   <text x="1346" y="67" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Tipo_Unidad</text>
+   <rect x="47" y="489" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient8" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="47" y="489" fill="url(#Gradient8)" width="116" height="53" stroke="#00aaaa" stroke-width="1"/>
+   <text x="105" y="500" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Menu_Seleccionado</text>
+   <line x1="47" x2="163" y1="506" y2="506" stroke="#00aaaa" stroke-width="1"/>
+   <text x="52" y="516" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdMenu</text>
+   <text x="52" y="529" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdMenu_Seleccionado</text>
+   <rect x="516" y="491" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient9" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="516" y="491" fill="url(#Gradient9)" width="96" height="54" stroke="#00aaaa" stroke-width="1"/>
+   <text x="564" y="502" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Clasificacion</text>
+   <line x1="516" x2="612" y1="508" y2="508" stroke="#00aaaa" stroke-width="1"/>
+   <text x="521" y="518" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdClasificacion</text>
+   <text x="521" y="531" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Nom_Clasificacion</text>
+   <rect x="499" y="670" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient10" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="499" y="670" fill="url(#Gradient10)" width="115" height="99" stroke="#00aaaa" stroke-width="1"/>
+   <text x="556" y="681" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Orden</text>
+   <line x1="499" x2="614" y1="687" y2="687" stroke="#00aaaa" stroke-width="1"/>
+   <text x="503" y="697" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdCompra</text>
+   <text x="503" y="710" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdOrden</text>
+   <text x="503" y="723" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdMenu</text>
+   <text x="503" y="736" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdMenu_Seleccionado</text>
+   <text x="503" y="749" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdProducto</text>
+   <text x="503" y="762" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Observaciones</text>
+   <rect x="73" y="864" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient11" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="73" y="864" fill="url(#Gradient11)" width="91" height="138" stroke="#00aaaa" stroke-width="1"/>
+   <text x="118" y="875" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Cliente</text>
+   <line x1="73" x2="164" y1="881" y2="881" stroke="#00aaaa" stroke-width="1"/>
+   <text x="77" y="891" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdCliente</text>
+   <text x="77" y="904" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PrimerNombre</text>
+   <text x="77" y="917" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">SegundoNombre</text>
+   <text x="77" y="930" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PrimerApellido</text>
+   <text x="77" y="943" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">SegundoApellido</text>
+   <text x="77" y="956" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TelefonoCliente</text>
+   <text x="77" y="969" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Correo</text>
+   <text x="77" y="982" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DireccionCliente</text>
+   <text x="77" y="995" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PasswordCliente</text>
+   <rect x="523" y="902" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient12" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="523" y="902" fill="url(#Gradient12)" width="64" height="60" stroke="#00aaaa" stroke-width="1"/>
+   <text x="555" y="913" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Compra</text>
+   <line x1="523" x2="587" y1="919" y2="919" stroke="#00aaaa" stroke-width="1"/>
+   <text x="528" y="929" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdCompra</text>
+   <text x="528" y="942" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IdCliente</text>
+   <text x="528" y="955" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Total</text>
+   <rect x="1234" y="615" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient13" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0ffff"/>
+      </linearGradient>
+   </defs>
+   <rect x="1234" y="615" fill="url(#Gradient13)" width="123" height="59" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1295" y="626" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Administrador</text>
+   <line x1="1234" x2="1357" y1="632" y2="632" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1239" y="642" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">Administrador</text>
+   <text x="1239" y="655" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">User_Administrador</text>
+   <text x="1239" y="668" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Password_Administrador</text>
+   <rect x="1331" y="374" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+   <defs>
+      <linearGradient id="Gradient14" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+         <stop offset="5%" stop-color="#ffffff"/>
+         <stop offset="95%" stop-color="#b0baff"/>
+      </linearGradient>
+   </defs>
+   <rect x="1331" y="374" fill="url(#Gradient14)" width="110" height="59" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1386" y="385" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Producto_Ingrediente</text>
+   <line x1="1331" x2="1441" y1="391" y2="391" stroke="#00aaaa" stroke-width="1"/>
+   <text x="1336" y="401" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdIngrediente</text>
+   <text x="1336" y="413" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">IdProducto</text>
+   <text x="1336" y="426" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Cantidad</text>
+</svg>
