@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     22/09/2022 10:19:48 p. m.                    */
+/* Created on:     24/09/2022 5:36:48 p. m.                     */
 /*==============================================================*/
 
 
@@ -64,7 +64,7 @@ drop index PRODUCTO_INGREDIENTE_FK;
 
 drop index PRODUCTO_INGREDIENTE2_FK;
 
-drop index PRODUCTO_INGREDIENTE_PK;
+drop index PRODUCTO_INGREDIENTE_PK2;
 
 drop table PRODUCTO_INGREDIENTE;
 
@@ -98,17 +98,17 @@ drop table STOCK;
 /* Table: ADMINISTRADOR                                         */
 /*==============================================================*/
 create table ADMINISTRADOR (
-   ADMINISTRADOR        INT4                 not null,
+   ADMINISTRADORID      INT4                 not null,
    USER_ADMINISTRADOR   VARCHAR(200)         not null,
    PASSWORD_ADMINISTRADOR VARCHAR(100)         not null,
-   constraint PK_ADMINISTRADOR primary key (ADMINISTRADOR)
+   constraint PK_ADMINISTRADOR primary key (ADMINISTRADORID)
 );
 
 /*==============================================================*/
 /* Index: ADMINISTRADOR_PK                                      */
 /*==============================================================*/
 create unique index ADMINISTRADOR_PK on ADMINISTRADOR (
-ADMINISTRADOR
+ADMINISTRADORID
 );
 
 /*==============================================================*/
@@ -157,6 +157,7 @@ create table COMPRA (
    IDCOMPRA             INT4                 not null,
    IDCLIENTE            INT4                 not null,
    TOTAL                NUMERIC(15,2)        not null,
+   FECHA                DATE                 not null,
    constraint PK_COMPRA primary key (IDCOMPRA)
 );
 
@@ -179,7 +180,7 @@ IDCLIENTE
 /*==============================================================*/
 create table ESPECIALIDAD (
    IDESPECIALIDAD       INT4                 not null,
-   NOMBRE               VARCHAR(200)         null,
+   NOMBRE               VARCHAR(200)         not null,
    constraint PK_ESPECIALIDAD primary key (IDESPECIALIDAD)
 );
 
@@ -236,16 +237,15 @@ IDRESTAURANTE
 /* Table: MENU_SELECCIONADO                                     */
 /*==============================================================*/
 create table MENU_SELECCIONADO (
-   IDMENU               INT4                 not null,
    IDMENU_SELECCIONADO  INT4                 not null,
-   constraint PK_MENU_SELECCIONADO primary key (IDMENU, IDMENU_SELECCIONADO)
+   IDMENU               INT4                 not null,
+   constraint PK_MENU_SELECCIONADO primary key (IDMENU_SELECCIONADO)
 );
 
 /*==============================================================*/
 /* Index: MENU_SELECCIONADO_PK                                  */
 /*==============================================================*/
 create unique index MENU_SELECCIONADO_PK on MENU_SELECCIONADO (
-IDMENU,
 IDMENU_SELECCIONADO
 );
 
@@ -260,20 +260,18 @@ IDMENU
 /* Table: ORDEN                                                 */
 /*==============================================================*/
 create table ORDEN (
-   IDCOMPRA             INT4                 not null,
    IDORDEN              INT4                 not null,
-   IDMENU               INT4                 not null,
-   IDMENU_SELECCIONADO  INT4                 not null,
-   IDPRODUCTO           INT4                 not null,
+   IDMENU_SELECCIONADO  INT4                 null,
+   IDCOMPRA             INT4                 not null,
+   IDPRODUCTO           INT4                 null,
    OBSERVACIONES        VARCHAR(400)         not null,
-   constraint PK_ORDEN primary key (IDCOMPRA, IDORDEN)
+   constraint PK_ORDEN primary key (IDORDEN)
 );
 
 /*==============================================================*/
 /* Index: ORDEN_PK                                              */
 /*==============================================================*/
 create unique index ORDEN_PK on ORDEN (
-IDCOMPRA,
 IDORDEN
 );
 
@@ -281,7 +279,6 @@ IDORDEN
 /* Index: ORDEN_MENUSELECCIONADO_FK                             */
 /*==============================================================*/
 create  index ORDEN_MENUSELECCIONADO_FK on ORDEN (
-IDMENU,
 IDMENU_SELECCIONADO
 );
 
@@ -336,16 +333,19 @@ IDCLASIFICACION
 /* Table: PRODUCTO_INGREDIENTE                                  */
 /*==============================================================*/
 create table PRODUCTO_INGREDIENTE (
+   IDPRODUCTOINGREDIENTE INT4                 not null,
    IDINGREDIENTE        INT4                 not null,
    IDPRODUCTO           INT4                 not null,
    CANTIDAD             NUMERIC(10,2)        not null,
-   constraint PK_PRODUCTO_INGREDIENTE primary key (IDINGREDIENTE, IDPRODUCTO)
+   constraint PK_PRODUCTO_INGREDIENTE primary key (IDPRODUCTOINGREDIENTE, IDINGREDIENTE, IDPRODUCTO),
+   constraint AK_IDPRODUCTOINGREDIE_PRODUCTO unique (IDPRODUCTOINGREDIENTE)
 );
 
 /*==============================================================*/
-/* Index: PRODUCTO_INGREDIENTE_PK                               */
+/* Index: PRODUCTO_INGREDIENTE_PK2                              */
 /*==============================================================*/
-create unique index PRODUCTO_INGREDIENTE_PK on PRODUCTO_INGREDIENTE (
+create unique index PRODUCTO_INGREDIENTE_PK2 on PRODUCTO_INGREDIENTE (
+IDPRODUCTOINGREDIENTE,
 IDINGREDIENTE,
 IDPRODUCTO
 );
@@ -398,11 +398,10 @@ IDESPECIALIDAD
 create table SELECCION (
    IDSELECCION          INT4                 not null,
    IDMENU               INT4                 null,
-   MEN_IDMENU           INT4                 null,
    IDMENU_SELECCIONADO  INT4                 null,
    IDCLASIFICACION      INT4                 not null,
    IDPRODUCTO           INT4                 null,
-   PRECIO_BAJO          DECIMAL(8,2)         not null,
+   PRECIO_BAJO          NUMERIC(8,2)         not null,
    PRECIO_ALTO          NUMERIC(8,2)         not null,
    constraint PK_SELECCION primary key (IDSELECCION)
 );
@@ -425,7 +424,6 @@ IDMENU
 /* Index: MENUSELECCIONADO_SELECCION_FK                         */
 /*==============================================================*/
 create  index MENUSELECCIONADO_SELECCION_FK on SELECCION (
-MEN_IDMENU,
 IDMENU_SELECCIONADO
 );
 
@@ -447,19 +445,17 @@ IDPRODUCTO
 /* Table: STOCK                                                 */
 /*==============================================================*/
 create table STOCK (
-   IDINGREDIENTE        INT4                 not null,
-   IDRESTAURANTE        INT4                 not null,
    IDSTOCK              INT4                 not null,
+   IDRESTAURANTE        INT4                 not null,
+   IDINGREDIENTE        INT4                 not null,
    CANTIDAD_STOCK       INT4                 not null,
-   constraint PK_STOCK primary key (IDINGREDIENTE, IDRESTAURANTE, IDSTOCK)
+   constraint PK_STOCK primary key (IDSTOCK)
 );
 
 /*==============================================================*/
 /* Index: STOCK_PK                                              */
 /*==============================================================*/
 create unique index STOCK_PK on STOCK (
-IDINGREDIENTE,
-IDRESTAURANTE,
 IDSTOCK
 );
 
@@ -498,8 +494,8 @@ alter table ORDEN
       on delete restrict on update restrict;
 
 alter table ORDEN
-   add constraint FK_ORDEN_ORDEN_MEN_MENU_SEL foreign key (IDMENU, IDMENU_SELECCIONADO)
-      references MENU_SELECCIONADO (IDMENU, IDMENU_SELECCIONADO)
+   add constraint FK_ORDEN_ORDEN_MEN_MENU_SEL foreign key (IDMENU_SELECCIONADO)
+      references MENU_SELECCIONADO (IDMENU_SELECCIONADO)
       on delete restrict on update restrict;
 
 alter table ORDEN
@@ -538,8 +534,8 @@ alter table SELECCION
       on delete restrict on update restrict;
 
 alter table SELECCION
-   add constraint FK_SELECCIO_MENUSELEC_MENU_SEL foreign key (MEN_IDMENU, IDMENU_SELECCIONADO)
-      references MENU_SELECCIONADO (IDMENU, IDMENU_SELECCIONADO)
+   add constraint FK_SELECCIO_MENUSELEC_MENU_SEL foreign key (IDMENU_SELECCIONADO)
+      references MENU_SELECCIONADO (IDMENU_SELECCIONADO)
       on delete restrict on update restrict;
 
 alter table SELECCION
