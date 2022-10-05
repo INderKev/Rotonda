@@ -15,7 +15,7 @@ public class Seleccion {
     @Column(name = "IDMENU", nullable = true)
     private int idMenu;
     @Column(name = "IDMENU_SELECCIONADO", nullable = true)
-    private int menIdMenu;
+    private int idMenuSeleccionado;
     @Column(name = "IDCLASIFICACION", nullable = false)
     private int idClasificacion;
     @Column(name = "IDPRODUCTO", nullable = true)
@@ -41,12 +41,12 @@ public class Seleccion {
         this.idMenu = idMenu;
     }
 
-    public int getMenIdMenu() {
-        return menIdMenu;
+    public int getIdMenuSeleccionado() {
+        return idMenuSeleccionado;
     }
 
-    public void setMenIdMenu(int menIdMenu) {
-        this.menIdMenu = menIdMenu;
+    public void setIdMenuSeleccionado(int menIdMenu) {
+        this.idMenuSeleccionado = menIdMenu;
     }
 
     public int getIdClasificacion() {

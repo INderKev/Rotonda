@@ -1,100 +1,4 @@
 /*==============================================================*/
-/* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     24/09/2022 5:36:48 p. m.                     */
-/*==============================================================*/
-
-
-drop index ADMINISTRADOR_PK;
-
-drop table ADMINISTRADOR;
-
-drop index CLASIFICACION_PK;
-
-drop table CLASIFICACION;
-
-drop index CLIENTE_PK;
-
-drop table CLIENTE;
-
-drop index CLIENTE_COMPRA_FK;
-
-drop index COMPRA_PK;
-
-drop table COMPRA;
-
-drop index ESPECIALIDAD_PK;
-
-drop table ESPECIALIDAD;
-
-drop index INGREDIENTE_PK;
-
-drop table INGREDIENTE;
-
-drop index RESTAURANTE_MENU_FK;
-
-drop index MENU_PK;
-
-drop table MENU;
-
-drop index MENU_MENUSELECCIONADO_FK;
-
-drop index MENU_SELECCIONADO_PK;
-
-drop table MENU_SELECCIONADO;
-
-drop index ORDEN_PRODUCTO_FK;
-
-drop index COMPRA_ORDEN_FK;
-
-drop index ORDEN_MENUSELECCIONADO_FK;
-
-drop index ORDEN_PK;
-
-drop table ORDEN;
-
-drop index CLASIFICACION_PRODUCTO_FK;
-
-drop index RESTAURANTE_PRODUCTO_FK;
-
-drop index PRODUCTO_PK;
-
-drop table PRODUCTO;
-
-drop index PRODUCTO_INGREDIENTE_FK;
-
-drop index PRODUCTO_INGREDIENTE2_FK;
-
-drop index PRODUCTO_INGREDIENTE_PK2;
-
-drop table PRODUCTO_INGREDIENTE;
-
-drop index ESPECIALIDAD_RESTAURANTE_FK;
-
-drop index RESTAURANTE_PK;
-
-drop table RESTAURANTE;
-
-drop index SELECCION_PRODUCTO_FK;
-
-drop index CLASIFICACION_SELECCION_FK;
-
-drop index MENUSELECCIONADO_SELECCION_FK;
-
-drop index MENU_SELECCION_FK;
-
-drop index SELECCION_PK;
-
-drop table SELECCION;
-
-drop index STOCK_INGREDIENTE_FK;
-
-drop index RESTAURANTE_STOCK_FK;
-
-drop index STOCK_PK;
-
-drop table STOCK;
-
-/*==============================================================*/
 /* Table: ADMINISTRADOR                                         */
 /*==============================================================*/
 create table ADMINISTRADOR (
@@ -216,6 +120,7 @@ create table MENU (
    IDRESTAURANTE        INT4                 not null,
    NOM_MENU             VARCHAR(200)         not null,
    PRECIO               NUMERIC(9,2)         not null,
+   IMAGEN_MENU          VARCHAR(400)         not null,
    constraint PK_MENU primary key (IDMENU)
 );
 
@@ -305,6 +210,7 @@ create table PRODUCTO (
    IDCLASIFICACION      INT4                 not null,
    NOM_PRODUCTO         VARCHAR(200)         not null,
    PRECIO_PRODUCTO      VARCHAR(200)         not null,
+   IMAGEN_PRODUCTO      VARCHAR(400)         not null,
    constraint PK_PRODUCTO primary key (IDPRODUCTO)
 );
 
