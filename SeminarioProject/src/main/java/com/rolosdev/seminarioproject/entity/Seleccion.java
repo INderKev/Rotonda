@@ -20,9 +20,9 @@ public class Seleccion {
     private int idClasificacion;
     @Column(name = "IDPRODUCTO", nullable = true)
     private int idProductivo;
-    @Column(name = "PRECIO_BAJO", nullable = false)
+    @Column(name = "PRECIO_BAJO", nullable = true)
     private double precioBajo;
-    @Column(name = "PRECIO_ALTO", nullable = false)
+    @Column(name = "PRECIO_ALTO", nullable = true)
     private double precioAlto;
 
     public int getIdSeleccion() {

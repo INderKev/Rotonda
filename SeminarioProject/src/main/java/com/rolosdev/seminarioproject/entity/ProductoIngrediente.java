@@ -18,6 +18,8 @@ public class ProductoIngrediente {
     private int idProducto;
     @Column(name = "CANTIDAD", nullable = false)
     private double cantidad;
+    @Column(name = "EDITABLE", nullable = false)
+    private boolean editable;
 
     public int getIdProductoIngrediente() {
         return idProductoIngrediente;
@@ -49,5 +51,13 @@ public class ProductoIngrediente {
 
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 }
