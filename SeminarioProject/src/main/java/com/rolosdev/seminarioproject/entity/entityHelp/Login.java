@@ -1,11 +1,15 @@
 package com.rolosdev.seminarioproject.entity.entityHelp;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Login {
 
+    @Id
+    private int id;
     private String usuario;
     private String pass;
     private String tipoUsuario;

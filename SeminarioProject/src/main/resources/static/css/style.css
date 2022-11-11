@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: #2B4E98 !important;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+/*------ Variables de estilo -----*/
+:root{
+    --primary-color: #F5C332;
+    --secondry-color: #2B4E98;
+    --white-color : #fff;
+    --black-color : #1c1c1c;
+
+    --text-primary: #F5C332;
+    --text-secondry: #2B4E98;
+    --text-color: #555;
+    --text-gray: #999;
+}
+
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    font-weight: 400;
+}
+
+::-webkit-scrollbar{
+    width: 0.425rem;
+}
+
+::-webkit-scrollbar-track{
+    background: var(--white-color);
+}
+
+::-webkit-scrollbar-thumb{
+    background: var(--primary-color);
+}
+
+h1{
+    font-size: 3.125rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color: var(--text-secondry);
+    text-transform: capitalize;
+}
+
+h2{
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-secondry);
+    text-transform: capitalize;
+}
+
+h4{
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--text-secondry);
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+h5{
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-secondry);
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+p{
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 400;
+    line-height: 1.75rem;
+    letter-spacing: .0625rem;
+}
+
+.main-btn{
+    padding: 0.625rem 1.875rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0.125rem .625rem -0.0625rem  rgb(0 0 0/19%);
+    -webkit-transition: all .4s ease-out 0s;
+    -ms-transition: all .4s ease-out 0s;
+    -o-transition:  all .4s ease-out 0s;
+    -moz-transition:  all .4s ease-out 0s;
+    transition:  all .4s ease-out 0s;
+    border: 0.1875rem solid var(--primary-color);
+    background-color: var(--primary-color);
+    color:var(--black-color);
+    border-radius: 7px;
+    text-align: center;
+    
+}
+.main-btn:hover{
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.wrapper {
+    padding-top: 6.25rem;
+    padding-bottom: 6.25rem;
+}
+
+.text-content{
+    width:70%;
+    margin: 0 auto;
+}
+
+.counter-section h2,
+.book-food-text h2{
+    color: #F5C332;
+}
+
+/*------ Navbar  -----*/
+
+.navigation-wrap.scroll-on{
+    position: fixed;
+    width: 100%;
+    left:0;
+    background-color: var(--white-color);
+    z-index: 1000;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.navigation-wrap .navbar-brand img{
+    width: 7.5rem;
+}  
+.navigation-wrap .nav-item{
+    padding: 0 0.625rem;
+    transition: all 200ms linear;
+}
+.navigation-wrap .navbar-toggler:focus{
+    outline: none;
+    border: unset;
+    box-shadow: none;
+}
+.navigation-wrap .nav-link{
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--black-color);
+    letter-spacing: .0625rem;
+}
+
+.navigation-wrap .main-btn{
+    padding: 0.3125rem 1.4375rem;
+    box-shadow: none;
+    margin-left: 0.625rem;
+}
+
+/* Baner*/
+.top-banner{
+    width:100%;
+    background-image: url(../img/bg-1.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 4.875rem 0 10.375rem;
+}
+
+/* División*/
+.division{
+    background-color: #1c1c1c;
+    padding: 2.5rem;
+}
+
+/* Sección quiénes somos */
+
+.seccion-quienes-somos{
+    width: 100%;
+    height: 28.125rem;
+    background-image: url(../img/bg-2.jpg);         
+    background-position: center center;
+    background-size: cover;
+    padding-top: 6.25rem;
+    text-align: center;
+}

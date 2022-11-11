@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ADMINISTRADOR")
+@Table(name = "administrador")
 public class Administrador {
 
     @Id
-    @Column(name = "ADMINISTRADOR", nullable = false)
+    @Column(name = "ADMINISTRADORID", nullable = false)
     private int administradorId;
     @Column(name = "USER_ADMINISTRADOR", nullable = false)
     private String userAdministrador;

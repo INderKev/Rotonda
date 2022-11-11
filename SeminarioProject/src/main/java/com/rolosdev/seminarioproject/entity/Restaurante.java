@@ -20,7 +20,7 @@ public class Restaurante {
     private String direccion;
     @Column(name = "TELEFONO", nullable = false)
     private String telefono;
-    @Column(name = "\"USER\"", nullable = false)
+    @Column(name = "USUARIO_RESTAURANTE", nullable = false)
     private String user;
     @Column(name = "PASSWORD", nullable = false)
     private String password;

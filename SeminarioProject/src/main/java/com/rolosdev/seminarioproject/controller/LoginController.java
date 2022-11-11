@@ -1,5 +1,8 @@
 package com.rolosdev.seminarioproject.controller;
 
+import com.rolosdev.seminarioproject.entity.Administrador;
+import com.rolosdev.seminarioproject.entity.Cliente;
+import com.rolosdev.seminarioproject.entity.Restaurante;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +24,33 @@ public class LoginController {
     @Qualifier("loginService")
     private ILoginService loginService;
 
-    @GetMapping("/login")
-    public String getLogin(Model model) {
+    @GetMapping("/index")
+    public String getIndex(Model model) {
         Login login = new Login();
-        model.addAttribute("login", login);
-        return "login";
+        login.setUsuario("rolitos");
+        login.setPass("asd123");
+        System.out.println(loginService.verificarDatos(login));
+        return "/index";
     }
 
     @PostMapping("/loguearse")
     public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu) {
-
-        return "login";
+        login.setTipoUsuario(loginService.verificarDatos(login));
+        switch (login.getTipoUsuario()) {
+            case "Cliente":
+                Cliente cliente = loginService.obtenerCliente(login);
+                return "/index";
+            case "Administrador":
+                Administrador administrador = loginService.obtenerAdministrador(login);
+                return "/index";
+            case "Restaurante":
+                Restaurante restaurante = loginService.obtenerRestaurante(login);
+                return "/index";
+            default:
+                model.addAttribute("login", new Login());
+                model.addAttribute("Mensaje", "El usuario no fue encontrado");
+                return "/login";
+        }
     }
 
 }

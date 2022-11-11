@@ -1,0 +1,64 @@
+/*------ Variables de estilo -----*/
+:root{
+    --primary-color: #F5C332;
+    --secondry-color: #2B4E98;
+    --white-color : #fff;
+    --black-color : #1c1c1c;
+
+    --text-primary: #F5C332;
+    --text-secondry: #2B4E98;
+    --text-color: #555;
+    --text-gray: #999;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+/*------ Navbar  -----*/
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: #2B4E98 !important;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-wrap.scroll-on{
+    position: fixed;
+    width: 100%;
+    left:0;
+    background-color: var(--white-color);
+    z-index: 1000;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.navigation-wrap .navbar-brand img{
+    width: 7.5rem;
+}  
+.navigation-wrap .nav-item{
+    padding: 0 0.625rem;
+    transition: all 200ms linear;
+}
+.navigation-wrap .navbar-toggler:focus{
+    outline: none;
+    border: unset;
+    box-shadow: none;
+}
+.navigation-wrap .nav-link{
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--black-color);
+    letter-spacing: .0625rem;
+}
+
+.navigation-wrap .main-btn{
+    padding: 0.3125rem 1.4375rem;
+    box-shadow: none;
+    margin-left: 0.625rem;
+}

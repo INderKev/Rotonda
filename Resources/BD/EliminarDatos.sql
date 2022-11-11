@@ -1,0 +1,14 @@
+DELETE FROM administrador;
+DELETE FROM orden;
+DELETE FROM compra;
+DELETE FROM stock;
+DELETE FROM seleccion;
+DELETE FROM menu_seleccionado;
+DELETE FROM producto_ingrediente;
+DELETE FROM producto;
+DELETE FROM menu;
+DELETE FROM clasificacion;
+DELETE FROM ingrediente;
+DELETE FROM cliente;
+DELETE FROM restaurante;
+DELETE FROM especialidad;

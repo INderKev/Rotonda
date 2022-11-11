@@ -1,0 +1,87 @@
+html,body{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    background-image: url('../img/bg-2.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    font-family: 'Roboto', sans-serif;
+}
+.container{
+  justify-content: center;   
+}
+h1{
+    font-size: 3.125rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color:#2B4E98;
+    text-transform:none;
+    text-align: center;
+    padding: 10px;
+}
+.roles {
+    display: inline-flex;
+    padding: 20px;
+
+}
+
+.roles .icono{
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.roles .icono span{
+    position: relative;
+    height: 80px;
+    width: 80px;
+    display: block;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+#etiqueta{
+    font-size: 30px;
+    line-height: 80px;
+}
+
+.roles .icono .tooltip{
+    position: absolute;
+    top: 0px;
+    background-color: white;
+    font-size: 20px;
+    padding: 10px 18px;
+    border-radius: 25px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.roles .icono .tooltip::before{
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+   
+}
+.roles .icono:hover .tooltip{
+    top: -60px;
+    opacity: 1;
+    pointer-events: auto;
+   
+}

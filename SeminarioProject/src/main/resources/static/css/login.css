@@ -1,0 +1,68 @@
+/*------ Variables de estilo -----*/
+:root{
+    --primary-color: #F5C332;
+    --secondry-color: #2B4E98;
+    --white-color : #fff;
+    --black-color : #1c1c1c;
+
+    --text-primary: #F5C332;
+    --text-secondry: #2B4E98;
+    --text-color: #555;
+    --text-gray: #999;
+}
+
+body{
+    background-color: rgb(219, 226, 226);
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#form-login{
+    width: 75%;
+    height: 55%;
+    position: absolute;
+    left: 15%;
+  
+}
+
+.row{
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px grey;
+
+    
+}
+
+img{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    
+}
+
+.boton-loguear{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    padding: 0.625rem 1.875rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0.125rem .625rem -0.0625rem  rgb(0 0 0/19%);
+    -webkit-transition: all .4s ease-out 0s;
+    -ms-transition: all .4s ease-out 0s;
+    -o-transition:  all .4s ease-out 0s;
+    -moz-transition:  all .4s ease-out 0s;
+    transition:  all .4s ease-out 0s;
+    background-color: var(--black-color);
+    color:var(--white-color);
+    border-radius: 7px;
+    text-align: center;
+}
+.boton-loguear:hover{
+    background: transparent;
+    border: 1px solid;
+    color: var(--black-color);
+}

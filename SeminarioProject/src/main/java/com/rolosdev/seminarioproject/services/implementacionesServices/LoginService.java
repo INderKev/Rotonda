@@ -31,16 +31,23 @@ public class LoginService implements ILoginService {
     private IRestauranteRepository restauranteRepository;
 
     public String verificarDatos(Login login){
-        return null;
+        if (clienteRepository.obtenerClienteLogin(login.getUsuario(), login.getPass()) != null) {
+            return "Cliente";
+        } else if (administradorRepository.obtenerAdministradorLogin(login.getUsuario(), login.getPass()) != null) {
+            return "Administrador";
+        } else if (restauranteRepository.obtenerRestauranteLogin(login.getUsuario(), login.getPass()) != null) {
+            return "Restaurante";
+        }
+        return "null";
     }
     public Cliente obtenerCliente(Login login){
-        return null;
+        return clienteRepository.obtenerClienteLogin(login.getUsuario(), login.getPass());
     }
-    public Administrador obtenerAdministrador(Login login){
-        return null;
+    public Administrador obtenerAdministrador(Login login) {
+        return administradorRepository.obtenerAdministradorLogin(login.getUsuario(), login.getPass());
     }
     public Restaurante obtenerRestaurante(Login login){
-        return null;
+        return restauranteRepository.obtenerRestauranteLogin(login.getUsuario(), login.getPass());
     }
 
 }
