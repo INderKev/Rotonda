@@ -1,11 +1,7 @@
 package com.rolosdev.seminarioproject.services.implementacionesServices;
 
-import com.rolosdev.seminarioproject.entity.Administrador;
-import com.rolosdev.seminarioproject.entity.Cliente;
-import com.rolosdev.seminarioproject.entity.Restaurante;
-import com.rolosdev.seminarioproject.repository.IAdministradorRepository;
-import com.rolosdev.seminarioproject.repository.IClienteRepository;
-import com.rolosdev.seminarioproject.repository.IRestauranteRepository;
+import com.rolosdev.seminarioproject.entity.*;
+import com.rolosdev.seminarioproject.repository.*;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +24,19 @@ public class RegistroService implements IRegistroService {
     @Autowired
     @Qualifier("restauranteRepository")
     private IRestauranteRepository restauranteRepository;
+
+    @Autowired
+    @Qualifier("ingredienteRepository")
+    private IIngredienteRepository ingredienteRepository;
+
+    @Autowired
+    @Qualifier("productoRepository")
+    private IProductoRepository productoRepository;
+
+    @Autowired
+    @Qualifier("menuRepository")
+    private IMenuRepository menuRepository;
+
     @Override
     public String registrarCliente(Cliente cliente) {
         if (clienteRepository.verificarExistencia(cliente.getCorreo()) == null) {
@@ -57,4 +66,36 @@ public class RegistroService implements IRegistroService {
         }
         return "El usuario " + restaurante.getIdRestaurante() + " Ya existe, verifique los datos";
     }
+
+    @Override
+    public String registrarIngrediente(Ingrediente ingrediente) {
+        if (ingredienteRepository.verificarExistencia(ingrediente.getNombre()) == null) {
+            ingrediente.setIdIngrediente(ingredienteRepository.obtenerUltimoId().getIdIngrediente() + 1);
+            ingredienteRepository.save(ingrediente);
+            return "OK";
+        }
+        return "El ingrediente " + ingrediente.getNombre() + " ya existe.";
+    }
+
+    @Override
+    public String registrarProducto(Producto producto) {
+        if (productoRepository.verificarExistencia(producto.getIdRestaurante(), producto.getNombre()) == null) {
+            producto.setIdProducto(productoRepository.obtenerUltimoId().getIdProducto() + 1);
+            productoRepository.save(producto);
+            return "OK";
+        }
+        return "El Producto " + producto.getNombre() + " ya existe.";
+    }
+
+    @Override
+    public String registrarMenu(Menu menu) {
+        if (menuRepository.verificarExistencia(menu.getIdRestaurante(), menu.getNombre()) == null) {
+            menu.setIdMenu(menuRepository.obtenerUltimoId().getIdMenu() + 1);
+            menuRepository.save(menu);
+            return "OK";
+        }
+        return "El Menu " + menu.getNombre() + " ya existe.";
+    }
+
+
 }
