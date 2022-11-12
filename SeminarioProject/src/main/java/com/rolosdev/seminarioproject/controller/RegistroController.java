@@ -1,8 +1,6 @@
 package com.rolosdev.seminarioproject.controller;
 
-import com.rolosdev.seminarioproject.entity.Administrador;
-import com.rolosdev.seminarioproject.entity.Cliente;
-import com.rolosdev.seminarioproject.entity.Restaurante;
+import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,41 @@ public class RegistroController {
         cliente.setPrimerNombre("asdfa");
         cliente.setPrimerApellido("asdf");
         System.out.println(registroService.registrarCliente(cliente));*/
+
+        /*Ingrediente ingrediente = new Ingrediente();
+        ingrediente.setNombre("Gaseosa Ponymalta");
+        ingrediente.setTipoUnidad("Unidad");
+        System.out.println(registroService.registrarIngrediente(ingrediente));*/
+
+        /*Producto producto = new Producto();
+        producto.setIdRestaurante(1);
+        producto.setNombre("Ponymalta");
+        producto.setPrecio(3000);
+        producto.setIdClasificacion(4);
+        producto.setImagenProducto("asdlkfjalskdfj");
+        System.out.println(registroService.registrarProducto(producto));*/
+
+        /*Menu menu = new Menu();
+        menu.setImagenMenu("otra imagen");
+        menu.setIdRestaurante(1);
+        menu.setNombre("Combo Hamburguesa re gonorrea");
+        menu.setPrecio(21500.15);
+        System.out.println(registroService.registrarMenu(menu));*/
+
+        /*ProductoIngrediente productoIngrediente = new ProductoIngrediente();
+        productoIngrediente.setIdProducto(26);
+        productoIngrediente.setIdIngrediente(37);
+        productoIngrediente.setCantidad(1);
+        productoIngrediente.setEditable(false);
+        System.out.println(registroService.registrarProductoIngrediente(productoIngrediente));*/
+
+        Seleccion seleccion = new Seleccion();
+        seleccion.setIdMenu(8);
+        seleccion.setIdClasificacion(4);
+        seleccion.setPrecioBajo(3000);
+        seleccion.setPrecioAlto(3000);
+        System.out.println(registroService.registrarSeleccion(seleccion));
+
         return "/index";
     }
 

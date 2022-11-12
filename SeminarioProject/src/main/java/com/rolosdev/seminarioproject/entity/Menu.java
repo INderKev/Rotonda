@@ -18,6 +18,8 @@ public class Menu {
     private String nombre;
     @Column(name = "PRECIO", nullable = false)
     private double precio;
+    @Column(name = "IMAGEN_MENU", nullable = false)
+    private String imagenMenu;
 
     public int getIdMenu() {
         return idMenu;
@@ -49,5 +51,13 @@ public class Menu {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getImagenMenu() {
+        return imagenMenu;
+    }
+
+    public void setImagenMenu(String imagenMenu) {
+        this.imagenMenu = imagenMenu;
     }
 }

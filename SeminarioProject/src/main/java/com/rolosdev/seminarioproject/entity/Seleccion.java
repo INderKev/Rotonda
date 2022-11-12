@@ -19,7 +19,7 @@ public class Seleccion {
     @Column(name = "IDCLASIFICACION", nullable = false)
     private int idClasificacion;
     @Column(name = "IDPRODUCTO", nullable = true)
-    private int idProductivo;
+    private int idProducto;
     @Column(name = "PRECIO_BAJO", nullable = true)
     private double precioBajo;
     @Column(name = "PRECIO_ALTO", nullable = true)
@@ -57,12 +57,12 @@ public class Seleccion {
         this.idClasificacion = idClasificacion;
     }
 
-    public int getIdProductivo() {
-        return idProductivo;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdProductivo(int idProductivo) {
-        this.idProductivo = idProductivo;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public double getPrecioBajo() {

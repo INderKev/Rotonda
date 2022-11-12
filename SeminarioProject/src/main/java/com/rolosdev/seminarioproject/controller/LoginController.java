@@ -24,13 +24,13 @@ public class LoginController {
     @Qualifier("loginService")
     private ILoginService loginService;
 
-    @GetMapping("/index")
+    @GetMapping("/login")
     public String getIndex(Model model) {
         Login login = new Login();
         login.setUsuario("rolitos");
         login.setPass("asd123");
         System.out.println(loginService.verificarDatos(login));
-        return "/index";
+        return "/login";
     }
 
     @PostMapping("/loguearse")

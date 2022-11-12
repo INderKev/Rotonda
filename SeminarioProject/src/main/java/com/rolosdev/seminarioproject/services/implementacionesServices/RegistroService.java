@@ -37,6 +37,14 @@ public class RegistroService implements IRegistroService {
     @Qualifier("menuRepository")
     private IMenuRepository menuRepository;
 
+    @Autowired
+    @Qualifier("productoIngredienteRepository")
+    private IProductoIngredienteRepository productoIngredienteRepository;
+
+    @Autowired
+    @Qualifier("seleccionRepository")
+    private ISeleccionRepository seleccionRepository;
+
     @Override
     public String registrarCliente(Cliente cliente) {
         if (clienteRepository.verificarExistencia(cliente.getCorreo()) == null) {
@@ -95,6 +103,20 @@ public class RegistroService implements IRegistroService {
             return "OK";
         }
         return "El Menu " + menu.getNombre() + " ya existe.";
+    }
+
+    @Override
+    public String registrarProductoIngrediente(ProductoIngrediente productoIngrediente) {
+        productoIngrediente.setIdProductoIngrediente(productoIngredienteRepository.obtenerUltimoId().getIdProductoIngrediente() + 1);
+        productoIngredienteRepository.save(productoIngrediente);
+        return "OK";
+    }
+
+    @Override
+    public String registrarSeleccion(Seleccion seleccion) {
+        seleccion.setIdSeleccion(seleccionRepository.obtenerUltimoId().getIdSeleccion() + 1);
+        seleccionRepository.save(seleccion);
+        return "OK";
     }
 
 

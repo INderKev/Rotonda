@@ -19,7 +19,9 @@ public class Producto {
     @Column(name = "NOM_PRODUCTO", nullable = false)
     private String nombre;
     @Column(name = "PRECIO_PRODUCTO", nullable = false)
-    private String precio;
+    private double precio;
+    @Column(name = "IMAGEN_PRODUCTO", nullable = false)
+    private String imagenProducto;
 
     public int getIdProducto() {
         return idProducto;
@@ -53,11 +55,19 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getImagenProducto() {
+        return imagenProducto;
+    }
+
+    public void setImagenProducto(String imagenProducto) {
+        this.imagenProducto = imagenProducto;
     }
 }
