@@ -22,20 +22,20 @@ public class RegistroService implements IRegistroService {
     private IClienteRepository clienteRepository;
 
     @Autowired
-    @Qualifier("restauranteRepository")
-    private IRestauranteRepository restauranteRepository;
-
-    @Autowired
     @Qualifier("ingredienteRepository")
     private IIngredienteRepository ingredienteRepository;
 
     @Autowired
-    @Qualifier("productoRepository")
-    private IProductoRepository productoRepository;
-
-    @Autowired
     @Qualifier("menuRepository")
     private IMenuRepository menuRepository;
+
+    @Autowired
+    @Qualifier("restauranteRepository")
+    private IRestauranteRepository restauranteRepository;
+
+    @Autowired
+    @Qualifier("productoRepository")
+    private IProductoRepository productoRepository;
 
     @Autowired
     @Qualifier("productoIngredienteRepository")

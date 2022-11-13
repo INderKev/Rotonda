@@ -1,3 +1,4 @@
+
 -- SCRIPT 
 
 
@@ -10,7 +11,7 @@ INSERT INTO administrador VALUES (2, 'cristopher', '123456789');
 
 INSERT INTO cliente VALUES (111111111, 'Maria', 'Paula', 'Gonzalez', 'Cuellar', '666', 'mpgc@correo.com', 'Calle 142 # 12 - 34', 'asd123');
 INSERT INTO cliente VALUES (222222222, 'Brayan', 'David', 'Pinto', 'Castillo', '666', 'bdpc@correo.com', 'Calle 134 # 12 - 35', 'asd123');
-INSERT INTO cliente VALUES (333333333, 'Jefferson', 'Alexander', 'Romero', 'Buitrago', '666', '@correo.com', '', 'asd123');
+INSERT INTO cliente VALUES (333333333, 'Jefferson', 'Alexander', 'Romero', 'Buitrago', '666', 'asdf@correo.com', 'Calle 134 # 12 - 35', 'asd123');
 
 -- Especialidad
 
@@ -63,9 +64,9 @@ INSERT INTO ingrediente VALUES (36, 'Empanada mexicana', 'Unidad');
 
 -- Restaurante
 
-INSERT INTO restaurante VALUES (1, 5, 'Los Rolitos', 'Calle 16 # 16 - 16', '987987987', 'rolitos', 'asd123');
-INSERT INTO restaurante VALUES (2, 5, 'Laura´s PTE', 'Carrera 17 # 12 - 17', '987987987', 'lauritas', 'asd123');
-INSERT INTO restaurante VALUES (3, 3, 'Donde Rosita', 'Calle 170 # 30 - 40', '987987987', 'rositas', 'asd123');
+INSERT INTO restaurante VALUES (1, 5, 'Los Rolitos', 'Calle 16 # 16 - 16', '987987987', 'rolitos', 'asd123', '');
+INSERT INTO restaurante VALUES (2, 5, 'Laura´s PTE', 'Carrera 17 # 12 - 17', '987987987', 'lauritas', 'asd123', '');
+INSERT INTO restaurante VALUES (3, 3, 'Donde Rosita', 'Calle 170 # 30 - 40', '987987987', 'rositas', 'asd123', '');
 
 -- Stock
 

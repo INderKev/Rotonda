@@ -4,6 +4,7 @@ import com.rolosdev.seminarioproject.entity.Administrador;
 import com.rolosdev.seminarioproject.entity.Cliente;
 import com.rolosdev.seminarioproject.entity.Restaurante;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
+import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,10 +27,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String getIndex(Model model) {
-        Login login = new Login();
-        login.setUsuario("rolitos");
-        login.setPass("asd123");
-        System.out.println(loginService.verificarDatos(login));
+        model.addAttribute("login", new Login());
         return "/login";
     }
 
@@ -39,18 +37,41 @@ public class LoginController {
         switch (login.getTipoUsuario()) {
             case "Cliente":
                 Cliente cliente = loginService.obtenerCliente(login);
+                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionCliente("Cliente", cliente);
                 return "/index";
             case "Administrador":
                 Administrador administrador = loginService.obtenerAdministrador(login);
+                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
                 return "/index";
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
+                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
                 return "/index";
             default:
                 model.addAttribute("login", new Login());
                 model.addAttribute("Mensaje", "El usuario no fue encontrado");
                 return "/login";
         }
+    }
+
+    @GetMapping("/home")
+    public String getHome(Model model) {
+        switch (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario()) {
+            case "Cliente":
+                return "/index";
+            case "Administrador":
+                return "/index";
+            case "Restaurante":
+                return "/index";
+            default:
+                return "/index";
+        }
+    }
+
+    @GetMapping("/cerrarSesion")
+    public String cerrarSesion(Model model) {
+        UsuarioLogueadoService.getUsuarioLogueadoService().cerrarSesion();
+        return "/index";
     }
 
 }

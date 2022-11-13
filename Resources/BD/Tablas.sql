@@ -1,8 +1,7 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     10/11/2022 11:36:28 p. m.                    */
+/* Created on:     12/11/2022 6:25:11 p.�m.                     */
 /*==============================================================*/
-
 
 /*==============================================================*/
 /* Table: ADMINISTRADOR                                         */
@@ -288,6 +287,7 @@ create table RESTAURANTE (
    TELEFONO             VARCHAR(13)          not null,
    USUARIO_RESTAURANTE  VARCHAR(200)         not null,
    PASSWORD             VARCHAR(70)          not null,
+   IMAGEN_RESTAURANTE   VARCHAR(500)         not null,
    constraint PK_RESTAURANTE primary key (IDRESTAURANTE)
 );
 
