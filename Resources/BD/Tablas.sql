@@ -1,7 +1,8 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     12/11/2022 6:25:11 p.ï¿½m.                     */
+/* Created on:     13/11/2022 2:15:17 p. m.                     */
 /*==============================================================*/
+
 
 /*==============================================================*/
 /* Table: ADMINISTRADOR                                         */
@@ -214,7 +215,7 @@ create table PRODUCTO (
    IDRESTAURANTE        INT4                 not null,
    IDCLASIFICACION      INT4                 not null,
    NOM_PRODUCTO         VARCHAR(200)         not null,
-   PRECIO_PRODUCTO      VARCHAR(200)         not null,
+   PRECIO_PRODUCTO      NUMERIC(10,2)        not null,
    IMAGEN_PRODUCTO      VARCHAR(400)         not null,
    constraint PK_PRODUCTO primary key (IDPRODUCTO)
 );

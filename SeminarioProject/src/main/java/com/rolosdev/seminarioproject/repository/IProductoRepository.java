@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
+
 @Repository("productoRepository")
 public interface IProductoRepository extends JpaRepository<Producto, Integer> {
     @Query(
@@ -19,4 +21,10 @@ public interface IProductoRepository extends JpaRepository<Producto, Integer> {
             nativeQuery = true
     )
     Producto verificarExistencia(@Param("id") int id, @Param("nombre") String nombre);
+
+    @Query(
+            value = "SELECT * FROM producto WHERE idrestaurante = ?1",
+            nativeQuery = true
+    )
+    ArrayList<Producto> obtenerProductosPorRestaurante(@Param("idRestaurante") int idRestaurante);
 }

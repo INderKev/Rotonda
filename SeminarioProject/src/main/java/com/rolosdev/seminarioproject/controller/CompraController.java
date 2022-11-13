@@ -51,4 +51,32 @@ public class CompraController {
     @Qualifier("seleccionRepository")
     private ISeleccionRepository seleccionRepository;
 
+    public String crearCompra() {
+        return null;
+    }
+
+    public String crearMenuSeleccionado(int idMenu) {
+        return null;
+    }
+
+    public String seleccionarProductoParaMenu(int idProducto, int idMenu) {
+        return null;
+    }
+
+    public String agregarMenuCarrito(int idMenuSeleccionado) {
+        return null;
+    }
+
+    public String agregarProducto(int idProducto) {
+        return null;
+    }
+
+    public String quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
+        return null;
+    }
+
+    public String quitarSeleccionProducto(int idProducto) {
+        return null;
+    }
+
 }

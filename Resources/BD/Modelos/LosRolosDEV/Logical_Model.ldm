@@ -1673,7 +1673,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o17">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((57794,-7420), (66118,13545))</a:Rect>
+<a:Rect>((60756,-7420), (63156,13545))</a:Rect>
 <a:ListOfPoints>((61956,-6359),(61956,13145))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>5138</a:ArrowStyle>
@@ -1716,7 +1716,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o22">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((-30009,-724), (-9895,11873))</a:Rect>
+<a:Rect>((-30009,-724), (-9895,11878))</a:Rect>
 <a:ListOfPoints>((-10295,10861),(-26334,10861),(-26334,-324))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -1737,7 +1737,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o25">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((10122,-8764), (35653,11883))</a:Rect>
+<a:Rect>((10122,-8764), (35653,11927))</a:Rect>
 <a:ListOfPoints>((10522,10913),(31416,10913),(31416,-8364))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -1905,7 +1905,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o47">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((-3806,-47382), (2268,-35590))</a:Rect>
+<a:Rect>((-1969,-47382), (431,-35590))</a:Rect>
 <a:ListOfPoints>((-769,-46982),(-769,-35990))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -2875,12 +2875,14 @@ DAT 1663902628</a:History>
 <a:Code>PRECIO_PRODUCTO</a:Code>
 <a:CreationDate>1663902628</a:CreationDate>
 <a:Creator>PC</a:Creator>
-<a:ModificationDate>1663902628</a:ModificationDate>
+<a:ModificationDate>1668366874</a:ModificationDate>
 <a:Modifier>PC</a:Modifier>
 <a:History>ORG {9C658C5A-E790-4651-98E0-A56D74E5BAB8}
-DAT 1663902628</a:History>
-<a:DataType>VA200</a:DataType>
-<a:Length>200</a:Length>
+DAT 1663902628
+ATT DTTP</a:History>
+<a:DataType>N10,2</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>2</a:Precision>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o105">
