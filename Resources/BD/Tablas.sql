@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     13/11/2022 2:15:17 p. m.                     */
+/* Created on:     13/11/2022 10:07:15 p. m.                    */
 /*==============================================================*/
 
 
@@ -362,7 +362,7 @@ create table STOCK (
    IDSTOCK              INT4                 not null,
    IDRESTAURANTE        INT4                 not null,
    IDINGREDIENTE        INT4                 not null,
-   CANTIDAD_STOCK       INT4                 not null,
+   CANTIDAD_STOCK       NUMERIC(10,2)        not null,
    constraint PK_STOCK primary key (IDSTOCK)
 );
 

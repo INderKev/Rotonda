@@ -17,8 +17,15 @@ public interface IProductoIngredienteRepository extends JpaRepository<ProductoIn
     ProductoIngrediente obtenerUltimoId();
 
     @Query(
-            value = "",
+            value = "SELECT * FROM producto_ingrediente WHERE idproducto = ?1",
             nativeQuery = true
     )
-    ArrayList<ProductoIngrediente> obtener(@Param("id") int id);
+    ArrayList<ProductoIngrediente> obtenerProductoIngredietePorProducto(@Param("idProducto") int idProducto);
+
+
+    @Query(
+            value = "SELECT pi.* FROM producto_ingrediente pi, (SELECT idproducto AS pr FROM producto pr, (SELECT se.precio_bajo AS pb, se.precio_alto AS pa, se.idclasificacion AS ic, me.idrestaurante AS ir FROM menu me, seleccion se WHERE me.idmenu = se.idmenu AND me.idmenu = ?1) t1 WHERE pr.precio_producto >= t1.pb AND pr.precio_producto <= t1.pa AND pr.idclasificacion = t1.ic AND pr.idrestaurante = t1.ir) t1 WHERE t1.pr = pi.idproducto",
+            nativeQuery = true
+    )
+    ArrayList<ProductoIngrediente> obtenerProductoIngredientePorMenu(@Param("idMenu") int idMenu);
 }

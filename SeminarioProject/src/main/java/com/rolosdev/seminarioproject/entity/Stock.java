@@ -18,7 +18,7 @@ public class Stock {
     @Column(name = "IDRESTAURANTE", nullable = false)
     private int idRestaurante;
     @Column(name = "CANTIDAD_STOCK", nullable = false)
-    private int cantidadStock;
+    private double cantidadStock;
 
     public int getIdIngrediente() {
         return idIngrediente;
@@ -44,11 +44,11 @@ public class Stock {
         this.idStock = idStock;
     }
 
-    public int getCantidadStock() {
+    public double getCantidadStock() {
         return cantidadStock;
     }
 
-    public void setCantidadStock(int cantidadStock) {
+    public void setCantidadStock(double cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
 }

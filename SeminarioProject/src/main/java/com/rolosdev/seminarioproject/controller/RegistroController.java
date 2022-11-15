@@ -75,12 +75,14 @@ public class RegistroController {
         productoIngrediente.setEditable(false);
         System.out.println(registroService.registrarProductoIngrediente(productoIngrediente));*/
 
-        Seleccion seleccion = new Seleccion();
+        /*Seleccion seleccion = new Seleccion();
         seleccion.setIdMenu(8);
         seleccion.setIdClasificacion(4);
         seleccion.setPrecioBajo(3000);
         seleccion.setPrecioAlto(3000);
-        System.out.println(registroService.registrarSeleccion(seleccion));
+        System.out.println(registroService.registrarSeleccion(seleccion));*/
+
+        registroService.pruebas();
 
         return "/index";
     }

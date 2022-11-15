@@ -1,9 +1,13 @@
 package com.rolosdev.seminarioproject.repository;
 
 import com.rolosdev.seminarioproject.entity.Orden;
+import com.rolosdev.seminarioproject.entity.Seleccion;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.ArrayList;
 
 @Repository("ordenRepository")
 public interface IOrdenRepository extends JpaRepository<Orden, Integer> {
@@ -13,5 +17,11 @@ public interface IOrdenRepository extends JpaRepository<Orden, Integer> {
             nativeQuery = true
     )
     Orden obtenerUltimoId();
+
+    @Query(
+            value = "SELECT * FROM orden WHERE idcompra = ?1",
+            nativeQuery = true
+    )
+    ArrayList<Orden> obtenerOrdenesPorCompra(@Param("idCompra") int idCompra);
 
 }

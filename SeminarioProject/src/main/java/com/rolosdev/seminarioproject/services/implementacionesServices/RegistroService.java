@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 
 @Service("registroService")
 @Transactional
@@ -44,6 +45,10 @@ public class RegistroService implements IRegistroService {
     @Autowired
     @Qualifier("seleccionRepository")
     private ISeleccionRepository seleccionRepository;
+
+    @Autowired
+    @Qualifier("stockRepository")
+    private IStockRepository stockRepository;
 
     @Override
     public String registrarCliente(Cliente cliente) {
@@ -119,5 +124,63 @@ public class RegistroService implements IRegistroService {
         return "OK";
     }
 
+    @Override
+    public void pruebas() {
+        boolean confirmar;
+        ArrayList<Producto> productosAEliminar = new ArrayList<>();
+        ArrayList<Integer> idEliminados = new ArrayList<>();
+        ArrayList<Producto> opcionesProductosMenu = productoRepository.obtenerProductosPorMenu(1);
+        ArrayList<Ingrediente> ingredientesParaTodosLosProductos = ingredienteRepository.obtenerIngredientesPorMenu(1);
+        ArrayList<Stock> stocks = stockRepository.obtenerStockPorMenu(1);
+        ArrayList<Seleccion> seleccionesMenu = seleccionRepository.obtenerSeleccionPorMenu(1);
+        for (Seleccion seleccion: seleccionesMenu) {
+            System.out.println(seleccion.getIdSeleccion());
+        }
+        ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredientePorMenu(1);
+        for (Producto producto : opcionesProductosMenu) {
+            for (ProductoIngrediente productoIngrediente : productosIngredientes) {
+                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
+                    for (Stock stock : stocks) {
+                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                            System.out.println("Cantidad en stock: " + stock.getCantidadStock() + " - ingrediente: " + stock.getIdIngrediente());
+                            System.out.println("Cantidad de producto: " + productoIngrediente.getCantidad() + " - ingrediente: " + productoIngrediente.getIdIngrediente());
+                            if (stock.getCantidadStock() < productoIngrediente.getCantidad()) {
+                                System.out.println("Eliminar----------------------------------------------------------------");
+                                confirmar = true;
+                                for (Producto productoAEliminar : productosAEliminar) {
+                                    if (productoAEliminar.equals(producto)) {
+                                        confirmar = false;
+                                        break;
+                                    }
+                                }
+                                if (confirmar) {
+                                    productosAEliminar.add(producto);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (Producto producto : productosAEliminar) {
+            opcionesProductosMenu.remove(producto);
+        }
+        for (Producto producto : opcionesProductosMenu) {
+            System.out.println("Producto: " + producto.getNombre());
+        }
+        for (Producto producto : opcionesProductosMenu) {
+            for (ProductoIngrediente productoIngrediente : productosIngredientes) {
+                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
+                    for (Stock stock : stocks) {
+                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                            stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
+                            stockRepository.save(stock);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

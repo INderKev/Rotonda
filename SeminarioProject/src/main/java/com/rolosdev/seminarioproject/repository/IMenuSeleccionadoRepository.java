@@ -18,9 +18,9 @@ public interface IMenuSeleccionadoRepository extends JpaRepository<MenuSeleccion
     MenuSeleccionado obtenerUltimoId();
 
     @Query(
-            value = "",
+            value = "SELECT ms.* FROM menu_seleccionado ms, orden o WHERE ms.idmenu_seleccionado = o.idmenu_seleccionado AND o.idcompra = ?1",
             nativeQuery = true
     )
-    ArrayList<MenuSeleccionado> obtener(@Param("id") int id);
+    ArrayList<MenuSeleccionado> obtenerMenusSeleccionadosPorCompra(@Param("idCompra") int idCompra);
 
 }

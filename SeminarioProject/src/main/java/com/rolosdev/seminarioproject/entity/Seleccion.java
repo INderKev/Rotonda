@@ -1,5 +1,7 @@
 package com.rolosdev.seminarioproject.entity;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,17 +14,18 @@ public class Seleccion {
     @Id
     @Column(name = "IDSELECCION", nullable = false)
     private int idSeleccion;
-    @Column(name = "IDMENU", nullable = true)
+    @Column(name = "IDMENU")
     private int idMenu;
-    @Column(name = "IDMENU_SELECCIONADO", nullable = true)
+    @Nullable
+    @Column(name = "IDMENU_SELECCIONADO")
     private int idMenuSeleccionado;
     @Column(name = "IDCLASIFICACION", nullable = false)
     private int idClasificacion;
-    @Column(name = "IDPRODUCTO", nullable = true)
+    @Column(name = "IDPRODUCTO")
     private int idProducto;
-    @Column(name = "PRECIO_BAJO", nullable = true)
+    @Column(name = "PRECIO_BAJO")
     private double precioBajo;
-    @Column(name = "PRECIO_ALTO", nullable = true)
+    @Column(name = "PRECIO_ALTO")
     private double precioAlto;
 
     public int getIdSeleccion() {
@@ -45,8 +48,8 @@ public class Seleccion {
         return idMenuSeleccionado;
     }
 
-    public void setIdMenuSeleccionado(int menIdMenu) {
-        this.idMenuSeleccionado = menIdMenu;
+    public void setIdMenuSeleccionado(int idMenuSeleccionado) {
+        this.idMenuSeleccionado = idMenuSeleccionado;
     }
 
     public int getIdClasificacion() {

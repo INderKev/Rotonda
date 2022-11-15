@@ -1610,8 +1610,8 @@ Shadow=0
 <c:Symbols>
 <o:RelationshipSymbol Id="o6">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((11154,16285), (25406,18685))</a:Rect>
-<a:ListOfPoints>((11554,17485),(24550,17485))</a:ListOfPoints>
+<a:Rect>((11154,16285), (24094,18685))</a:Rect>
+<a:ListOfPoints>((11554,17485),(23340,17485))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1631,8 +1631,8 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o10">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((36614,16156), (51381,18556))</a:Rect>
-<a:ListOfPoints>((37470,17356),(50981,17356))</a:ListOfPoints>
+<a:Rect>((37926,16156), (51381,18556))</a:Rect>
+<a:ListOfPoints>((38680,17356),(50981,17356))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>5138</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1673,7 +1673,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o17">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((60756,-7420), (63156,13545))</a:Rect>
+<a:Rect>((57794,-7420), (66118,13545))</a:Rect>
 <a:ListOfPoints>((61956,-6359),(61956,13145))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>5138</a:ArrowStyle>
@@ -1716,7 +1716,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o22">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((-30009,-724), (-9895,11878))</a:Rect>
+<a:Rect>((-30009,-724), (-9895,11901))</a:Rect>
 <a:ListOfPoints>((-10295,10861),(-26334,10861),(-26334,-324))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -1737,7 +1737,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o25">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((10122,-8764), (35653,11927))</a:Rect>
+<a:Rect>((10122,-8764), (35653,11926))</a:Rect>
 <a:ListOfPoints>((10522,10913),(31416,10913),(31416,-8364))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -1779,7 +1779,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o30">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((-41907,-17612), (-31857,-5238))</a:Rect>
+<a:Rect>((-38069,-17612), (-35662,-5238))</a:Rect>
 <a:ListOfPoints>((-36901,-5638),(-36861,-17212))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
@@ -1821,7 +1821,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o35">
 <a:ModificationDate>1664057380</a:ModificationDate>
-<a:Rect>((-39762,-35062), (-9887,-20139))</a:Rect>
+<a:Rect>((-35324,-35062), (-9887,-20139))</a:Rect>
 <a:ListOfPoints>((-34662,-20539),(-34662,-33862),(-10287,-33862))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4371</a:ArrowStyle>
@@ -2011,7 +2011,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:EntitySymbol Id="o8">
 <a:ModificationDate>1665016470</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((24006,13985), (38014,20727))</a:Rect>
+<a:Rect>((22694,13985), (39326,20727))</a:Rect>
 <a:LineColor>11184640</a:LineColor>
 <a:FillColor>16777136</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2547,11 +2547,14 @@ DAT 1663902628</a:History>
 <a:Code>CANTIDAD_STOCK</a:Code>
 <a:CreationDate>1663902628</a:CreationDate>
 <a:Creator>PC</a:Creator>
-<a:ModificationDate>1663902628</a:ModificationDate>
+<a:ModificationDate>1668395196</a:ModificationDate>
 <a:Modifier>PC</a:Modifier>
 <a:History>ORG {57A5FD80-756D-4255-A010-D28C50FA4717}
-DAT 1663902628</a:History>
-<a:DataType>I</a:DataType>
+DAT 1663902628
+ATT DTTP</a:History>
+<a:DataType>N10,2</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>2</a:Precision>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 </c:Attributes>
@@ -4274,12 +4277,12 @@ DAT 1663902628</a:History>
 <a:Code>PHYSICAL_MODEL</a:Code>
 <a:CreationDate>1663902827</a:CreationDate>
 <a:Creator>PC</a:Creator>
-<a:ModificationDate>1668295496</a:ModificationDate>
+<a:ModificationDate>1668395215</a:ModificationDate>
 <a:Modifier>PC</a:Modifier>
 <a:TargetModelURL>file:///%[PRJ_ROOT_DIR]%/Physical_Model.pdm</a:TargetModelURL>
 <a:TargetModelID>5C408975-B904-4289-88AC-33BB13BC3CB7</a:TargetModelID>
 <a:TargetModelClassID>CDE44E21-9669-11D1-9914-006097355D9B</a:TargetModelClassID>
-<a:TargetModelLastModificationDate>1668299157</a:TargetModelLastModificationDate>
+<a:TargetModelLastModificationDate>1668395233</a:TargetModelLastModificationDate>
 <c:SessionShortcuts>
 <o:Shortcut Ref="o3"/>
 </c:SessionShortcuts>
