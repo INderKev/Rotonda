@@ -15,20 +15,20 @@ public class Seleccion {
     @Column(name = "IDSELECCION", nullable = false)
     private int idSeleccion;
     @Column(name = "IDMENU")
-    private int idMenu;
+    private Integer idMenu;
     @Nullable
     @Column(name = "IDMENU_SELECCIONADO")
-    private int idMenuSeleccionado;
+    private Integer idMenuSeleccionado;
     @Column(name = "IDCLASIFICACION", nullable = false)
     private int idClasificacion;
     @Column(name = "IDPRODUCTO")
-    private int idProducto;
+    private Integer idProducto;
     @Column(name = "PRECIO_BAJO")
     private double precioBajo;
     @Column(name = "PRECIO_ALTO")
     private double precioAlto;
 
-    public int getIdSeleccion() {
+    public Integer getIdSeleccion() {
         return idSeleccion;
     }
 
