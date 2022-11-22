@@ -24,7 +24,7 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
     Ingrediente verificarExistencia(@Param("ingrediente") String ingrediente);
 
     @Query(
-            value = "SELECT i.* FROM producto_ingrediente pi, ingrediente i WHERE pi.idingrediente = i.idingrediente AND pi.idproducto = ?1;",
+            value = "SELECT i.* FROM producto_ingrediente pi, ingrediente i WHERE pi.idingrediente = i.idingrediente AND pi.idproducto = ?1",
             nativeQuery = true
     )
     ArrayList<Ingrediente> obtenerIngredientesPorProducto(@Param("idProducto") int idProducto);

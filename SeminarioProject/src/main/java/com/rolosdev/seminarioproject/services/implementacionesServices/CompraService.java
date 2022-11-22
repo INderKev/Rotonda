@@ -61,6 +61,7 @@ public class CompraService implements ICompraService {
     @Qualifier("stockRepository")
     private IStockRepository stockRepository;
 
+    @Override
     public String iniciarCompra() {
         Compra compra = new Compra();
         compra.setIdCompra(compraRepository.obtenerUltimoId().getIdCompra() + 1);
@@ -72,17 +73,20 @@ public class CompraService implements ICompraService {
         return null;
     }
 
+    @Override
     public String cancelarCompra() {
 
         return null;
     }
 
+    @Override
     public String terminarCompra() {
         return null;
     }
 
+    @Override
     public void crearMenuSeleccionado(int idMenu) {
-        boolean confirmar;
+
         MenuSeleccionado menuSeleccionado = new MenuSeleccionado();
         menuSeleccionado.setIdMenu(idMenu);
         menuSeleccionado.setIdMenuSeleccionado(menuSeleccionadoRepository.obtenerUltimoId().getIdMenuSeleccionado() + 1);
@@ -97,7 +101,7 @@ public class CompraService implements ICompraService {
         paqueteMenuSeleccionado.setMenuSeleccionado(menuSeleccionado);
         paqueteOrden.setPaqueteMenuSeleccionado(paqueteMenuSeleccionado);
         ArrayList<Producto> productosAEliminar = new ArrayList<>();
-        //ArrayList<Seleccion> seleccionesMenu = seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu());
+        ArrayList<Seleccion> seleccionesMenu = seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu());
         ArrayList<Producto> opcionesProductosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
         ArrayList<Ingrediente> ingredientesParaTodosLosProductos = ingredienteRepository.obtenerIngredientesPorMenu(menuSeleccionado.getIdMenu());
         ArrayList<Stock> stocks = stockRepository.obtenerStockPorMenu(menuSeleccionado.getIdMenu());
@@ -107,10 +111,58 @@ public class CompraService implements ICompraService {
                 if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
                     for (Stock stock : stocks) {
                         if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
-                            System.out.println("Cantidad en stock: " + stock.getCantidadStock() + " - ingrediente: " + stock.getIdIngrediente());
-                            System.out.println("Cantidad de producto: " + productoIngrediente.getCantidad() + " - ingrediente: " + productoIngrediente.getIdIngrediente());
+                            stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
+                            stockRepository.save(stock);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public String seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado) {
+        return null;
+    }
+
+    @Override
+    public String agregarMenuCarrito(int idMenuSeleccionado) {
+        return null;
+    }
+
+    @Override
+    public String agregarProducto(int idProducto) {
+        return null;
+    }
+
+    @Override
+    public String quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
+        return null;
+    }
+
+    @Override
+    public String quitarSeleccionProducto(int idProducto) {
+        return null;
+    }
+
+    @Override
+    public void actualizarTotalCompra(Compra compra) {
+        compraRepository.save(compra);
+    }
+
+    public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {
+        boolean confirmar;
+        ArrayList<Producto> productosAEliminar = new ArrayList<>();
+        ArrayList<Producto> opcionesProductosMenu = productoRepository.obtenerProductosPorMenu(idMenu);
+        ArrayList<Stock> stocks = stockRepository.obtenerStockPorMenu(idMenu);
+        ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredientePorMenu(idMenu);
+        for (Producto producto : opcionesProductosMenu) {
+            for (ProductoIngrediente productoIngrediente : productosIngredientes) {
+                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
+                    for (Stock stock : stocks) {
+                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
                             if (stock.getCantidadStock() < productoIngrediente.getCantidad()) {
-                                System.out.println("Eliminar----------------------------------------------------------------");
                                 confirmar = true;
                                 for (Producto productoAEliminar : productosAEliminar) {
                                     if (productoAEliminar.equals(producto)) {
@@ -130,48 +182,7 @@ public class CompraService implements ICompraService {
         for (Producto producto : productosAEliminar) {
             opcionesProductosMenu.remove(producto);
         }
-        for (Producto producto : opcionesProductosMenu) {
-            System.out.println("Producto: " + producto.getNombre());
-        }
-        for (Producto producto : opcionesProductosMenu) {
-            for (ProductoIngrediente productoIngrediente : productosIngredientes) {
-                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
-                    for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
-                            stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
-                            stockRepository.save(stock);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        return opcionesProductosMenu;
     }
-
-    public String seleccionarProductoParaMenu(int idProducto, int idMenu) {
-        return null;
-    }
-
-    public String agregarMenuCarrito(int idMenuSeleccionado) {
-        return null;
-    }
-
-    public String agregarProducto(int idProducto) {
-        return null;
-    }
-
-    public String quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
-        return null;
-    }
-
-    public String quitarSeleccionProducto(int idProducto) {
-        return null;
-    }
-
-    public void actualizarTotalCompra(Compra compra) {
-        compraRepository.save(compra);
-    }
-
-
 
 }
