@@ -57,22 +57,27 @@ public class ConsultaService implements IConsultaService {
     @Qualifier("seleccionRepository")
     private ISeleccionRepository seleccionRepository;
 
+    @Override
     public ArrayList<Menu> obtenerMenusDelRestaurante(int idRestaurante) {
         return menuRepository.obtenerMenusPorRestaurante(idRestaurante);
     }
 
+    @Override
     public ArrayList<Producto> obtenerProductosDelRestaurante(int idRestaurante) {
         return productoRepository.obtenerProductosPorRestaurante(idRestaurante);
     }
 
+    @Override
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {
         return productoRepository.obtenerProductosPorMenu(idMenu);
     }
 
+    @Override
     public ArrayList<Ingrediente> obtenerIngredientesPorProducto(int idProducto) {
         return ingredienteRepository.obtenerIngredientesPorProducto(idProducto);
     }
 
+    @Override
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto) {
         return productoIngredienteRepository.obtenerProductoIngredietePorProducto(idProducto);
     }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class CarritoDeCompraService {
 
     static public CarritoDeCompraService carritoDeCompraService;
-
     public Compra compra;
     public ArrayList<PaqueteOrden> ordenes;
 
@@ -31,7 +30,11 @@ public class CarritoDeCompraService {
         ordenes.add(paqueteOrden);
     }
 
-
+    public PaqueteOrden obtenerOrdenPorMenu(int idMenu) {
+        for (PaqueteOrden paqueteOrden : ordenes) {
+            if ()
+        }
+    }
 
     static public CarritoDeCompraService getCarritoDeCompraService(){
         if (carritoDeCompraService == null){

@@ -22,4 +22,10 @@ public interface IStockRepository extends JpaRepository<Stock, Integer> {
             nativeQuery = true
     )
     ArrayList<Stock> obtenerStockPorMenu(@Param("idMenu") int idMenu);
+
+    @Query(
+            value = "SELECT s.* FROM producto pr, stock s, producto_ingrediente pi WHERE pr.idrestaurante = s.idrestaurante AND pr.idproducto = pi.idproducto AND pi.idIngrediente = s.idIngrediente AND pr.idproducto = ?1",
+            nativeQuery = true
+    )
+    ArrayList<Stock> obtenerStockPorProducto(@Param("idProducto") int idProducto);
 }

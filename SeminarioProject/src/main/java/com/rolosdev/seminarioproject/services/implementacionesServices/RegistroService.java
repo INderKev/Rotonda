@@ -124,7 +124,6 @@ public class RegistroService implements IRegistroService {
         return "OK";
     }
 
-    @Override
     public void pruebas() {
         boolean confirmar;
         ArrayList<Producto> productosAEliminar = new ArrayList<>();
@@ -164,9 +163,6 @@ public class RegistroService implements IRegistroService {
         }
         for (Producto producto : productosAEliminar) {
             opcionesProductosMenu.remove(producto);
-        }
-        for (Producto producto : opcionesProductosMenu) {
-            System.out.println("Producto: " + producto.getNombre());
         }
         for (Producto producto : opcionesProductosMenu) {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {

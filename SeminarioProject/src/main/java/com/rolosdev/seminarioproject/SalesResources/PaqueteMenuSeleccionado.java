@@ -1,6 +1,7 @@
 package com.rolosdev.seminarioproject.SalesResources;
 
 import com.rolosdev.seminarioproject.entity.MenuSeleccionado;
+import com.rolosdev.seminarioproject.entity.Producto;
 import com.rolosdev.seminarioproject.entity.Seleccion;
 
 
@@ -10,11 +11,12 @@ public class PaqueteMenuSeleccionado {
 
     public MenuSeleccionado menuSeleccionado;
     public ArrayList<Seleccion> selecciones;
-
-
+    public ArrayList<PaqueteProducto> productos;
+    public ArrayList<PaqueteProducto> productosSeleccionados;
 
     public PaqueteMenuSeleccionado() {
-        selecciones = new ArrayList<>();
+        productos = new ArrayList<>();
+        productosSeleccionados = new ArrayList<>();
     }
 
     public MenuSeleccionado getMenuSeleccionado() {
@@ -25,16 +27,47 @@ public class PaqueteMenuSeleccionado {
         this.menuSeleccionado = menuSeleccionado;
     }
 
-    public void agregarSeleccion (Seleccion seleccion) {
-        selecciones.add(seleccion);
-    }
-
-    public void cambiarSeleccion (Seleccion seleccion) {
-
-    }
-
-    public ArrayList<Seleccion> getSelecciones () {
+    public ArrayList<Seleccion> getSelecciones() {
         return selecciones;
     }
 
+    public void setSelecciones(ArrayList<Seleccion> selecciones) {
+        this.selecciones = selecciones;
+    }
+
+    public ArrayList<PaqueteProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<PaqueteProducto> productos) {
+        this.productos = productos;
+    }
+
+    public ArrayList<PaqueteProducto> getProductosSeleccionados() {
+        return productosSeleccionados;
+    }
+
+    public void setProductosSeleccionados(ArrayList<PaqueteProducto> productosSeleccionados) {
+        this.productosSeleccionados = productosSeleccionados;
+    }
+
+    public void agregarProducto(PaqueteProducto producto) {
+        productos.add(producto);
+    }
+
+    public void agregarProductoSeleccionado(PaqueteProducto producto) {
+        boolean confirmar = false;
+        PaqueteProducto paqueteProductoAEliminar = new PaqueteProducto();
+        for (PaqueteProducto paqueteProducto : productosSeleccionados) {
+            if (paqueteProducto.getProducto().getIdClasificacion() == producto.getProducto().getIdClasificacion()) {
+                confirmar = true;
+                paqueteProductoAEliminar = paqueteProducto;
+                break;
+            }
+        }
+        if (confirmar) {
+            productosSeleccionados.remove(paqueteProductoAEliminar);
+        }
+        productosSeleccionados.add(producto);
+    }
 }

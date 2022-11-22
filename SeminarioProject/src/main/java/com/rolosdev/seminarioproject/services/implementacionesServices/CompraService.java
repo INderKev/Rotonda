@@ -2,6 +2,8 @@ package com.rolosdev.seminarioproject.services.implementacionesServices;
 
 import com.rolosdev.seminarioproject.SalesResources.PaqueteMenuSeleccionado;
 import com.rolosdev.seminarioproject.SalesResources.PaqueteOrden;
+import com.rolosdev.seminarioproject.SalesResources.PaqueteProducto;
+import com.rolosdev.seminarioproject.SalesResources.PaqueteProductoIngrediente;
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.repository.*;
 import com.rolosdev.seminarioproject.services.interfacesServices.ICompraService;
@@ -62,7 +64,50 @@ public class CompraService implements ICompraService {
     private IStockRepository stockRepository;
 
     @Override
-    public String iniciarCompra() {
+    public ArrayList<Menu> obtenerMenusDisponibles(int idRestaurante) {
+        boolean confirmar;
+        ArrayList<Menu> menus = menuRepository.obtenerMenusPorRestaurante(idRestaurante);
+        ArrayList<Menu> menusDescartados = new ArrayList<>();
+        ArrayList<Producto> productos = new ArrayList<>();
+        ArrayList<Producto> productosObtenidos;
+        for (Menu menu : menus) {
+            productosObtenidos = obtenerProductosPorMenu(menu.getIdMenu());
+            for (Producto productoObtenido : productosObtenidos) {
+                confirmar = true;
+                for (Producto producto : productos) {
+                    if (producto.getIdProducto() == productoObtenido.getIdProducto()) {
+                        confirmar = false;
+                    }
+                }
+                if (confirmar) {
+                    productos.add(productoObtenido);
+                }
+            }
+        }
+        for (Menu menu : menus) {
+            ArrayList<Seleccion> selecciones = seleccionRepository.obtenerSeleccionPorMenu(menu.getIdMenu());
+            for (Seleccion seleccion : selecciones) {
+                confirmar = true;
+                for (Producto producto : productos) {
+                    if (producto.getIdClasificacion() == seleccion.getIdClasificacion() && producto.getPrecio() <= seleccion.getPrecioAlto() && producto.getPrecio() >= seleccion.getPrecioBajo()) {
+                        confirmar = false;
+                        break;
+                    }
+                }
+                if (confirmar) {
+                    menusDescartados.add(menu);
+                    break;
+                }
+            }
+        }
+        for (Menu menu : menusDescartados) {
+            menus.remove(menu);
+        }
+        return menus;
+    }
+
+    @Override
+    public void iniciarCompra() {
         Compra compra = new Compra();
         compra.setIdCompra(compraRepository.obtenerUltimoId().getIdCompra() + 1);
         compra.setFecha(LocalDate.now());
@@ -70,23 +115,20 @@ public class CompraService implements ICompraService {
         compra.setIdCliente(UsuarioLogueadoService.getUsuarioLogueadoService().getCliente().getIdCliente());
         compraRepository.save(compra);
         CarritoDeCompraService.getCarritoDeCompraService().setCompra(compra);
-        return null;
     }
 
     @Override
-    public String cancelarCompra() {
+    public void cancelarCompra() {
 
-        return null;
     }
 
     @Override
-    public String terminarCompra() {
-        return null;
+    public void terminarCompra() {
+
     }
 
     @Override
     public void crearMenuSeleccionado(int idMenu) {
-
         MenuSeleccionado menuSeleccionado = new MenuSeleccionado();
         menuSeleccionado.setIdMenu(idMenu);
         menuSeleccionado.setIdMenuSeleccionado(menuSeleccionadoRepository.obtenerUltimoId().getIdMenuSeleccionado() + 1);
@@ -100,55 +142,48 @@ public class CompraService implements ICompraService {
         PaqueteMenuSeleccionado paqueteMenuSeleccionado = new PaqueteMenuSeleccionado();
         paqueteMenuSeleccionado.setMenuSeleccionado(menuSeleccionado);
         paqueteOrden.setPaqueteMenuSeleccionado(paqueteMenuSeleccionado);
-        ArrayList<Producto> productosAEliminar = new ArrayList<>();
-        ArrayList<Seleccion> seleccionesMenu = seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu());
-        ArrayList<Producto> opcionesProductosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
-        ArrayList<Ingrediente> ingredientesParaTodosLosProductos = ingredienteRepository.obtenerIngredientesPorMenu(menuSeleccionado.getIdMenu());
-        ArrayList<Stock> stocks = stockRepository.obtenerStockPorMenu(menuSeleccionado.getIdMenu());
-        ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredientePorMenu(menuSeleccionado.getIdMenu());
-        for (Producto producto : opcionesProductosMenu) {
+        paqueteMenuSeleccionado.setSelecciones(seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu()));
+        ArrayList<Producto> productosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
+        for (Producto producto : productosMenu) {
+            descontarCantidadStock(producto);
+            PaqueteProducto paqueteProducto = new PaqueteProducto();
+            paqueteProducto.setProducto(producto);
+            ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
-                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
-                    for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
-                            stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
-                            stockRepository.save(stock);
-                            break;
-                        }
-                    }
-                }
+                PaqueteProductoIngrediente paqueteProductoIngrediente = new PaqueteProductoIngrediente();
+                paqueteProductoIngrediente.setProductoIngrediente(productoIngrediente);
+                paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIdIngrediente()).orElse(null));
+                paqueteProducto.agregarPaqueteProductoIngrediente(paqueteProductoIngrediente);
             }
+            paqueteMenuSeleccionado.agregarProducto(paqueteProducto);
         }
+        CarritoDeCompraService.getCarritoDeCompraService().agregarPaqueteDeOrden(paqueteOrden);
     }
 
     @Override
-    public String seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado) {
-        return null;
+    public void seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado) {
+        Producto producto = productoRepository.findById(idProducto).get();
+
     }
 
     @Override
-    public String agregarMenuCarrito(int idMenuSeleccionado) {
-        return null;
+    public void agregarMenuCarrito(int idMenuSeleccionado) {
+
     }
 
     @Override
-    public String agregarProducto(int idProducto) {
-        return null;
+    public void agregarProducto(int idProducto) {
+
     }
 
     @Override
-    public String quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
-        return null;
+    public void quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
+
     }
 
     @Override
-    public String quitarSeleccionProducto(int idProducto) {
-        return null;
-    }
+    public void quitarSeleccionProducto(int idProducto) {
 
-    @Override
-    public void actualizarTotalCompra(Compra compra) {
-        compraRepository.save(compra);
     }
 
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {
@@ -183,6 +218,34 @@ public class CompraService implements ICompraService {
             opcionesProductosMenu.remove(producto);
         }
         return opcionesProductosMenu;
+    }
+
+    private void descontarCantidadStock(Producto producto) {
+        ArrayList<Stock> stocks = stockRepository.obtenerStockPorProducto(producto.getIdProducto());
+        ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
+        for (ProductoIngrediente productoIngrediente : productosIngredientes) {
+            for (Stock stock : stocks) {
+                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                    stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
+                    stockRepository.save(stock);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void recuperarCantidadStock(Producto producto) {
+        ArrayList<Stock> stocks = stockRepository.obtenerStockPorProducto(producto.getIdProducto());
+        ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
+        for (ProductoIngrediente productoIngrediente : productosIngredientes) {
+            for (Stock stock : stocks) {
+                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                    stock.setCantidadStock(stock.getCantidadStock() + productoIngrediente.getCantidad());
+                    stockRepository.save(stock);
+                    break;
+                }
+            }
+        }
     }
 
 }
