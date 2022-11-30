@@ -198,3 +198,16 @@ p{
     padding-top: 6.25rem;
     text-align: center;
 }
+
+/* Nuestro equipo */
+#img-equipo{
+    margin-left: 14px;
+    margin-top: 8px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.card{
+    border: none;
+}

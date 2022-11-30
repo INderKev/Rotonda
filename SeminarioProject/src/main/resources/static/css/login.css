@@ -10,11 +10,15 @@
     --text-color: #555;
     --text-gray: #999;
 }
+html{
+    scroll-behavior: smooth;
+}
 
 body{
     background-color: rgb(219, 226, 226);
     align-items: center;
     justify-content: center;
+    display: block;
 }
 
 
@@ -22,17 +26,16 @@ body{
 #form-login{
     width: 75%;
     height: 55%;
-    position: absolute;
+    position: relative;
     left: 15%;
+    padding-bottom: 10px;
   
 }
 
 .row{
     background-color: white;
     border-radius: 30px;
-    box-shadow: 12px 12px 22px grey;
-
-    
+    box-shadow: 12px 12px 22px grey; 
 }
 
 img{

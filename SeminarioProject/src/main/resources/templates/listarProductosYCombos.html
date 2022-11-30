@@ -20,6 +20,20 @@
   <link rel="stylesheet" href="css/navbar.css" />
 </head>
 
+<script type="text/javascript">
+  function mostrarProductos() {
+    document.getElementById("lista-productos").style.display = "block";
+    document.getElementById("lista-combos").style.display = "none";
+
+  }
+
+  function mostrarCombos() {
+    document.getElementById("lista-combos").style.display = "block";
+    document.getElementById("lista-productos").style.display = "none";
+
+  }
+</script>
+
 <!-- Header -->
 <header>
   <nav class="navbar navbar-expand-lg navigation-wrap">
@@ -59,7 +73,11 @@
 </header>
 
 <body style="background-color: #dadbdb; display: block">
-  <div class="align-items-center justify-content-around"
+
+  <button onclick="mostrarProductos()">Productos</button>
+  <button onclick="mostrarCombos()">Combos</button>
+  <!-- Contenedor de productos -->
+  <section id="lista-productos" class="align-items-center justify-content-around"
     style="position: relative; margin-bottom: 2rem; margin-left: 3rem">
     <div class="mt-6">
       <h1 class="" style="
@@ -70,19 +88,19 @@
             text-transform: capitalize;
             text-align: center;
           ">
-        Bienvendido a la sección de restaurantes
+        Productos
       </h1>
     </div>
     <div class="align-items-center d-flex justify-content-around">
-      <div class="row row-cols-1 row-cols-md-3 g-4 m-2" id="contenedor-restaurantes">
+      <div class="row row-cols-1 row-cols-md-3 g-4 m-2" id="contenedor-productos">
         <!-- Esta es la tarjeta-->
         <div class="col mx-3" style="width: 360px;">
           <div class="card align-items-center text-center"
             style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
             <div class="">
               <h3 class="card-title font-weigth-bold py-2">KFC</h3>
-              <img src="./img/restaurantes/KFC_logo_PNG20.png" alt="imagen-restaurante"
-                class="card-img-top p-2 img-fluid" style="width: 230px; height: 230px" />
+              <img src="./img/dashboard/gaseosa.png" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
+                style="width: 230px; height: 230px" />
             </div>
             <div class="card-body b">
               <h5 class="">Especialidad</h5>
@@ -129,7 +147,80 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Contenedor de combos -->
+  <section id="lista-combos" class="align-items-center justify-content-around"
+    style="position: relative; margin-bottom: 2rem; margin-left: 3rem">
+    <div class="mt-6">
+      <h1 class="" style="
+           font-size: 3.125rem;
+           font-weight: 900;
+           margin-bottom: 1.5rem;
+           color: #2b4e98;
+           text-transform: capitalize;
+           text-align: center;
+         ">
+        Combos
+      </h1>
+    </div>
+    <div class="align-items-center d-flex justify-content-around">
+      <div class="row row-cols-1 row-cols-md-3 g-4 m-2" id="contenedor-combos">
+        <!-- Esta es la tarjeta-->
+        <div class="col mx-3" style="width: 360px;">
+          <div class="card align-items-center text-center"
+            style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
+            <div class="">
+              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
+              <img src="./img/dashboard/duo-tenkaco.webp" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
+                style="width: 230px; height: 230px" />
+            </div>
+            <div class="card-body b">
+              <h5 class="">Especialidad</h5>
+              <button type="button" class="btn btn-outline-dark">
+                Ver menú de KFC
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borrar (es una prueba)-->
+        <div class="col mx-3" style="width: 360px">
+          <div class="card align-items-center text-center"
+            style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
+            <div class="">
+              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
+              <img src="./img/restaurantes/el_corral.jpg" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
+                style="width: 230px; height: 230px" />
+            </div>
+            <div class="card-body b">
+              <h5 class="">Especialidad</h5>
+              <button type="button" class="btn btn-outline-dark">
+                Ver menú de KFC
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Borrar (es una prueba)-->
+        <div class="col mx-3" style="width: 360px">
+          <div class="card align-items-center text-center"
+            style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
+            <div class="">
+              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
+              <img src="./img/restaurantes/mr-bolat.png" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
+                style="width: 230px; height: 230px" />
+            </div>
+            <div class="card-body b">
+              <h5 class="">Especialidad</h5>
+              <button type="button" class="btn btn-outline-dark">
+                Ver menú de KFC
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-dark text-center text-white">
