@@ -5,6 +5,8 @@ import com.rolosdev.seminarioproject.entity.Cliente;
 import com.rolosdev.seminarioproject.entity.Restaurante;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 
+import java.util.ArrayList;
+
 public interface ILoginService {
 
     public String verificarDatos(Login login);

@@ -30,10 +30,30 @@ public class CarritoDeCompraService {
         ordenes.add(paqueteOrden);
     }
 
-    public PaqueteOrden obtenerOrdenPorMenu(int idMenu) {
+    public PaqueteOrden obtenerOrdenPorMenuSeleccionado(int idMenuSeleccionado) {
         for (PaqueteOrden paqueteOrden : ordenes) {
-            if ()
+            if (paqueteOrden.getPaqueteMenuSeleccionado() != null) {
+                if (paqueteOrden.getPaqueteMenuSeleccionado().getMenuSeleccionado().getIdMenuSeleccionado() == idMenuSeleccionado) {
+                    return paqueteOrden;
+                }
+            }
         }
+        return null;
+    }
+
+    public PaqueteOrden obtenerOrdenPorProducto(int idProducto) {
+        for (PaqueteOrden paqueteOrden : ordenes) {
+            if (paqueteOrden.getPaqueteProducto() != null) {
+                if (paqueteOrden.getPaqueteProducto().getProducto().getIdProducto() == idProducto) {
+                    return paqueteOrden;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void eliminarOrden(PaqueteOrden paqueteOrden) {
+        ordenes.remove(paqueteOrden);
     }
 
     static public CarritoDeCompraService getCarritoDeCompraService(){

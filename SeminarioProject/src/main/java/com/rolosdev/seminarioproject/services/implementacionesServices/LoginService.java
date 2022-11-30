@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 
 @Service("loginService")
 @Transactional
@@ -49,5 +50,8 @@ public class LoginService implements ILoginService {
     public Restaurante obtenerRestaurante(Login login){
         return restauranteRepository.obtenerRestauranteLogin(login.getUsuario(), login.getPass());
     }
+
+
+
 
 }

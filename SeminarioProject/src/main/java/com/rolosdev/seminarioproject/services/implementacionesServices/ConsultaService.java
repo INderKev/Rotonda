@@ -1,9 +1,6 @@
 package com.rolosdev.seminarioproject.services.implementacionesServices;
 
-import com.rolosdev.seminarioproject.entity.Ingrediente;
-import com.rolosdev.seminarioproject.entity.Menu;
-import com.rolosdev.seminarioproject.entity.Producto;
-import com.rolosdev.seminarioproject.entity.ProductoIngrediente;
+import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.repository.*;
 import com.rolosdev.seminarioproject.services.interfacesServices.IConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,10 @@ public class ConsultaService implements IConsultaService {
     @Autowired
     @Qualifier("clienteRepository")
     private IClienteRepository clienteRepository;
+
+    @Autowired
+    @Qualifier("clasificacionRepository")
+    private IClasificacionRepository clasificacionRepository;
 
     @Autowired
     @Qualifier("compraRepository")
@@ -80,6 +81,16 @@ public class ConsultaService implements IConsultaService {
     @Override
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto) {
         return productoIngredienteRepository.obtenerProductoIngredietePorProducto(idProducto);
+    }
+
+    @Override
+    public ArrayList<Restaurante> obtenerRestaurantes() {
+        return (ArrayList<Restaurante>) restauranteRepository.findAll();
+    }
+
+    @Override
+    public ArrayList<Clasificacion> obtenerClasificaciones() {
+        return (ArrayList<Clasificacion>) clasificacionRepository.findAll();
     }
 
 }
