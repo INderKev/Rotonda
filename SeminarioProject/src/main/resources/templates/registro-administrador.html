@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,15 +24,15 @@
                         <h1 class="font-weigth-bold py-3">Formulario de registro</h1>
                         
                         <h4>Administrador</h4>
-                        <form action="">
+                        <form th:action="@{/registrarAdministrador}" th:object="${administrador}" method="post">
                             <div class="form-row">
                                 <div class="col-lg-8">
-                                    <input type="text" placeholder="Username" class="form-control my-3 p-3">
+                                    <input type="text" placeholder="Username" class="form-control my-3 p-3" th:field="*{userAdministrador}">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-lg-8">
-                                    <input type="password" placeholder="Contraseña" class="form-control my-3 p-3">
+                                    <input type="password" placeholder="Contraseña" class="form-control my-3 p-3" th:field="*{password}">
                                 </div>
                             </div>
                             <div class="form-row">

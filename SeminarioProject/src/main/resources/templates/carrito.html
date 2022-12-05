@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -56,7 +56,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html"
+                <a class="nav-link active" aria-current="page" th:href="@{/home}"
                   >Inicio</a
                 >
               </li>
@@ -76,10 +76,10 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+                <a class="nav-link" th:href="@{/verCarrito}"><i class="fas fa-shopping-cart"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Inicia sesión</a>
+                <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
               </li>
             </ul>
           </div>

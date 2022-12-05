@@ -42,11 +42,16 @@ public class CompraController {
         return "/index";
     }
 
+    @GetMapping("/verCarrito")
+    public String verCarrito(Model model) {
+        return "/carrito";
+    }
+
     @GetMapping("/seleccionarRestaurante/{idRestaurante}")
     public String seleccionarRestaurante(@PathVariable("idRestaurante") int idRestaurante, Model model) {
         model.addAttribute("menus", compraService.obtenerMenusDisponibles(idRestaurante));
         model.addAttribute("productos", compraService.obtenerProductosDisponibles(idRestaurante));
-        return "/index";
+        return "/listarProductosYCombos";
     }
 
     @GetMapping("/seleccionarMenu/{idMenu}")

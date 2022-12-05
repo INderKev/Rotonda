@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -35,7 +35,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+            <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html#quienes-somos">¿Quiénes somos?</a>
@@ -47,10 +47,10 @@
             <a class="nav-link" href="listarRestaurantes.html">Restaurantes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
+            <a class="nav-link" th:href="@{/verCarrito}"><i class="fas fa-shopping-cart"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Inicia sesión</a>
+            <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
           </li>
         </ul>
       </div>
@@ -76,57 +76,25 @@
     <div class="align-items-center d-flex justify-content-around">
       <div class="row row-cols-1 row-cols-md-3 g-4 m-2" id="contenedor-restaurantes">
         <!-- Esta es la tarjeta-->
-        <div class="col mx-3" style="width: 360px;">
+        <div th:each="restaurante:${restaurantes}" class="col mx-3" style="width: 360px;">
           <div class="card align-items-center text-center"
             style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
             <div class="">
-              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
-              <img src="./img/restaurantes/KFC_logo_PNG20.png" alt="imagen-restaurante"
+              <h3 class="card-title font-weigth-bold py-2" th:text="${restaurante.nombre}"></h3>
+              <img th:src="${restaurante.imagen}" alt="imagen-restaurante"
                 class="card-img-top p-2 img-fluid" style="width: 230px; height: 230px" />
             </div>
             <div class="card-body b">
-              <h5 class="">Especialidad</h5>
-              <button type="button" class="btn btn-outline-dark">
-                Ver menú de KFC
-              </button>
+              <div th:each="especialidad:${especialidades}">
+                <h5 class=""  th:if="${especialidad.idEspecialidad == restaurante.idEspecialidad}" th:text="${especialidad.nombre}"></h5>
+              </div>
+              <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarRestaurante/{idRestaurante}(idRestaurante=${restaurante.idRestaurante})}">
+                Ver carta
+              </a>
             </div>
           </div>
         </div>
 
-        <!-- Borrar (es una prueba)-->
-        <div class="col mx-3" style="width: 360px">
-          <div class="card align-items-center text-center"
-            style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
-            <div class="">
-              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
-              <img src="./img/restaurantes/el_corral.jpg" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
-                style="width: 230px; height: 230px" />
-            </div>
-            <div class="card-body b">
-              <h5 class="">Especialidad</h5>
-              <button type="button" class="btn btn-outline-dark">
-                Ver menú de KFC
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Borrar (es una prueba)-->
-        <div class="col mx-3" style="width: 360px">
-          <div class="card align-items-center text-center"
-            style="border-radius: 30px; box-shadow: 6px 6px 10px #454646">
-            <div class="">
-              <h3 class="card-title font-weigth-bold py-2">KFC</h3>
-              <img src="./img/restaurantes/mr-bolat.png" alt="imagen-restaurante" class="card-img-top p-2 img-fluid"
-                style="width: 230px; height: 230px" />
-            </div>
-            <div class="card-body b">
-              <h5 class="">Especialidad</h5>
-              <button type="button" class="btn btn-outline-dark">
-                Ver menú de KFC
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

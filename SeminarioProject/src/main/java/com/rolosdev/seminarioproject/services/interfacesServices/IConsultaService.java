@@ -13,4 +13,5 @@ public interface IConsultaService {
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto);
     public ArrayList<Restaurante> obtenerRestaurantes();
     public ArrayList<Clasificacion> obtenerClasificaciones();
+    public ArrayList<Especialidad> obtenerEspecialidades();
 }

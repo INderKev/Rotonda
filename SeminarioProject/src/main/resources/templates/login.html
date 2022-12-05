@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="#quienes-somos">¿Quiénes somos?</a>
@@ -47,7 +47,7 @@
                             <a class="nav-link" href="#nuestro-equipo">Nuestro equipo</a>
                             </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Inicia sesión</a>
+                            <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +84,7 @@
                                    <button class="boton-loguear mt-3 mb-5">Iniciar sesión</button>
                                 </div>
                             </div>
-                            <p>¿No tienes una cuenta? <a href="seleccionar_rol.html">Registrate aquí.</a> </p>
+                            <p>¿No tienes una cuenta? <a th:href="@{seleccionarRol}">Registrate aquí.</a> </p>
                         </form>
                     </div>
                

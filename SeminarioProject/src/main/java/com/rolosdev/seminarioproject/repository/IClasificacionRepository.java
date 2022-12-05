@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
+
 @Repository("clasificacionRepository")
 public interface IClasificacionRepository extends JpaRepository<Clasificacion, Integer> {
 
@@ -13,5 +15,11 @@ public interface IClasificacionRepository extends JpaRepository<Clasificacion, I
             nativeQuery = true
     )
     Clasificacion obtenerUltimoId();
+
+    @Query(
+            value = "SELECT * FROM Clasificacion",
+            nativeQuery = true
+    )
+    ArrayList<Clasificacion> obtenerTodasClasificaciones();
 
 }

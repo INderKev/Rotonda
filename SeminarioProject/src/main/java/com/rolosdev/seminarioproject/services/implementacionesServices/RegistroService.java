@@ -53,11 +53,9 @@ public class RegistroService implements IRegistroService {
     @Override
     public String registrarCliente(Cliente cliente) {
         if (clienteRepository.verificarExistencia(cliente.getCorreo()) == null) {
-            if (clienteRepository.verificarExistenciaIDcliente(cliente.getIdCliente()) == null) {
-                clienteRepository.save(cliente);
-                return "OK";
-            }
-            return "El número de identificación " + cliente.getIdCliente() + " ya existe, verifique los datos";
+            cliente.setIdCliente(clienteRepository.obtenerUltimoId().getIdCliente() + 1);
+            clienteRepository.save(cliente);
+            return "OK";
         }
         return "El correo " + cliente.getCorreo() + " Ya existe, verifique los datos";
     }

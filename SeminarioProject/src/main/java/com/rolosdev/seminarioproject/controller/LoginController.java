@@ -4,6 +4,8 @@ import com.rolosdev.seminarioproject.entity.Administrador;
 import com.rolosdev.seminarioproject.entity.Cliente;
 import com.rolosdev.seminarioproject.entity.Restaurante;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
+import com.rolosdev.seminarioproject.services.implementacionesServices.CompraService;
+import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,40 @@ public class LoginController {
     @Qualifier("loginService")
     private ILoginService loginService;
 
+    @Autowired
+    @Qualifier("compraService")
+    private CompraService compraService;
+
+    @Autowired
+    @Qualifier("consultaService")
+    private ConsultaService consultaService;
+
     @GetMapping("/login")
-    public String getIndex(Model model) {
+    public String getLogin(Model model) {
         model.addAttribute("login", new Login());
         return "/login";
+    }
+    @GetMapping("/seleccionarRol")
+    public String getSeleccionarRol(Model model) {
+        return "/seleccionar_rol";
+    }
+
+    @GetMapping("/registro-administrador")
+    public String getRegistro(Model model) {
+        model.addAttribute("administrador", new Administrador());
+        return "/registro-administrador";
+    }
+
+    @GetMapping("/registro-cliente")
+    public String getRegistroCliente(Model model) {
+        model.addAttribute("cliente", new Cliente());
+        return "/registro-cliente";
+    }
+
+    @GetMapping("/registro-restaurante")
+    public String getRegistroRestaurante(Model model) {
+        model.addAttribute("restaurante", new Restaurante());
+        return "/registro-restaurante";
     }
 
     @PostMapping("/loguearse")
@@ -38,7 +70,9 @@ public class LoginController {
             case "Cliente":
                 Cliente cliente = loginService.obtenerCliente(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionCliente("Cliente", cliente);
-                return "/index";
+                model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
+                model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
+                return "/listarRestaurantes";
             case "Administrador":
                 Administrador administrador = loginService.obtenerAdministrador(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
@@ -56,16 +90,21 @@ public class LoginController {
 
     @GetMapping("/home")
     public String getHome(Model model) {
-        switch (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario()) {
-            case "Cliente":
-                return "/index";
-            case "Administrador":
-                return "/index";
-            case "Restaurante":
-                return "/index";
-            default:
-                return "/index";
+        if (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario() != null){
+            switch (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario()) {
+                case "Cliente":
+                    model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
+                    model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
+                    return "/listarRestaurantes";
+                case "Administrador":
+                    return "/index";
+                case "Restaurante":
+                    return "/index";
+                default:
+                    return "/index";
+            }
         }
+        return "/index";
     }
 
     @GetMapping("/cerrarSesion")

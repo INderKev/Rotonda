@@ -24,6 +24,8 @@ public class Restaurante {
     private String user;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+    @Column(name = "IMAGEN_RESTAURANTE", nullable = false)
+    private String imagen;
 
     public int getIdRestaurante() {
         return idRestaurante;
@@ -79,5 +81,13 @@ public class Restaurante {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

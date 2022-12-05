@@ -58,6 +58,10 @@ public class ConsultaService implements IConsultaService {
     @Qualifier("seleccionRepository")
     private ISeleccionRepository seleccionRepository;
 
+    @Autowired
+    @Qualifier("especialidadRepository")
+    private IEspecialidadRepository especialidadRepository;
+
     @Override
     public ArrayList<Menu> obtenerMenusDelRestaurante(int idRestaurante) {
         return menuRepository.obtenerMenusPorRestaurante(idRestaurante);
@@ -90,7 +94,12 @@ public class ConsultaService implements IConsultaService {
 
     @Override
     public ArrayList<Clasificacion> obtenerClasificaciones() {
-        return (ArrayList<Clasificacion>) clasificacionRepository.findAll();
+        return clasificacionRepository.obtenerTodasClasificaciones();
+    }
+
+    @Override
+    public ArrayList<Especialidad> obtenerEspecialidades() {
+        return (ArrayList<Especialidad>) especialidadRepository.findAll();
     }
 
 }

@@ -1,3 +1,3 @@
 function redireccionar(valor){ 
-    window.location.href = "registro-"+valor.id+".html";
+    window.location.href = "registro-"+valor.id;
 }
