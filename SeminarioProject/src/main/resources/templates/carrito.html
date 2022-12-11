@@ -61,25 +61,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html#quienes-somos"
-                  >¿Quiénes somos?</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#nuestro-equipo"
-                  >Nuestro equipo</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="listarRestaurantes.html"
-                  >Restaurantes</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/verCarrito}"><i class="fas fa-shopping-cart"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
+                <a class="nav-link" th:href="@{/cerrarSesion}">Cerrar Sesión</a>
               </li>
             </ul>
           </div>
@@ -100,31 +82,30 @@
                       <table class="table table-striped mb-0">
                         <thead style="background-color: #002d72;">
                           <tr>
-                            <th scope="col"></th>
+                            <th scope="col">Imagen</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
-                            <th scope="col"></th>
-                            
+                            <th scope="col">Remover</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td><img src="./img/dashboard/gaseosa.png" alt="" style="width: 100px; height:100px;"></td>
-                            <td>Gaseosa</td>
-                            <td>$3000</td>
-                            <td><button type="button" class="btn btn-outline-danger">Remover</button></td>
+                          <tr th:if="productos != null" th:each="producto : ${productos}">
+                            <td><img th:src="${producto.imagenProducto}" alt="" style="width: 100px; height:100px;"></td>
+                            <td th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.precio}"></td>
+                            <td><a type="button" class="btn btn-outline-danger" th:href="@{/quitarProductoCarrito/{idProducto}(idProducto=${producto.idProducto})}">Remover</a></td>
                           </tr>
-                          <tr>
-                            <td><img src="./img/dashboard/gaseosa.png" alt="" style="width: 100px; height:100px;"></td>
-                            <td>Gaseosa</td>
-                            <td>$3000</td>
-                            <td><button type="button" class="btn btn-outline-danger">Remover</button></td>
+                          <tr th:if="menusSeleccionados != null" th:each="menuSeleccionado : ${menusSeleccionados}">
+                            <td><img th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}" th:src="${menu.imagenMenu}" alt="" style="width: 100px; height:100px;"></td>
+                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}" th:text="${menu.nombre}"></td>
+                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}"  th:text="${menu.precio}"></td>
+                            <td><a type="button" class="btn btn-outline-danger" th:href="@{/quitarMenuCarrito/{idMenuSeleccionado}(idMenuSeleccionado=${menuSeleccionado.idMenuSeleccionado})}">Remover</a></td>
                           </tr>
-                          <tr>
-                            <td><img src="./img/dashboard/gaseosa.png" alt="" style="width: 100px; height:100px;"></td>
-                            <td>Gaseosa</td>
-                            <td>$3000</td>
-                            <td><button type="button" class="btn btn-outline-danger">Remover</button></td>
+                          <tr style="text-align: right;">
+                            <td colspan="2" class="text-align-right" th:if="${compra != null}" th:text="${compra.total}"></td>
+                            <td colspan="2" class="text-align-right" th:if="${compra == null}" >0</td>
+                            <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/pagarCompra}">Confirmar</a></td>
+                            <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/cancelarCompra}">Cancelar</a></td>
                           </tr>
                         </tbody>
                       </table>

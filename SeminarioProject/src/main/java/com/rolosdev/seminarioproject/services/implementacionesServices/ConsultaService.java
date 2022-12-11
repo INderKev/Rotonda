@@ -93,6 +93,11 @@ public class ConsultaService implements IConsultaService {
     }
 
     @Override
+    public Restaurante obtenerRestauranteById(int id) {
+        return restauranteRepository.findById(id).get();
+    }
+
+    @Override
     public ArrayList<Clasificacion> obtenerClasificaciones() {
         return clasificacionRepository.obtenerTodasClasificaciones();
     }
@@ -102,4 +107,18 @@ public class ConsultaService implements IConsultaService {
         return (ArrayList<Especialidad>) especialidadRepository.findAll();
     }
 
+    @Override
+    public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu) {
+        return seleccionRepository.obtenerSeleccionPorMenu(idMenu);
+    }
+
+    @Override
+    public Producto obtenerProductoPorId(int IdProducto) {
+        return productoRepository.findById(IdProducto).get();
+    }
+
+    @Override
+    public Menu obtenerMenuPorId(int IdMenu){
+        return menuRepository.findById(IdMenu).get();
+    }
 }

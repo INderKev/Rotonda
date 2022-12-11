@@ -2,6 +2,7 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
+import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping
@@ -116,4 +120,49 @@ public class RegistroController {
         }
         return "/index";
     }
+    @PostMapping("/registrarProducto")
+    public String registrarProducto(HttpServletResponse response, @Validated Producto producto, Model model){
+        producto.setIdRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante());
+        String resultado = registroService.registrarProducto(producto);
+        if (!resultado.equals("OK")){
+            model.addAttribute("Mensaje", resultado);
+            return "/index";
+        }
+        return "redirect:/home";
+    }
+
+    @PostMapping("/registrarMenu")
+    public String registrarMenu(HttpServletResponse response, @Validated Menu menu, Model model){
+        menu.setIdRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante());
+        String resultado = registroService.registrarMenu(menu);
+        if (!resultado.equals("OK")){
+            model.addAttribute("Mensaje", resultado);
+            return "/index";
+        }
+        return "redirect:/home";
+    }
+
+    @PostMapping("/registarIngrediente")
+    public String registarIngrediente(HttpServletResponse response, @Validated Ingrediente ingrediente, Model model){
+        String resultado = registroService.registrarIngrediente(ingrediente);
+        if (!resultado.equals("OK")){
+            model.addAttribute("Mensaje", resultado);
+            return "/index";
+        }
+        return "redirect:/home";
+    }
+
+    @GetMapping("/eliminarMenu/{idMenu}")
+    public String eliminarMenu(@PathVariable("idMenu") int idMenu, Model model) {
+        registroService.eliminarMenu(idMenu);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/eliminarProducto/{idProducto}")
+    public String eliminarProducto(@PathVariable("idProducto") int idProducto, Model model) {
+        registroService.eliminarProducto(idProducto);
+        return "redirect:/home";
+    }
+
+
 }

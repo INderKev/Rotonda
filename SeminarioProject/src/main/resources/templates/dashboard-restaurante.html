@@ -12,19 +12,18 @@
     
 
     <!-- CSS -->
-	<link rel="stylesheet" th:href="@{css\dashboard-restaurante.css}">
+	<link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}">
 	
 </head>
+
 <body>
-	
-	<!-- SIDEBAR -->
-	<section id="sidebar">
+
+	<section th:id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> Los Rolos DEV</a>
 		<ul class="side-menu">
 			<li><a href="#" class="active"><i class='bx bxs-dashboard icon' ></i> Configuración</a></li>
 			<li class="divider" data-text="Opciones">Opciones</li>
 
-            <!-- Ingredientes -->
 			<li>
 				<a href="#container-ingredientes"><i class='bx bxs-inbox icon' ></i> Ingredientes <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
@@ -35,7 +34,6 @@
 				</ul>
 			</li>
 
-            <!-- Productos -->
 			<li>
 				<a href="#container-productos"><i class='bx bxs-inbox icon' ></i> Productos <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
@@ -46,7 +44,6 @@
 				</ul>
 			</li>
 
-            <!-- Menú -->
             <li>
 				<a href="#container-menu"><i class='bx bxs-inbox icon' ></i> Menús <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
@@ -56,18 +53,15 @@
 					<li><a href="#">Eliminar menú</a></li>
 				</ul>
 			</li>
-			
-            <!-- Pedidos -->
+
 			<li class="divider" data-text="Pedidos">Pedidos</li>
 			<li><a href="#"><i class='bx bx-table icon' ></i> Ver pedidos</a></li>
 		</ul>
 	</section>
 	
 
-	<!-- Contenido lado derecho -->
-	<section id="content">
-        
-        <!-- Barra de navegación básica -->
+	<section th:id="content">
+
 		<nav>
 			<i class='bx bx-menu toggle-sidebar' ></i>
 			<form action="#">
@@ -79,148 +73,26 @@
 
 			<span class="divider"></span>
 			<div class="profile">
-                <img th:src="@{img/restaurantes/KFC_logo_PNG20.png}" alt="">
+                <img th:src="${restaurante.imagen}" alt="">
 				<ul class="profile-link">
-					<li><a th:href="@{/home}"><i class='bx bxs-log-out-circle' ></i> Cerrar sesión</a></li>
+					<li><a th:href="@{/cerrarSesion}"><i class='bx bxs-log-out-circle' ></i> Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</nav>
-		
-		<!-- CRUD ingredientes-->
-		<div class="container-ingredientes">
-			<!-- Ver ingredientes -->
-			<main id="ver-ingredientes">
-				<h1 class="title">Bienvenid@ a la sección de ingredientes</h1>
-				<h3>Consulta tus ingredientes</h3>
 
-				<div class="id">
-					<label id="label-id">Ingresa el id de tu ingrediente:</label>
-					<input type="text" class="form-control" placeholder="ID de tu ingrediente" id="input-id">
-					<button type="button" class="btn btn-primary" id="btn-buscar-id">Buscar ingrediente</button>	
-				</div>
-				
-				<table class="table">
-					<thead class="table-dark">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre de ingrediente</th>
-						<th scope="col">Tipo de unidad</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-					</tr>
-					</thead>
 
-					<tbody class="tabla-ingredientes">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td> 
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>  
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>  
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>   
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>    
-						</tr>
-					</tbody>
-				</table>
-				
-			</main>
-			<!-- Agregar ingrediente -->
-			<main id="agregar-ingrediente">
-				<h3>Agrega un nuevo ingrediente</h3>
-				<section class="form my-3 mx-3" id="form-registro-ingrediente">
-					<div class="container g-0">
-						<div class="row g-0">
-								<div class="col-lg-5">
-									<img th:src="@{img/dashboard/ingredientes.jpg}" class="img-fluid" alt="ingredientes">
-								</div>
-								<div class="col-lg 5 px-5 pt-5">
-									<form>
-										<div class="row">
-											<div class="form-group col">
-												<label>Nombre de tu ingrediente</label>
-												<input type="text" class="form-control" name="nombreIngrediente" required>
-											</div>
-										
-										</div>
-							
-										<div class="row">
-											<div class="form-group col">
-												<label>Tipo de unidad</label>
-												<input type="text" class="form-control" name="tipoUnidad" required>
-											</div>
-								
-										</div>
-							
-										<div class="form-row">
-											<div class="col-lg-8">
-											<button class="boton-registrar mt-3 mb-5">Registrar ingrediente</button>
-											</div>
-										</div>
-									</form>
-								</div>
-						
-						</div>
-					</div>
-				</section>
-				
-			</main>
-			<!-- Editar ingredientes -->
-			<main id="editar-ingrediente">
-
-				<h3>Edita tu ingrediente</h3>
-				<table class="table">
-					<thead class="table-dark">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Nombre de ingrediente</th>
-						<th scope="col">Tipo de unidad</th>
-						<th></th>
-					</tr>
-					</thead>
-
-					<tbody class="tabla-ingredientes">
-						<tr>
-							<th scope="row">1</th>
-							<td><input type="text"  class="form-control" placeholder="Nombre ingrediente"></td>
-							<td><input type="text"  class="form-control" placeholder="Tipo de unidad"></td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>    
-						</tr>
-					</tbody>
-				</table>
-				
-			</main>
-		</div>
-
-		<!-- CRUD productos-->
 		<div class="container-productos">
-            <!-- Ver productos -->
-            <main id="ver-productos">
+            <main th:id="ver-productos">
                 <h1 class="title">Bienvenid@ a la sección de productos</h1>
                 <h3>Consulta tus productos</h3>
 
                 <div class="id">
-                    <label id="label-id">Ingresa el id de tu producto:</label>
-                    <input type="text" class="form-control" placeholder="ID de tu producto" id="input-id">
-                    <button type="button" class="btn btn-primary" id="btn-buscar-id">Buscar producto</button>    
+                    <form th:action="@{/productoPorId}" th:object="${productoAConsultar}" method="post">
+                        <label th:id="label-id">Ingresa el id de tu producto:</label>
+                        <input type="text" class="form-control" placeholder="ID de tu producto" th:id="input-id"
+                               th:field="*{idProducto}">
+                        <button class="btn btn-primary">Buscar</button>
+                    </form>
                 </div>
                 
                 <table class="table">
@@ -230,136 +102,93 @@
 						<th scope="col">Imagen de tu producto</th>
                         <th scope="col">Nombre de producto</th>
                         <th scope="col">Precio</th>
-						<th scope="col">Clasificación</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
+                        <th scope="col">Especialidad</th>
+						<th scope="col">Eliminar</th>
                     </tr>
                     </thead>
-
                     <tbody class="tabla-productos-consultar">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><img th:src="@{img/dashboard/gaseosa.png}" alt="imagen_producto" id="imagen-producto"></td>
-                            <td>Gaseosa</td>
-							<td>18.000</td>
-							<td>Bebida</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>  
-                        </tr>
-						<tr>
-                            <th scope="row">2</th>
-                            <td><img th:src="@{img/dashboard/BBQ Cruch.webp}" alt="imagen_producto" id="imagen-producto"></td>
-                            <td>BBQ Crunh</td>
-							<td>18.000</td>    
-							<td>Comestible</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>    
-                        </tr>
+                    <tr th:each="prod:${productos}">
+                        <th scope="row" th:text="${prod.idProducto}"></th>
+                        <td><img th:src="${prod.imagenProducto}" alt="imagen_producto" th:id="imagen-producto"></td>
+                        <td th:text="${prod.nombre}"></td>
+                        <td th:text="${prod.precio}"></td>
+                        <td th:each="clasificacion:${clasificaciones}"
+                            th:if="${clasificacion.idClasificacion == prod.idClasificacion}"
+                            th:text="${clasificacion.nombreClasificacion}"></td>
+                        <td><a type="button" class="btn btn-outline-danger"
+                               th:href="@{/eliminarProducto/{idProducto}(idProducto=${prod.idProducto})}">Eliminar</a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-                
             </main>
-            <!-- Agregar producto -->
-            <main id="agregar-producto">
+            <main th:id="agregar-producto">
                 <h3>Agrega un nuevo producto</h3>
-                <section class="form my-3 mx-3" id="form-registro-producto">
+                <section class="form my-3 mx-3" th:id="form-registro-producto">
                     <div class="container g-0">
                         <div class="row g-0">
                                 <div class="col-lg-5">
                                     <img th:src="@{img/dashboard/ingredientes.jpg}" class="img-fluid" alt="productos">
                                 </div>
                                 <div class="col-lg 5 px-5 pt-5">
-                                    <form>
+                                    <form th:action="@{/registrarProducto}" th:object="${producto}" method="post">
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label>Nombre de tu producto</label>
-                                                <input type="text" class="form-control" name="nombreProducto" required>
+                                                <input type="text" class="form-control" name="nombreProducto" required
+                                                       th:field="*{nombre}">
                                             </div>
-											<div class="form-group col">
+                                            <div class="form-group col">
                                                 <label>Clasificación</label>
-                                                <select class="form-select" name="clasificacion" id="clasificacion">
-													<option value="bebida">Bebida</option>
-													<option value="comestible">Comestible</option>
-													<option value="postre">Postre</option>
-												</select>
+                                                <select class="form-select" name="clasificacion" th:id="clasificacion"
+                                                        th:field="*{idClasificacion}">
+                                                    <option th:each="clasificacion:${clasificaciones}"
+                                                            th:value="${clasificacion.idClasificacion}"
+                                                            th:text="${clasificacion.nombreClasificacion}"></option>
+                                                </select>
                                             </div>
                                         </div>
-                            
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label>URL imagen del producto</label>
-                                                <input type="text" class="form-control" name="url-imagen-producto" required>
+                                                <input type="text" class="form-control" name="url-imagen-producto"
+                                                       required th:field="*{imagenProducto}">
                                             </div>
                                         </div>
-										
-										<div class="row">
+
+                                        <div class="row">
                                             <div class="form-group col">
                                                 <label>Precio del producto</label>
-                                                <input type="number" class="form-control" name="precio-producto" min="1000" required>
+                                                <input type="number" class="form-control" name="precio-producto"
+                                                       min="1000" required th:field="*{precio}">
                                             </div>
                                         </div>
 
                                         <div class="form-row">
                                             <div class="col-lg-8">
-                                            <button class="boton-registrar mt-3 mb-5">Registrar producto</button>
+                                                <button class="boton-registrar mt-3 mb-5">Registrar producto</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                        
                         </div>
                     </div>
                 </section>
-                
             </main>
-            <!-- Editar productos -->
-            <main id="editar-producto">
 
-                <h3>Edita tu producto</h3>
-                <table class="table">
-                    <thead class="table-dark">
-						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">Imagen de tu producto</th>
-							<th scope="col">Nombre de producto</th>
-							<th scope="col">Clasificación</th>
-							<th scope="col">Precio</th>
-							<th scope="col"></th>
-						</tr>
-                    </thead>
-
-                    <tbody class="tabla-productos-editar">
-                        <tr>
-                            <th scope="row">1</th>
-							<td><input type="text"  class="form-control" placeholder="URL imagen producto"></td>
-                            <td><input type="text"  class="form-control" placeholder="Nombre producto"></td>
-							<td>
-								<select class="form-select" name="clasificacion" id="clasificacion">
-									<option value="bebida">Bebida</option>
-									<option value="comestible">Comestible</option>
-									<option value="postre">Postre</option>
-								</select>
-							</td>
-							<td><input type="number" class="form-control" name="precio-producto" min="1000" placeholder="Precio de tu producto"></td>
-                            <td><button type="button" class="btn btn-outline-success">Editar</button></td>    
-                        </tr>
-                    </tbody>
-                </table>
-                
-            </main>
-        </div>
-
-		<!-- CRUD menús-->
 		<div class="container-menus">
-            <!-- Ver menus -->
-            <main id="ver-menus">
+
+            <main th:id="ver-menus">
                 <h1 class="title">Bienvenid@ a la sección de menús</h1>
                 <h3>Consulta tus menus</h3>
 
                 <div class="id">
-                    <label id="label-id">Ingresa el id de tu menú:</label>
-                    <input type="text" class="form-control" placeholder="ID de tu menu" id="input-id">
-                    <button type="button" class="btn btn-primary" id="btn-buscar-id">Buscar menú</button>    
+                    <form th:action="@{/menuPorId}" th:object="${menuAConsultar}" method="post">
+                        <label th:id="label-id">Ingresa el id de tu Menu:</label>
+                        <input type="text" class="form-control" placeholder="ID de tu producto" th:id="input-id"
+                               th:field="*{idMenu}">
+                        <button class="btn btn-primary">Buscar</button>
+                    </form>
                 </div>
                 
                 <table class="table">
@@ -369,47 +198,38 @@
                         <th scope="col">Imagen de tu menú</th>
                         <th scope="col">Nombre de menú</th>
                         <th scope="col">Precio</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
+						<th scope="col">Eliminar</th>
                     </tr>
                     </thead>
 
                     <tbody class="tabla-menus-consultar">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><img th:src="@{img/dashboard/mega-sin-igual.webp}" alt="imagen_menu" id="imagen-menu"></td>
-                            <td>Mega igual</td>
-                            <td>53.000</td>
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>   
+                        <tr th:each="men: ${menus}">
+                            <th scope="row" th:text="${men.idMenu}"></th>
+                            <td><img th:src="${men.imagenMenu}" alt="imagen_menu" th:id="imagen-menu"></td>
+                            <td th:text="${men.nombre}"></td>
+                            <td th:text="${men.precio}"></td>
+							<td><a type="button" class="btn btn-outline-danger" th:href="@{/eliminarMenu/{idMenu}(idMenu=${men.idMenu})}">Eliminar</a></td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td><img th:src="@{img/dashboard/duo-tenkaco.webp}" alt="imagen_menu" id="imagen-menu"></td>
-                            <td>Duo Kentaco</td>
-                            <td>40.000</td>    
-							<td><button type="button" class="btn btn-outline-success">Editar</button></td>
-							<td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>   
-                        </tr>
                     </tbody>
                 </table>
                 
             </main>
-            <!-- Agregar menu -->
-            <main id="agregar-menu">
+
+            <main th:id="agregar-menu">
                 <h3>Agrega un nuevo menú</h3>
-                <section class="form my-3 mx-3" id="form-registro-menu">
+                <section class="form my-3 mx-3" th:id="form-registro-menu">
                     <div class="container g-0">
                         <div class="row g-0">
                                 <div class="col-lg-5">
                                     <img th:src="@{img/dashboard/ingredientes.jpg}" class="img-fluid" alt="menus">
                                 </div>
                                 <div class="col-lg 5 px-5 pt-5">
-                                    <form>
+                                    <form th:action="@{/registrarMenu}" th:object="${menu}" method="post">
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label>Nombre de tu menú</label>
-                                                <input type="text" class="form-control" name="nombreMenu" required>
+                                                <input type="text" class="form-control" name="nombreMenu" required th:field="*{nombre}">
                                             </div>
                                             
                                         </div>
@@ -417,14 +237,14 @@
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label>URL imagen del menú</label>
-                                                <input type="text" class="form-control" name="url-imagen-menu" required>
+                                                <input type="text" class="form-control" name="url-imagen-menu" required th:field="*{imagenMenu}">
                                             </div>
                                         </div>
                                         
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label>Precio del menú</label>
-                                                <input type="number" class="form-control" name="precio-menu" min="1000" required>
+                                                <input type="number" class="form-control" name="precio-menu" min="1000" required th:field="*{precio}">
                                             </div>
                                         </div>
 
@@ -435,48 +255,14 @@
                                         </div>
                                     </form>
                                 </div>
-                        
                         </div>
                     </div>
                 </section>
-                
             </main>
-            <!-- Editar menus -->
-            <main id="editar-menu">
-
-                <h3>Edita tu menú</h3>
-
-                <table class="table">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Imagen de tu menú</th>
-                            <th scope="col">Nombre de menú</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col"></th>
-							<th scope="col"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="tabla-menus-editar">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><input type="text"  class="form-control" placeholder="URL imagen menu"></td>
-                            <td><input type="text"  class="form-control" placeholder="Nombre menu"></td>
-                            <td><input type="number" class="form-control" name="precio-menu" min="1000" placeholder="Precio de tu menu"></td>
-                            <td><button type="button" class="btn btn-outline-success">Editar</button></td>    
-                        </tr>
-                    </tbody>
-                </table>
-                
-            </main>
-            
         </div>
-
-	</section>
-	
+    </section>
 
 	<script th:src="@{https://cdn.jsdelivr.net/npm/apexcharts}"></script>
-	<script th:src="@{js\dashboard-restaurante.js}"></script>
+	<script th:src="@{js/dashboard-restaurante.js}"></script>
 </body>
 </html>

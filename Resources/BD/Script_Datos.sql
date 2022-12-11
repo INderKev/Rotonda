@@ -64,9 +64,9 @@ INSERT INTO ingrediente VALUES (36, 'Empanada mexicana', 'Unidad');
 
 -- Restaurante
 
-INSERT INTO restaurante VALUES (1, 5, 'Los Rolitos', 'Calle 16 # 16 - 16', '987987987', 'rolitos', 'asd123', '');
-INSERT INTO restaurante VALUES (2, 5, 'Laura´s PTE', 'Carrera 17 # 12 - 17', '987987987', 'lauritas', 'asd123', '');
-INSERT INTO restaurante VALUES (3, 3, 'Donde Rosita', 'Calle 170 # 30 - 40', '987987987', 'rositas', 'asd123', '');
+INSERT INTO restaurante VALUES (1, 5, 'Los Rolitos', 'Calle 16 # 16 - 16', '987987987', 'rolitos', 'asd123', 'https://res.cloudinary.com/dn1k0drir/image/upload/v1670262735/ROLOS%20DEV/descargar_terlwv.jpg');
+INSERT INTO restaurante VALUES (2, 5, 'Laura´s PTE', 'Carrera 17 # 12 - 17', '987987987', 'lauritas', 'asd123', 'https://res.cloudinary.com/dn1k0drir/image/upload/v1670262735/ROLOS%20DEV/L_fqd48y.png');
+INSERT INTO restaurante VALUES (3, 3, 'Donde Rosita', 'Calle 170 # 30 - 40', '987987987', 'rositas', 'asd123', 'https://res.cloudinary.com/dn1k0drir/image/upload/v1670262735/ROLOS%20DEV/R_azoyvr.png');
 
 -- Stock
 

@@ -14,75 +14,65 @@
     <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
-    
     <section class="Form my-3 mx-3" id="form-registro">
         <div class="container g-0">
             <div class="row g-0">
                 <div class="col-lg-5">
                     <img src="img\forms\chef.webp" class="img-fluid" alt="imagen">
                 </div>
-                    <div class="col-lg 4 px-5 pt-5">
-                        <h1 class="font-weigth-bold py-3">Formulario de registro</h1>
- 
-                        <form>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label>Primer nombre</label>
-                                    <input type="text" class="form-control" name="primerNombre">
-                                </div>
-                                <div class="form-group col">
-                                    <label>Segundo nombre</label>
-                                    <input type="text" class="form-control" name="segundoNombre">
-                                </div>
+                <div class="col-lg 4 px-5 pt-5">
+                    <h1 class="font-weigth-bold py-3">Formulario de registro</h1>
+                    <form th:action="@{/registrarRestaurante}" th:object="${restaurante}" method="post">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label>Nombre de tu Restaurante</label>
+                                <input type="text" class="form-control" name="nombreRestaurante" th:field="*{nombre}">
                             </div>
-                
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label>Primer apellido</label>
-                                    <input type="text" class="form-control" name="primerApellido">
-                                </div>
-                                <div class="form-group col">
-                                    <label>Segundo apellido</label>
-                                    <input type="text" class="form-control" name="segundoApellido">
-                                </div>
+                            <div class="form-group col">
+                                <label>Dirección</label>
+                                <input type="text" class="form-control" name="direccion" th:field="*{direccion}">
                             </div>
-                
-                            <div class="form-row">
-                                <div class="form-group col">
-                                    <label>Teléfono</label>
-                                    <input type="text" class="form-control" name="telefonoCliente">
-                                </div>
-                                <div class="form-group col">
-                                    <label>Correo electrónico</label>
-                                    <input type="email" class="form-control" name="correo">
-                                </div>
-                
-                                <div class="form-group col">
-                                    <label>Dirección</label>
-                                    <input type="email" class="form-control" name="direccion">
-                                </div>
-                
-                                <div class="form-group col">
-                                    <label>Contraseña</label>
-                                    <input type="password" class="form-control" name="password">
-                                </div>
-                                <div class="form-group col">
-                                    <label>Confirmar contraseña</label>
-                                    <input type="password" class="form-control" name="confirmar_password">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label>Logo de tu Restaurante (url)</label>
+                                <input type="text" class="form-control" name="logo-url" th:field="*{imagen}">
                             </div>
-
-                            <div class="form-row">
-                                <div class="col-lg-8">
-                                   <button class="boton-loguear mt-3 mb-5">Registrar</button>
-                                </div>
+                            <div class="form-group col">
+                                <label>Especialidad</label>
+                                <select class="form-select" name="elegir-especialidad" id="elegir-especialidad"
+                                        th:field="*{idEspecialidad}">
+                                    <option th:each="especialidad:${especialidades}"
+                                            th:value="${especialidad.idEspecialidad}"
+                                            th:text="${especialidad.nombre}"></option>
+                                </select>
                             </div>
-                        </form>
-                    </div>
-               
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label>Teléfono</label>
+                                <input type="text" class="form-control" name="telefonoCliente"
+                                       th:field="*{telefono}">
+                            </div>
+                            <div class="form-group col">
+                                <label>Usuario</label>
+                                <input type="text" class="form-control" name="usuario-restaurante"
+                                       th:field="*{user}">
+                            </div>
+                            <div class="form-group col">
+                                <label>Contraseña</label>
+                                <input type="password" class="form-control" name="password" th:field="*{password}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-8">
+                                <button class="boton-loguear mt-3 mb-5">Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-   
 </body>
 </html>

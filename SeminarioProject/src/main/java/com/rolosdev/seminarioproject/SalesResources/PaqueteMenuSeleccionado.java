@@ -17,6 +17,7 @@ public class PaqueteMenuSeleccionado {
     public PaqueteMenuSeleccionado() {
         productos = new ArrayList<>();
         productosSeleccionados = new ArrayList<>();
+        selecciones = new ArrayList<>();
     }
 
     public MenuSeleccionado getMenuSeleccionado() {
@@ -53,6 +54,10 @@ public class PaqueteMenuSeleccionado {
 
     public void agregarProducto(PaqueteProducto producto) {
         productos.add(producto);
+    }
+
+    public void agregaSeleccion(Seleccion seleccion) {
+        selecciones.add(seleccion);
     }
 
     public void agregarProductoSeleccionado(PaqueteProducto producto) {

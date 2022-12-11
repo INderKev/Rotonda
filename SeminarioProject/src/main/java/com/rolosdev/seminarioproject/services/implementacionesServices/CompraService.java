@@ -144,19 +144,58 @@ public class CompraService implements ICompraService {
     @Override
     public void cancelarCompra() {
         compraRepository.delete(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
-
+        ArrayList<Producto> productos = CarritoDeCompraService.getCarritoDeCompraService().getProductos();
+        ArrayList<PaqueteMenuSeleccionado> paquetesMenusSeleccionados = CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados();
+        for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : paquetesMenusSeleccionados) {
+            ArrayList<PaqueteProducto> productosMenu = paqueteMenuSeleccionado.getProductos();
+            for (PaqueteProducto paqueteProducto : productosMenu) {
+                productos.add(paqueteProducto.getProducto());
+            }
+            menuSeleccionadoRepository.delete(paqueteMenuSeleccionado.getMenuSeleccionado());
+        }
+        for (Producto producto : productos) {
+            recuperarCantidadStock(producto);
+        }
+        CarritoDeCompraService.getCarritoDeCompraService().finalizar();
     }
 
     @Override
     public void terminarCompra() {
-
+        ArrayList<Producto> productos = new ArrayList<>();
+        ArrayList<Producto> productosUsados = new ArrayList<>();
+        for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
+            productos = new ArrayList<>();
+            productosUsados = new ArrayList<>();
+            for (PaqueteProducto paqueteProducto : paqueteMenuSeleccionado.getProductos()) {
+                productos.add(paqueteProducto.getProducto());
+                for (PaqueteProducto pq : paqueteMenuSeleccionado.getProductosSeleccionados()) {
+                    if (pq.getProducto().getIdProducto() == paqueteProducto.getProducto().getIdProducto()) {
+                        productosUsados.add(paqueteProducto.getProducto());
+                        break;
+                    }
+                }
+            }
+            for (Producto pr : productosUsados) {
+                productos.remove(pr);
+            }
+            for (Producto producto : productos) {
+                recuperarCantidadStock(producto);
+            }
+            for (Seleccion seleccion : paqueteMenuSeleccionado.getSelecciones()) {
+                seleccionRepository.save(seleccion);
+            }
+        }
+        compraRepository.save(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
+        for (PaqueteOrden orden : CarritoDeCompraService.getCarritoDeCompraService().getOrdenes()) {
+            ordenRepository.save(orden.getOrden());
+        }
+        CarritoDeCompraService.getCarritoDeCompraService().finalizar();
     }
 
     @Override
-    public int crearMenuSeleccionado(int idMenu) {
+    public MenuSeleccionado crearMenuSeleccionado(int idMenu) {
         MenuSeleccionado menuSeleccionado = new MenuSeleccionado();
-        Menu menu = new Menu();
-        menu = menuRepository.findById(idMenu).get();
+        Menu menu = menuRepository.findById(idMenu).get();
         menuSeleccionado.setIdMenu(idMenu);
         menuSeleccionado.setIdMenuSeleccionado(menuSeleccionadoRepository.obtenerUltimoId().getIdMenuSeleccionado() + 1);
         Orden orden = new Orden();
@@ -169,7 +208,7 @@ public class CompraService implements ICompraService {
         PaqueteMenuSeleccionado paqueteMenuSeleccionado = new PaqueteMenuSeleccionado();
         paqueteMenuSeleccionado.setMenuSeleccionado(menuSeleccionado);
         paqueteOrden.setPaqueteMenuSeleccionado(paqueteMenuSeleccionado);
-        paqueteMenuSeleccionado.setSelecciones(seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu()));
+        //paqueteMenuSeleccionado.setSelecciones(seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu()));
         ArrayList<Producto> productosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
         for (Producto producto : productosMenu) {
             descontarCantidadStock(producto);
@@ -186,13 +225,19 @@ public class CompraService implements ICompraService {
         }
         CarritoDeCompraService.getCarritoDeCompraService().agregarPaqueteDeOrden(paqueteOrden);
         CarritoDeCompraService.getCarritoDeCompraService().compra.setTotal(CarritoDeCompraService.getCarritoDeCompraService().compra.getTotal() + menu.getPrecio());
-        return menuSeleccionado.getIdMenuSeleccionado();
+        menuSeleccionadoRepository.save(menuSeleccionado);
+        return menuSeleccionado;
     }
 
     @Override
     public void seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado) {
         Producto producto = productoRepository.findById(idProducto).get();
         PaqueteProducto paqueteProducto = new PaqueteProducto();
+        Seleccion seleccion = new Seleccion();
+        seleccion.setIdSeleccion(seleccionRepository.obtenerUltimoId().getIdSeleccion() + 1);
+        seleccion.setIdMenuSeleccionado(idMenuSeleccionado);
+        seleccion.setIdProducto(idProducto);
+        seleccion.setIdClasificacion(producto.getIdClasificacion());
         paqueteProducto.setProducto(producto);
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
@@ -203,10 +248,11 @@ public class CompraService implements ICompraService {
         }
         PaqueteOrden paqueteOrden = CarritoDeCompraService.carritoDeCompraService.obtenerOrdenPorMenuSeleccionado(idMenuSeleccionado);
         paqueteOrden.getPaqueteMenuSeleccionado().agregarProductoSeleccionado(paqueteProducto);
+        paqueteOrden.getPaqueteMenuSeleccionado().agregaSeleccion(seleccion);
     }
 
     @Override
-    public void agregarProducto(int idProducto) {
+    public void agregarProductoCarrito(int idProducto) {
         Producto producto = productoRepository.findById(idProducto).get();
         PaqueteProducto paqueteProducto = new PaqueteProducto();
         paqueteProducto.setProducto(producto);
@@ -220,9 +266,13 @@ public class CompraService implements ICompraService {
         Orden orden = new Orden();
         orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden());
         orden.setIdCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getIdCompra());
+        orden.setObservaciones("");
         PaqueteOrden paqueteOrden = new PaqueteOrden();
         paqueteOrden.setOrden(orden);
         paqueteOrden.setPaqueteProducto(paqueteProducto);
+        CarritoDeCompraService.getCarritoDeCompraService().agregarPaqueteDeOrden(paqueteOrden);
+        CarritoDeCompraService.getCarritoDeCompraService().getCompra().setTotal(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getTotal() + producto.getPrecio());
+        descontarCantidadStock(producto);
     }
 
     @Override
@@ -233,15 +283,35 @@ public class CompraService implements ICompraService {
         for (PaqueteProducto producto: paqueteOrden.getPaqueteMenuSeleccionado().getProductos()) {
             recuperarCantidadStock(producto.getProducto());
         }
-        menuSeleccionadoRepository.deleteById(idMenuSeleccionado);
-        CarritoDeCompraService.getCarritoDeCompraService().compra.setTotal(CarritoDeCompraService.getCarritoDeCompraService().compra.getTotal() - menu.getPrecio());
+        CarritoDeCompraService.getCarritoDeCompraService().compra.setTotal(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getTotal() - menu.getPrecio());
         CarritoDeCompraService.getCarritoDeCompraService().eliminarOrden(paqueteOrden);
         menuSeleccionadoRepository.deleteById(idMenuSeleccionado);
     }
 
     @Override
     public void quitarSeleccionProducto(int idProducto) {
-        
+        recuperarCantidadStock(productoRepository.findById(idProducto).get());
+        CarritoDeCompraService.getCarritoDeCompraService().getCompra().setTotal(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getTotal() - productoRepository.findById(idProducto).get().getPrecio());
+        CarritoDeCompraService.getCarritoDeCompraService().eliminarOrden(CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorProducto(idProducto));
+    }
+
+    @Override
+    public ArrayList<Menu> obtenerMenusCarro() {
+        ArrayList<Menu> menus = new ArrayList<>();
+        boolean confirmar;
+        for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
+            confirmar = true;
+            for (Menu menu : menus) {
+                if (menu.getIdMenu() == menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getIdMenu()).get().getIdMenu()) {
+                    confirmar = false;
+                    break;
+                }
+            }
+            if (confirmar) {
+                menus.add(menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getIdMenu()).get());
+            }
+        }
+        return menus;
     }
 
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {

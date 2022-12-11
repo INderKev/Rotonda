@@ -122,6 +122,7 @@ public class RegistroService implements IRegistroService {
         return "OK";
     }
 
+    @Override
     public void pruebas() {
         boolean confirmar;
         ArrayList<Producto> productosAEliminar = new ArrayList<>();
@@ -175,6 +176,24 @@ public class RegistroService implements IRegistroService {
                 }
             }
         }
+    }
+
+    @Override
+    public void eliminarProducto(int id) {
+        ArrayList<ProductoIngrediente> productoIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(id);
+        for (ProductoIngrediente pi : productoIngredientes) {
+            productoIngredienteRepository.delete(pi);
+        }
+        productoRepository.deleteById(id);
+    }
+
+    @Override
+    public void eliminarMenu(int id) {
+        ArrayList<Seleccion> selecciones = seleccionRepository.obtenerSeleccionPorMenu(id);
+        for (Seleccion seleccion : selecciones) {
+            seleccionRepository.delete(seleccion);
+        }
+        menuRepository.deleteById(id);
     }
 
 }

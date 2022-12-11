@@ -12,9 +12,9 @@ public class Orden {
     @Column(name = "IDCOMPRA", nullable = false)
     private int idCompra;
     @Column(name = "IDMENU_SELECCIONADO", nullable = true)
-    private int idMenuSeleccionado;
+    private Integer idMenuSeleccionado;
     @Column(name = "IDPRODUCTO", nullable = true)
-    private int idProducto;
+    private Integer idProducto;
     @Column(name = "OBSERVACIONES", nullable = false)
     private String observaciones;
 

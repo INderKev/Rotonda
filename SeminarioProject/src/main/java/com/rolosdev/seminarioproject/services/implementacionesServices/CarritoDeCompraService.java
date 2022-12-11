@@ -1,7 +1,10 @@
 package com.rolosdev.seminarioproject.services.implementacionesServices;
 
+import com.rolosdev.seminarioproject.SalesResources.PaqueteMenuSeleccionado;
 import com.rolosdev.seminarioproject.SalesResources.PaqueteOrden;
 import com.rolosdev.seminarioproject.entity.Compra;
+import com.rolosdev.seminarioproject.entity.MenuSeleccionado;
+import com.rolosdev.seminarioproject.entity.Producto;
 
 import java.util.ArrayList;
 
@@ -52,8 +55,32 @@ public class CarritoDeCompraService {
         return null;
     }
 
+    public ArrayList<Producto> getProductos() {
+        ArrayList<Producto> productos = new ArrayList<>();
+        for (PaqueteOrden orden : ordenes) {
+            if (orden.getPaqueteProducto() != null) {
+                productos.add(orden.getPaqueteProducto().producto);
+            }
+        }
+        return productos;
+    }
+
+    public ArrayList<PaqueteMenuSeleccionado> getMenusSeleccionados() {
+        ArrayList<PaqueteMenuSeleccionado> menuSeleccionado = new ArrayList<>();
+        for (PaqueteOrden orden : ordenes) {
+            if (orden.getPaqueteMenuSeleccionado() != null) {
+                menuSeleccionado.add(orden.getPaqueteMenuSeleccionado());
+            }
+        }
+        return menuSeleccionado;
+    }
+
     public void eliminarOrden(PaqueteOrden paqueteOrden) {
         ordenes.remove(paqueteOrden);
+    }
+
+    public void finalizar() {
+        carritoDeCompraService = new CarritoDeCompraService();
     }
 
     static public CarritoDeCompraService getCarritoDeCompraService(){
@@ -61,5 +88,9 @@ public class CarritoDeCompraService {
             carritoDeCompraService = new CarritoDeCompraService();
         }
         return carritoDeCompraService;
+    }
+
+    public ArrayList<PaqueteOrden> getOrdenes() {
+        return ordenes;
     }
 }

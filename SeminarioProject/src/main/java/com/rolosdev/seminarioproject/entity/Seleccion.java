@@ -24,9 +24,9 @@ public class Seleccion {
     @Column(name = "IDPRODUCTO")
     private Integer idProducto;
     @Column(name = "PRECIO_BAJO")
-    private double precioBajo;
+    private Double precioBajo;
     @Column(name = "PRECIO_ALTO")
-    private double precioAlto;
+    private Double precioAlto;
 
     public Integer getIdSeleccion() {
         return idSeleccion;

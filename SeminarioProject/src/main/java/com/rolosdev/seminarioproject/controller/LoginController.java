@@ -1,9 +1,8 @@
 package com.rolosdev.seminarioproject.controller;
 
-import com.rolosdev.seminarioproject.entity.Administrador;
-import com.rolosdev.seminarioproject.entity.Cliente;
-import com.rolosdev.seminarioproject.entity.Restaurante;
+import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
+import com.rolosdev.seminarioproject.services.implementacionesServices.CarritoDeCompraService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.CompraService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
@@ -60,6 +59,7 @@ public class LoginController {
     @GetMapping("/registro-restaurante")
     public String getRegistroRestaurante(Model model) {
         model.addAttribute("restaurante", new Restaurante());
+        model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
         return "/registro-restaurante";
     }
 
@@ -70,17 +70,29 @@ public class LoginController {
             case "Cliente":
                 Cliente cliente = loginService.obtenerCliente(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionCliente("Cliente", cliente);
+                UsuarioLogueadoService.getUsuarioLogueadoService().setCliente(cliente);
                 model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
                 model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
                 return "/listarRestaurantes";
             case "Administrador":
                 Administrador administrador = loginService.obtenerAdministrador(login);
+                UsuarioLogueadoService.getUsuarioLogueadoService().setAdministrador(administrador);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
-                return "/index";
+                model.addAttribute("ingrediente", new Ingrediente());
+                return "/registro-ingrediente";
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
-                return "/index";
+                UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(restaurante);
+                model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(restaurante.getIdRestaurante()));
+                model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(restaurante.getIdRestaurante()));
+                model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
+                model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                model.addAttribute("producto", new Producto());
+                model.addAttribute("menu", new Menu());
+                model.addAttribute("productoAConsultar", new Producto());
+                model.addAttribute("menuAConsultar", new Menu());
+                return "/dashboard-restaurante";
             default:
                 model.addAttribute("login", new Login());
                 model.addAttribute("Mensaje", "El usuario no fue encontrado");
@@ -97,9 +109,18 @@ public class LoginController {
                     model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
                     return "/listarRestaurantes";
                 case "Administrador":
-                    return "/index";
+                    model.addAttribute("ingrediente", new Ingrediente());
+                    return "/registro-ingrediente";
                 case "Restaurante":
-                    return "/index";
+                    model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+                    model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+                    model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
+                    model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                    model.addAttribute("producto", new Producto());
+                    model.addAttribute("menu", new Menu());
+                    model.addAttribute("productoAConsultar", new Producto());
+                    model.addAttribute("menuAConsultar", new Menu());
+                    return "/dashboard-restaurante";
                 default:
                     return "/index";
             }
@@ -109,6 +130,9 @@ public class LoginController {
 
     @GetMapping("/cerrarSesion")
     public String cerrarSesion(Model model) {
+        if (CarritoDeCompraService.getCarritoDeCompraService().getCompra() != null) {
+            compraService.cancelarCompra();
+        }
         UsuarioLogueadoService.getUsuarioLogueadoService().cerrarSesion();
         return "/index";
     }

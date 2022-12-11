@@ -15,5 +15,7 @@ public interface IRegistroService {
     public String registrarProductoIngrediente(ProductoIngrediente productoIngrediente);
     public String registrarSeleccion(Seleccion seleccion);
     public void pruebas();
+    public void eliminarProducto(int id);
+    public void eliminarMenu(int id);
 
 }

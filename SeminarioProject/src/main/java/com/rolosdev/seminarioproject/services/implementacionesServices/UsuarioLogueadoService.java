@@ -54,6 +54,26 @@ public class UsuarioLogueadoService {
         return restaurante;
     }
 
+    public static void setUsuarioLogueadoService(UsuarioLogueadoService usuarioLogueadoService) {
+        UsuarioLogueadoService.usuarioLogueadoService = usuarioLogueadoService;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
     static public UsuarioLogueadoService getUsuarioLogueadoService() {
         if (usuarioLogueadoService == null) {
             usuarioLogueadoService = new UsuarioLogueadoService();

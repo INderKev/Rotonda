@@ -13,7 +13,7 @@ public class Clasificacion {
     @Column(name = "IDCLASIFICACION", nullable = false)
     private int idClasificacion;
     @Column(name = "NOM_CLASIFICACION", nullable = false)
-    private int nombreClasificacion;
+    private String nombreClasificacion;
 
     public int getIdClasificacion() {
         return idClasificacion;
@@ -23,11 +23,11 @@ public class Clasificacion {
         this.idClasificacion = idClasificacion;
     }
 
-    public int getNombreClasificacion() {
+    public String getNombreClasificacion() {
         return nombreClasificacion;
     }
 
-    public void setNombreClasificacion(int nombreClasificacion) {
+    public void setNombreClasificacion(String nombreClasificacion) {
         this.nombreClasificacion = nombreClasificacion;
     }
 }

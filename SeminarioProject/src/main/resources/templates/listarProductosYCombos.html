@@ -39,7 +39,7 @@
   <nav class="navbar navbar-expand-lg navigation-wrap">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="img/logo.png" alt="logo" class="img-fluid" />
+        <img src="https://res.cloudinary.com/dn1k0drir/image/upload/v1670262844/ROLOS%20DEV/logo_rsgjf6.png" alt="logo" class="img-fluid" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,19 +52,10 @@
             <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html#quienes-somos">¿Quiénes somos?</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#nuestro-equipo">Nuestro equipo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="listarRestaurantes.html">Restaurantes</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" th:href="@{/verCarrito}"><i class="fas fa-shopping-cart"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
+            <a class="nav-link" th:href="@{/cerrarSesion}">Cerrar Sesión</a>
           </li>
         </ul>
       </div>
@@ -73,9 +64,10 @@
 </header>
 
 <body style="background-color: #dadbdb; display: block">
-
-  <button onclick="mostrarProductos()">Productos</button>
-  <button onclick="mostrarCombos()">Combos</button>
+  <div class="align-items-center justify-content-around" style="margin-left: 45%;">
+    <button class="btn btn-outline-dark ml-50" onclick="mostrarProductos()">Productos</button>
+    <button class="btn btn-outline-dark ml-50" onclick="mostrarCombos()">Combos</button>
+  </div>
   <!-- Contenedor de productos -->
   <section id="lista-productos" class="align-items-center justify-content-around"
     style="position: relative; margin-bottom: 2rem; margin-left: 3rem">
@@ -104,9 +96,9 @@
             </div>
             <h3 class="card-title font-weigth-bold py-2" th:text="${producto.precio}"></h3>
             <div class="card-body b">
-              <button type="button" class="btn btn-outline-dark">
+              <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarProducto/{idProducto}/detail/{idRestaurante}(idRestaurante=${producto.idRestaurante}, idProducto=${producto.idProducto})}">
                 Agregar al carrito
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -143,9 +135,9 @@
             </div>
             <h3 class="card-title font-weigth-bold py-2" th:text="${menu.precio}"></h3>
             <div class="card-body b">
-              <button type="button" class="btn btn-outline-dark">
-                Ver menú de KFC
-              </button>
+              <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarMenu/{idMenu}(idMenu=${menu.idMenu})}">
+                Agregar al carrito
+              </a>
             </div>
           </div>
         </div>
