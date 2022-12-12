@@ -39,7 +39,7 @@ img{
 }
 
 
-.boton-loguear{
+.boton-loguear, a{
     border: none;
     outline: none;
     height: 50px;

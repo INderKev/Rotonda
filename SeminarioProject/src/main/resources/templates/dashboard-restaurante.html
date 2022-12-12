@@ -87,7 +87,7 @@
                 <h3>Consulta tus productos</h3>
 
                 <div class="id">
-                    <form th:action="@{/productoPorId}" th:object="${productoAConsultar}" method="post">
+                    <form th:action="@{/productoPorId}" th:object="${productoAConsultar}" method="post" style="display: flex">
                         <label th:id="label-id">Ingresa el id de tu producto:</label>
                         <input type="text" class="form-control" placeholder="ID de tu producto" th:id="input-id"
                                th:field="*{idProducto}">
@@ -183,7 +183,7 @@
                 <h3>Consulta tus menus</h3>
 
                 <div class="id">
-                    <form th:action="@{/menuPorId}" th:object="${menuAConsultar}" method="post">
+                    <form th:action="@{/menuPorId}" th:object="${menuAConsultar}" method="post" style="display: flex">
                         <label th:id="label-id">Ingresa el id de tu Menu:</label>
                         <input type="text" class="form-control" placeholder="ID de tu producto" th:id="input-id"
                                th:field="*{idMenu}">
