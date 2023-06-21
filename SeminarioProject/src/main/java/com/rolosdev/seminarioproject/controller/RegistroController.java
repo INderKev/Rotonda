@@ -1,7 +1,6 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
-import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping
