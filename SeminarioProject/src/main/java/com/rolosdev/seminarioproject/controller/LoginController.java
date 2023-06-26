@@ -23,6 +23,10 @@ import org.springframework.web.bind.support.SessionStatus;
 public class LoginController {
 
     @Autowired
+    @Qualifier("usuarioLogueadoService")
+    UsuarioLogueadoService user;
+
+    @Autowired
     @Qualifier("loginService")
     private ILoginService loginService;
 
@@ -66,28 +70,24 @@ public class LoginController {
     @PostMapping("/loguearse")
     public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu) {
         login.setTipoUsuario(loginService.verificarDatos(login));
+        this.user = new UsuarioLogueadoService();
         switch (login.getTipoUsuario()) {
             case "Cliente":
-                Cliente cliente = loginService.obtenerCliente(login);
-                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionCliente("Cliente", cliente);
-                UsuarioLogueadoService.getUsuarioLogueadoService().setCliente(cliente);
+                user.abrirSesionCliente("Cliente", loginService.obtenerCliente(login));
                 model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
                 model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
                 return "/listarRestaurantes";
             case "Administrador":
-                Administrador administrador = loginService.obtenerAdministrador(login);
-                UsuarioLogueadoService.getUsuarioLogueadoService().setAdministrador(administrador);
-                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
+                user.abrirSesionAdministrador("Administrador", loginService.obtenerAdministrador(login));
                 model.addAttribute("ingrediente", new Ingrediente());
                 return "/registro-ingrediente";
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
-                UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
-                UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(restaurante);
+                 user.abrirSesionRestaurante("Restaurante", restaurante);
                 model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
-                model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                model.addAttribute("restaurante", user.getRestaurante());
                 model.addAttribute("producto", new Producto());
                 model.addAttribute("menu", new Menu());
                 model.addAttribute("productoAConsultar", new Producto());
@@ -102,8 +102,8 @@ public class LoginController {
 
     @GetMapping("/home")
     public String getHome(Model model) {
-        if (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario() != null){
-            switch (UsuarioLogueadoService.getUsuarioLogueadoService().getTipoUsuario()) {
+        if (user.getTipoUsuario() != null){
+            switch (user.getTipoUsuario()) {
                 case "Cliente":
                     model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
                     model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
@@ -112,10 +112,10 @@ public class LoginController {
                     model.addAttribute("ingrediente", new Ingrediente());
                     return "/registro-ingrediente";
                 case "Restaurante":
-                    model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
-                    model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+                    model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(user.getRestaurante().getIdRestaurante()));
+                    model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(user.getRestaurante().getIdRestaurante()));
                     model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
-                    model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                    model.addAttribute("restaurante", user.getRestaurante());
                     model.addAttribute("producto", new Producto());
                     model.addAttribute("menu", new Menu());
                     model.addAttribute("productoAConsultar", new Producto());
@@ -133,7 +133,7 @@ public class LoginController {
         if (CarritoDeCompraService.getCarritoDeCompraService().getCompra() != null) {
             compraService.cancelarCompra();
         }
-        UsuarioLogueadoService.getUsuarioLogueadoService().cerrarSesion();
+        user.cerrarSesion();
         return "/index";
     }
 

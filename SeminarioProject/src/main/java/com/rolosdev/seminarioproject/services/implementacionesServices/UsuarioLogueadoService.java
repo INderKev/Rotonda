@@ -6,14 +6,14 @@ import com.rolosdev.seminarioproject.entity.Restaurante;
 
 public class UsuarioLogueadoService {
 
-    static public UsuarioLogueadoService usuarioLogueadoService;
+
     private String tipoUsuario;
     private Administrador administrador;
     private Cliente cliente;
     private Restaurante restaurante;
 
-    private UsuarioLogueadoService() {
-        cerrarSesion();
+    public UsuarioLogueadoService() {
+        
     }
 
     public void abrirSesionAdministrador(String tipoUsuario, Administrador usuario) {
@@ -54,9 +54,6 @@ public class UsuarioLogueadoService {
         return restaurante;
     }
 
-    public static void setUsuarioLogueadoService(UsuarioLogueadoService usuarioLogueadoService) {
-        UsuarioLogueadoService.usuarioLogueadoService = usuarioLogueadoService;
-    }
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
@@ -72,13 +69,6 @@ public class UsuarioLogueadoService {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
-    }
-
-    static public UsuarioLogueadoService getUsuarioLogueadoService() {
-        if (usuarioLogueadoService == null) {
-            usuarioLogueadoService = new UsuarioLogueadoService();
-        }
-        return usuarioLogueadoService;
     }
 
 }
