@@ -1,6 +1,5 @@
 package com.rolosdev.seminarioproject.services.interfacesServices;
 
-import com.rolosdev.seminarioproject.entity.Compra;
 import com.rolosdev.seminarioproject.entity.Menu;
 import com.rolosdev.seminarioproject.entity.MenuSeleccionado;
 import com.rolosdev.seminarioproject.entity.Producto;
