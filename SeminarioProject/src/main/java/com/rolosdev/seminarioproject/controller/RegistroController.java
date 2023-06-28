@@ -1,7 +1,6 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
-import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping
@@ -92,13 +90,14 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarCliente")
-    public String registrarCliente(HttpServletResponse response, @Validated Cliente cliente, Model model){
+    public String registrarCliente(HttpServletResponse response, @Validated Cliente cliente, Model model, RedirectAttributes redirAttrs){
         String resultado = registroService.registrarCliente(cliente);
         if (!resultado.equals("OK")){
-            model.addAttribute("Mensaje", resultado);
-            return "/registro-cliente";
+            redirAttrs.addFlashAttribute("error", resultado);
+            return "redirect:/registro-cliente";
         }
-        return "/index";
+        redirAttrs.addFlashAttribute("success", "¡Cliente registrado con éxito!");
+        return "redirect:/home";
     }
 
     @PostMapping("/registrarAdministrador")
