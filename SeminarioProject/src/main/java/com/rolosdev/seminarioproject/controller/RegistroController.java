@@ -1,7 +1,7 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
-import com.rolosdev.seminarioproject.entity.entityHelp.Login;
+import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping
@@ -25,6 +24,10 @@ public class RegistroController {
     @Autowired
     @Qualifier("registroService")
     private IRegistroService registroService;
+
+    @Autowired
+    @Qualifier("consultaService")
+    private ConsultaService consultaService;
 
     @GetMapping("/pruebaRegistro")
     public String getIndex(Model model) {
@@ -112,14 +115,16 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarRestaurante")
-    public String registrarRestaurante(HttpServletResponse response, @Validated Restaurante restaurante, Model model){
+    public String registrarRestaurante(HttpServletResponse response, @Validated Restaurante restaurante, Model model, RedirectAttributes attrsRedirect){
         String resultado = registroService.registrarRestaurante(restaurante);
         if (!resultado.equals("OK")){
-            model.addAttribute("Mensaje", resultado);
-            return "/registro-administrador";
+            attrsRedirect.addFlashAttribute("error", resultado);
+            return "redirect:/registro-restaurante";
         }
-        return "/index";
+        attrsRedirect.addFlashAttribute("success", "¡Restaurante registrado con éxito!");
+        return "redirect:/home";
     }
+
     @PostMapping("/registrarProducto")
     public String registrarProducto(HttpServletResponse response, @Validated Producto producto, Model model){
         producto.setIdRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante());

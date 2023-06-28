@@ -75,7 +75,7 @@ public class RegistroService implements IRegistroService {
             restauranteRepository.save(restaurante);
             return "OK";
         }
-        return "El usuario " + restaurante.getIdRestaurante() + " Ya existe, verifique los datos";
+        return "El usuario " + restaurante.getUser() + " Ya existe, verifique los datos";
     }
 
     @Override
@@ -126,9 +126,7 @@ public class RegistroService implements IRegistroService {
     public void pruebas() {
         boolean confirmar;
         ArrayList<Producto> productosAEliminar = new ArrayList<>();
-        ArrayList<Integer> idEliminados = new ArrayList<>();
         ArrayList<Producto> opcionesProductosMenu = productoRepository.obtenerProductosPorMenu(1);
-        ArrayList<Ingrediente> ingredientesParaTodosLosProductos = ingredienteRepository.obtenerIngredientesPorMenu(1);
         ArrayList<Stock> stocks = stockRepository.obtenerStockPorMenu(1);
         ArrayList<Seleccion> seleccionesMenu = seleccionRepository.obtenerSeleccionPorMenu(1);
         for (Seleccion seleccion: seleccionesMenu) {

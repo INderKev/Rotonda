@@ -1,9 +1,6 @@
 package com.rolosdev.seminarioproject.SalesResources;
 
-import com.rolosdev.seminarioproject.entity.MenuSeleccionado;
 import com.rolosdev.seminarioproject.entity.Orden;
-import com.rolosdev.seminarioproject.entity.ProductoIngrediente;
-import com.rolosdev.seminarioproject.repository.ISeleccionRepository;
 
 public class PaqueteOrden {
 

@@ -1,7 +1,6 @@
 package com.rolosdev.seminarioproject.SalesResources;
 
 import com.rolosdev.seminarioproject.entity.MenuSeleccionado;
-import com.rolosdev.seminarioproject.entity.Producto;
 import com.rolosdev.seminarioproject.entity.Seleccion;
 
 
