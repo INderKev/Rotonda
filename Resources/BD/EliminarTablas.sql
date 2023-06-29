@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS administrador;
+DROP TABLE IF EXISTS orden;
+DROP TABLE IF EXISTS compra;
+DROP TABLE IF EXISTS stock;
+DROP TABLE IF EXISTS seleccion;
+DROP TABLE IF EXISTS menu_seleccionado;
+DROP TABLE IF EXISTS producto_ingrediente;
+DROP TABLE IF EXISTS producto;
+DROP TABLE IF EXISTS menu;
+DROP TABLE IF EXISTS clasificacion;
+DROP TABLE IF EXISTS ingrediente;
+DROP TABLE IF EXISTS tarjeta;
+DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS restaurante;
+DROP TABLE IF EXISTS especialidad;

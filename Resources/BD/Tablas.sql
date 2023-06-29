@@ -3,7 +3,6 @@
 /* Created on:     13/11/2022 10:07:15 p. m.                    */
 /*==============================================================*/
 
-
 /*==============================================================*/
 /* Table: ADMINISTRADOR                                         */
 /*==============================================================*/
@@ -57,6 +56,31 @@ create table CLIENTE (
 /* Index: CLIENTE_PK                                            */
 /*==============================================================*/
 create unique index CLIENTE_PK on CLIENTE (
+IDCLIENTE
+);
+
+/*==============================================================*/
+/* Table: TARJETA                                               */
+/*==============================================================*/
+create table TARJETA (
+   NUMTARJETA		NUMERIC(16,0)	     not null,
+   IDCLIENTE	 	INT4		     not null,
+   TIPO			VARCHAR(10)	     not null,
+   FECHA_CADUCIDAD	DATE		     not null,
+   constraint PK_TARJETA primary key (NUMTARJETA)
+);
+
+/*==============================================================*/
+/* Index: TARJETA_PK                                             */
+/*==============================================================*/
+create unique index TARJETA_PK on TARJETA (
+NUMTARJETA
+);
+
+/*==============================================================*/
+/* Index: CLIENTE_TARJETA_FK                                  */
+/*==============================================================*/
+create  index CLIENTE_TARJETA_FK on TARJETA (
 IDCLIENTE
 );
 
@@ -387,6 +411,11 @@ create  index STOCK_INGREDIENTE_FK on STOCK (
 IDINGREDIENTE
 );
 
+alter table TARJETA
+   add constraint FK_TARJETA_CLIENTE_C_CLIENTE foreign key (IDCLIENTE)
+      references CLIENTE (IDCLIENTE)
+      on delete restrict on update restrict;
+
 alter table COMPRA
    add constraint FK_COMPRA_CLIENTE_C_CLIENTE foreign key (IDCLIENTE)
       references CLIENTE (IDCLIENTE)
@@ -447,7 +476,7 @@ alter table SELECCION
       references CLASIFICACION (IDCLASIFICACION)
       on delete restrict on update restrict;
 
-alter table SELECCION
+alter table SELECCION"mpgc@correo.com"
    add constraint FK_SELECCIO_MENUSELEC_MENU_SEL foreign key (IDMENU_SELECCIONADO)
       references MENU_SELECCIONADO (IDMENU_SELECCIONADO)
       on delete restrict on update restrict;
