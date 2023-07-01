@@ -95,7 +95,7 @@ public class LoginController {
                 return "/dashboard-restaurante";
             default:
                 model.addAttribute("login", new Login());
-                model.addAttribute("Mensaje", "El usuario no fue encontrado");
+                model.addAttribute("error", "El usuario no fue encontrado");
                 return "/login";
         }
     }

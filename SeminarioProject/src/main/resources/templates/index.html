@@ -31,6 +31,7 @@
   </head>
 
   <body>
+    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
   <!-- Header -->
   <header>
     <nav class="navbar navbar-expand-lg navigation-wrap">
@@ -247,6 +248,5 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="js/script.js"></script>
-
   </body>
 </html>
