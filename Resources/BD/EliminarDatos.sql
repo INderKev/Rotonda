@@ -10,6 +10,8 @@ DELETE FROM menu;
 DELETE FROM clasificacion;
 DELETE FROM ingrediente;
 DELETE FROM tarjeta;
+DELETE FROM tipo_tarjeta;
 DELETE FROM cliente;
+DELETE FROM tarjetas_cliente;
 DELETE FROM restaurante;
 DELETE FROM especialidad;

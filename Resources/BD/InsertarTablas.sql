@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     13/11/2022 10:07:15 p. m.                    */
+/* Created on:     13/11/2022 10:07:15 p.Â m.                    */
 /*==============================================================*/
 
 /*==============================================================*/
@@ -60,12 +60,28 @@ IDCLIENTE
 );
 
 /*==============================================================*/
+/* Table: TIPO_TARJETA                                          */
+/*==============================================================*/
+create table TIPO_TARJETA (
+   TIPO		 	VARCHAR(25)	     not null,
+   IDENTIFICADOR	NUMERIC(1,0)	     not null,
+   constraint PK_TIPO_TARJETA primary key (TIPO)
+);
+
+/*==============================================================*/
+/* Index: TIPO_TARJETA_PK                                       */
+/*==============================================================*/
+create unique index TIPO_TARJETA_PK on TIPO_TARJETA (
+TIPO
+);
+
+/*==============================================================*/
 /* Table: TARJETA                                               */
 /*==============================================================*/
 create table TARJETA (
    NUMTARJETA		NUMERIC(16,0)	     not null,
-   IDCLIENTE	 	INT4		     not null,
-   TIPO			VARCHAR(10)	     not null,
+   PIN			NUMERIC(4,0)	     not null,
+   TIPO			VARCHAR(25)	     not null,
    FECHA_CADUCIDAD	DATE		     not null,
    constraint PK_TARJETA primary key (NUMTARJETA)
 );
@@ -78,10 +94,32 @@ NUMTARJETA
 );
 
 /*==============================================================*/
-/* Index: CLIENTE_TARJETA_FK                                  */
+/* Index: TIPO_TARJETA_FK                                  */
 /*==============================================================*/
-create  index CLIENTE_TARJETA_FK on TARJETA (
+create  index TIPO_TARJETA_FK on TARJETA (
+TIPO
+);
+
+/*==============================================================*/
+/* Table: TARJETAS_CLIENTE                                      */
+/*==============================================================*/
+create table TARJETAS_CLIENTE (
+   IDCLIENTE            INT4                 not null,
+   NUMTARJETA		NUMERIC(16,0)	     not null
+);
+
+/*==============================================================*/
+/* Index: CLIENTE_TARJETAS_CLIENTE_FK                           */
+/*==============================================================*/
+create unique index CLIENTE_TARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
 IDCLIENTE
+);
+
+/*==============================================================*/
+/* Index: TARJETA_TARJETAS_CLIENTE_FK                           */
+/*==============================================================*/
+create unique index TARJETATARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
+NUMTARJETA
 );
 
 /*==============================================================*/
@@ -412,9 +450,19 @@ IDINGREDIENTE
 );
 
 alter table TARJETA
-   add constraint FK_TARJETA_CLIENTE_C_CLIENTE foreign key (IDCLIENTE)
+   add constraint FK_TARJETA_TIPO_TARJETAS foreign key (TIPO)
+      references TIPO_TARJETA (TIPO)
+      on delete restrict on update restrict;
+      
+alter table TARJETAS_CLIENTE
+   add constraint FK_CLIENTE_TARJETAS_CLIENTE foreign key (IDCLIENTE)
       references CLIENTE (IDCLIENTE)
       on delete restrict on update restrict;
+      
+alter table TARJETAS_CLIENTE
+   add constraint FK_TARJETA_TARJETAS_CLIENTE foreign key (NUMTARJETA)
+      references TARJETA (NUMTARJETA)
+      on delete restrict on update restrict;      
 
 alter table COMPRA
    add constraint FK_COMPRA_CLIENTE_C_CLIENTE foreign key (IDCLIENTE)
@@ -476,7 +524,7 @@ alter table SELECCION
       references CLASIFICACION (IDCLASIFICACION)
       on delete restrict on update restrict;
 
-alter table SELECCION"mpgc@correo.com"
+alter table SELECCION
    add constraint FK_SELECCIO_MENUSELEC_MENU_SEL foreign key (IDMENU_SELECCIONADO)
       references MENU_SELECCIONADO (IDMENU_SELECCIONADO)
       on delete restrict on update restrict;
