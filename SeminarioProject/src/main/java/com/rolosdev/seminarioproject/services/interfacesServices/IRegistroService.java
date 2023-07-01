@@ -2,7 +2,6 @@ package com.rolosdev.seminarioproject.services.interfacesServices;
 
 import com.rolosdev.seminarioproject.entity.*;
 
-
 public interface IRegistroService {
 
     public String registrarCliente(Cliente cliente);
