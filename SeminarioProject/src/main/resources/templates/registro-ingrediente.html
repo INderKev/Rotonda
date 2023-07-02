@@ -32,6 +32,12 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col">
+                                    <label>Descripción del ingrediente</label>
+                                    <input type="text" class="form-control" name="descripcion" required th:field="*{descripcion}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
                                     <label>Tipo de Medida</label>
                                     <select class="form-select" name="elegir-especialidad" id="elegir-especialidad"
                                             th:field="*{tipoUnidad}">

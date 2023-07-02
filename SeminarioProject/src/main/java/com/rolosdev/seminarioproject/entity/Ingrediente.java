@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "INGREDIENTE")
 public class Ingrediente {
 
@@ -16,28 +19,7 @@ public class Ingrediente {
     private String nombre;
     @Column(name = "TIPO_UNIDAD", nullable = false)
     private String tipoUnidad;
+    @Column(name = "DESCRIPCION", nullable = true)
+    private String descripcion;
 
-    public int getIdIngrediente() {
-        return idIngrediente;
-    }
-
-    public void setIdIngrediente(int idIngrediente) {
-        this.idIngrediente = idIngrediente;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipoUnidad() {
-        return tipoUnidad;
-    }
-
-    public void setTipoUnidad(String tipoUnidad) {
-        this.tipoUnidad = tipoUnidad;
-    }
 }

@@ -1,6 +1,21 @@
+DROP TABLE IF EXISTS administrador;
+DROP TABLE IF EXISTS orden;
+DROP TABLE IF EXISTS compra;
+DROP TABLE IF EXISTS stock;
+DROP TABLE IF EXISTS seleccion;
+DROP TABLE IF EXISTS menu_seleccionado;
+DROP TABLE IF EXISTS producto_ingrediente;
+DROP TABLE IF EXISTS producto;
+DROP TABLE IF EXISTS menu;
+DROP TABLE IF EXISTS clasificacion;
+DROP TABLE IF EXISTS ingrediente;
+DROP TABLE IF EXISTS cliente;
+DROP TABLE IF EXISTS restaurante;
+DROP TABLE IF EXISTS especialidad;
+
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     13/11/2022 10:07:15 p. m.                    */
+/* Created on:     13/11/2022 10:07:15 p.ï¿½m.                    */
 /*==============================================================*/
 
 
@@ -108,6 +123,7 @@ create table INGREDIENTE (
    IDINGREDIENTE        INT4                 not null,
    NOM_INGREDIENTE      VARCHAR(200)         not null,
    TIPO_UNIDAD          VARCHAR(150)         not null,
+   DESCRIPCION          VARCHAR(200)         null,
    constraint PK_INGREDIENTE primary key (IDINGREDIENTE)
 );
 
@@ -471,4 +487,3 @@ alter table STOCK
    add constraint FK_STOCK_STOCK_ING_INGREDIE foreign key (IDINGREDIENTE)
       references INGREDIENTE (IDINGREDIENTE)
       on delete restrict on update restrict;
-
