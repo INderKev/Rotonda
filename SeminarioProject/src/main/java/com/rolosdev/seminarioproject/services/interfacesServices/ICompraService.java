@@ -12,7 +12,7 @@ public interface ICompraService {
     public ArrayList<Producto> obtenerProductosDisponibles(int idRestaurante);
     public void iniciarCompra();
     public void cancelarCompra();
-    public void terminarCompra();
+    public String terminarCompra();
     public MenuSeleccionado crearMenuSeleccionado(int idMenu);
     public void seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado);
     public void agregarProductoCarrito(int idProducto);

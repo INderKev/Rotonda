@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -90,9 +91,14 @@ public class CompraController {
     }
 
     @GetMapping("/pagarCompra")
-    public String pagarCompra(Model model) {
-        compraService.terminarCompra();
-        return "redirect:/home";
+    public String pagarCompra(RedirectAttributes redirAttrs) {
+        String mensaje = compraService.terminarCompra();
+        if (!mensaje.equals("OK")) {
+            redirAttrs.addFlashAttribute("error", mensaje);
+            return "redirect:/verCarrito";
+        }
+        redirAttrs.addFlashAttribute("success", "¡Compra realizada con éxito!");
+        return "redirect:/verCarrito";
     }
 
     @GetMapping("/seleccionarMenu/{idMenu}")

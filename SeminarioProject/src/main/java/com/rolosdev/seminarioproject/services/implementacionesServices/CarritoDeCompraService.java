@@ -79,7 +79,8 @@ public class CarritoDeCompraService {
     }
 
     public void finalizar() {
-        carritoDeCompraService = new CarritoDeCompraService();
+        compra = null;
+        ordenes.clear();
     }
 
     static public CarritoDeCompraService getCarritoDeCompraService(){
