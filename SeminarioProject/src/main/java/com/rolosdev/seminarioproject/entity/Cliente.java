@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class Cliente {
     @Column(name = "SEGUNDOAPELLIDO", nullable = true)
     private String segundoApellido;
     @Column(name = "TELEFONOCLIENTE", nullable = false)
+    @Pattern(regexp = "^(\\(?(\\+?\\d{2,3})?\\)?[- ]?\\(?(\\d{3})\\)?[- ]?)?(\\d{3})[- ]?(\\d{4})$")
     private String telefono;
     @Column(name = "CORREO", nullable = false)
     private String correo;
