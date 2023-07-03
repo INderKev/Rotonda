@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Los Rolos DEV</title>
 
-    <!-- Bootsrap
+    <!-- Bootsrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-     CSS -->
-    <!--<link rel="stylesheet" href="css/form.css">-->
-    <link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/form.css">
+    <!-- <link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}"> -->
 </head>
 <body>
     
@@ -74,11 +74,11 @@
                     <div class="col-lg 4 px-5 pt-5">
                         <h1 class="font-weigth-bold py-3">Búscar cantidad de ingrediente por restaurante</h1>
                         <form th:action="@{/listarIngredientes}"  method="post">
-                            <select name="idrestaurante" id="">
+                            <select class="form-select" name="idrestaurante" id="idrestaurante">
                                 <option>Seleccionar valor</option>
                                 <option th:each="restaurante: ${restaurantes}"
-                                    th:value="${restaurante.idRestaurante}"
-                                    th:text="${restaurante.nombre}"/>
+                                        th:value="${restaurante.idRestaurante}"
+                                        th:text="${restaurante.nombre}">
                             </select>
                             <div class="form-row">
                                 <div class="col-lg-8">

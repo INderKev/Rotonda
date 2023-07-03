@@ -69,14 +69,8 @@ public class ConsultaController {
     }
 
     @PostMapping("/listarIngredientes")
-    public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true)int idRestaurante){
+    public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true) int idRestaurante) {
         List<Stock> listaStock = consultaService.obtenerStockPorRestaurante(idRestaurante);
-        
-        //List<Stock> listaStock = consultaService.obtenerIngredintes2();    SIRVE
-        for (int i = 0; i < listaStock.size(); i++) {
-            
-        }
-
         modelo.addAttribute("listaStock", listaStock);
         return "/ingrediente-cantidad";
     }

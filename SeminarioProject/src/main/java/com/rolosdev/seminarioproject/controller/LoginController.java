@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,7 +67,7 @@ public class LoginController {
     }
 
     @PostMapping("/loguearse")
-    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu, ModelMap modelo) {
+    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus status) {
         login.setTipoUsuario(loginService.verificarDatos(login));
         switch (login.getTipoUsuario()) {
             case "Cliente":
@@ -78,14 +77,16 @@ public class LoginController {
                 model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
                 model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
                 return "/listarRestaurantes";
+
             case "Administrador":
                 Administrador administrador = loginService.obtenerAdministrador(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().setAdministrador(administrador);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
                 model.addAttribute("ingrediente", new Ingrediente());
                 ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
-                modelo.addAttribute("restaurantes", restaurantes);
+                model.addAttribute("restaurantes", restaurantes);
                 return "/registro-ingrediente";
+
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
@@ -99,6 +100,7 @@ public class LoginController {
                 model.addAttribute("productoAConsultar", new Producto());
                 model.addAttribute("menuAConsultar", new Menu());
                 return "/dashboard-restaurante";
+
             default:
                 model.addAttribute("login", new Login());
                 model.addAttribute("error", "El usuario no fue encontrado");
