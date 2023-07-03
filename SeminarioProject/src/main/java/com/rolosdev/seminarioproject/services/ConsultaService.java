@@ -1,8 +1,7 @@
-package com.rolosdev.seminarioproject.services.implementacionesServices;
+package com.rolosdev.seminarioproject.services;
 
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.repository.*;
-import com.rolosdev.seminarioproject.services.interfacesServices.IConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Service("consultaService")
 @Transactional
-public class ConsultaService implements IConsultaService {
+public class ConsultaService {
 
     @Autowired
     @Qualifier("clienteRepository")
@@ -67,82 +66,62 @@ public class ConsultaService implements IConsultaService {
     @Qualifier("stockRepository")
     private IStockRepository stockRepository;
 
-    @Override
     public ArrayList<Menu> obtenerMenusDelRestaurante(int idRestaurante) {
         return menuRepository.obtenerMenusPorRestaurante(idRestaurante);
     }
 
-    @Override
     public ArrayList<Producto> obtenerProductosDelRestaurante(int idRestaurante) {
         return productoRepository.obtenerProductosPorRestaurante(idRestaurante);
     }
 
-    @Override
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {
         return productoRepository.obtenerProductosPorMenu(idMenu);
     }
 
-    @Override
     public ArrayList<Ingrediente> obtenerIngredientesPorProducto(int idProducto) {
         return ingredienteRepository.obtenerIngredientesPorProducto(idProducto);
     }
 
-    @Override
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto) {
         return productoIngredienteRepository.obtenerProductoIngredietePorProducto(idProducto);
     }
 
-    @Override
     public ArrayList<Restaurante> obtenerRestaurantes() {
         return (ArrayList<Restaurante>) restauranteRepository.findAll();
     }
 
-    @Override
     public Restaurante obtenerRestauranteById(int id) {
         return restauranteRepository.findById(id).get();
     }
 
-    @Override
     public ArrayList<Clasificacion> obtenerClasificaciones() {
         return clasificacionRepository.obtenerTodasClasificaciones();
     }
 
-    @Override
     public ArrayList<Especialidad> obtenerEspecialidades() {
         return (ArrayList<Especialidad>) especialidadRepository.findAll();
     }
 
-    @Override
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu) {
         return seleccionRepository.obtenerSeleccionPorMenu(idMenu);
     }
 
-    @Override
     public Producto obtenerProductoPorId(int IdProducto) {
         return productoRepository.findById(IdProducto).get();
     }
 
-    @Override
     public Menu obtenerMenuPorId(int IdMenu){
         return menuRepository.findById(IdMenu).get();
     }
 
-    @Override
     public List<Stock> obtenerStockPorRestaurante(int restaurante) {
         return stockRepository.obtenerStockPorRestaurante(restaurante);
     }
 
-    @Override
-    public List<Stock> obtenerTodoStock(){
-        return stockRepository.findAll();
-    }
-
-    @Override
     public Restaurante obtenerStockRestaurante(int idRestaurante) {
        return restauranteRepository.findById(idRestaurante).get();
     }
 
-    @Override
     public Stock obtenerStock(int idStock) {
        return stockRepository.findById(idStock).get();
     }

@@ -3,8 +3,8 @@ package com.rolosdev.seminarioproject.controller;
 import com.rolosdev.seminarioproject.entity.Menu;
 import com.rolosdev.seminarioproject.entity.Producto;
 import com.rolosdev.seminarioproject.entity.Stock;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,19 +68,14 @@ public class ConsultaController {
         model.addAttribute("menuAConsultar", new Menu());
         return "/dashboard-restaurante";
     }
+
     //Metodo que redirecciona al formulario de modificacion de ingredientes para un restaurante
     @GetMapping("/modificar/{idStock}")
-    public String formulariodeingrediente(Model model,@PathVariable("idStock") String idStock) {
-       Stock stockseleccionado=consultaService.obtenerStock(Integer.valueOf(idStock));
-      /*  System.out.println(stockseleccionado.getIdStock()+"pito");
-        System.out.println(stockseleccionado.getIdIngrediente()+"pito");
-        System.out.println(stockseleccionado.getCantidadStock());
-        System.out.println(stockseleccionado.getIdRestaurante()+"pito");
-        System.out.println(stockseleccionado.getIdIngrediente()+"pito");*/
+    public String formularioDeIngrediente(Model model, @PathVariable("idStock") String idStock) {
+        Stock stockseleccionado = consultaService.obtenerStock(Integer.valueOf(idStock));
         model.addAttribute("stock", stockseleccionado);
         return "/modificar-ingrediente";
     }
-    
 
     @PostMapping("/listarIngredientes")
     public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true) int idRestaurante) {

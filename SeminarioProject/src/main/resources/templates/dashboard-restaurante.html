@@ -113,7 +113,7 @@
                         <td th:text="${prod.nombre}"></td>
                         <td th:text="${prod.precio}"></td>
                         <td th:each="clasificacion:${clasificaciones}"
-                            th:if="${clasificacion.idClasificacion == prod.idClasificacion}"
+                            th:if="${clasificacion.idClasificacion == prod.clasificacion.idClasificacion}"
                             th:text="${clasificacion.nombreClasificacion}"></td>
                         <td><a type="button" class="btn btn-outline-danger"
                                th:href="@{/eliminarProducto/{idProducto}(idProducto=${prod.idProducto})}">Eliminar</a>
@@ -141,7 +141,7 @@
                                             <div class="form-group col">
                                                 <label>Clasificación</label>
                                                 <select class="form-select" name="clasificacion" th:id="clasificacion"
-                                                        th:field="*{idClasificacion}">
+                                                        th:field="*{clasificacion.idClasificacion}">
                                                     <option th:each="clasificacion:${clasificaciones}"
                                                             th:value="${clasificacion.idClasificacion}"
                                                             th:text="${clasificacion.nombreClasificacion}"></option>

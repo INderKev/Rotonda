@@ -2,11 +2,11 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CarritoDeCompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
-import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
+import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
+import com.rolosdev.seminarioproject.services.CompraService;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.LoginService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class LoginController {
 
     @Autowired
     @Qualifier("loginService")
-    private ILoginService loginService;
+    private LoginService loginService;
 
     @Autowired
     @Qualifier("compraService")
@@ -108,7 +108,7 @@ public class LoginController {
 
             default:
                 model.addAttribute("login", new Login());
-                model.addAttribute("error", "El usuario no fue encontrado");
+                model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
                 return "/login";
         }
     }

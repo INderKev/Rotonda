@@ -2,9 +2,10 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.SalesResources.PaqueteMenuSeleccionado;
 import com.rolosdev.seminarioproject.entity.*;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CarritoDeCompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
+import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
+import com.rolosdev.seminarioproject.services.CompraService;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -115,7 +116,7 @@ public class CompraController {
         ArrayList<Producto> acompaniamientos = new ArrayList<>();
         ArrayList<Producto> comidasRapidas = new ArrayList<>();
         for (Producto producto: productos) {
-            switch (producto.getIdClasificacion()) {
+            switch (producto.getClasificacion().getIdClasificacion()) {
                 case 1:
                     entradas.add(producto);
                     break;
@@ -139,7 +140,7 @@ public class CompraController {
         boolean isEntrada = false, isPlatoFuerte = false, isPostre = false, isBebida = false, isAcompniamiento = false, iscComidaRápida = false;
         ArrayList<Seleccion> selecciones = consultaService.obtenerSeleccionesPorMenu(idMenu);
         for (Seleccion seleccion : selecciones) {
-            switch (seleccion.getIdClasificacion()) {
+            switch (seleccion.getClasificacion().getIdClasificacion()) {
                 case 1:
                     isEntrada = true;
                     break;
@@ -162,7 +163,7 @@ public class CompraController {
         }
         ArrayList<Seleccion> seleccionesUsadas = CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorMenuSeleccionado(menuSeleccionado.getIdMenuSeleccionado()).getPaqueteMenuSeleccionado().getSelecciones();
         for (Seleccion seleccion : seleccionesUsadas) {
-            switch (seleccion.getIdClasificacion()) {
+            switch (seleccion.getClasificacion().getIdClasificacion()) {
                 case 1:
                     isEntrada = false;
                     break;
@@ -210,7 +211,7 @@ public class CompraController {
     public String seleccionarProductoPorMenu(@PathVariable("idProducto") int idProducto, @PathVariable("idMenuSeleccionado") int idMenuSeleccionado, Model model) {
         MenuSeleccionado menuSeleccionado = CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorMenuSeleccionado(idMenuSeleccionado).getPaqueteMenuSeleccionado().getMenuSeleccionado();
         compraService.seleccionarProductoParaMenu(idProducto, idMenuSeleccionado);
-        ArrayList<Producto> productos = consultaService.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
+        ArrayList<Producto> productos = consultaService.obtenerProductosPorMenu(menuSeleccionado.getMenu().getIdMenu());
         ArrayList<Producto> entradas = new ArrayList<>();
         ArrayList<Producto> platosFuertes = new ArrayList<>();
         ArrayList<Producto> postres = new ArrayList<>();
@@ -218,7 +219,7 @@ public class CompraController {
         ArrayList<Producto> acompaniamientos = new ArrayList<>();
         ArrayList<Producto> comidasRapidas = new ArrayList<>();
         for (Producto producto: productos) {
-            switch (producto.getIdClasificacion()) {
+            switch (producto.getClasificacion().getIdClasificacion()) {
                 case 1:
                     entradas.add(producto);
                     break;
@@ -240,9 +241,9 @@ public class CompraController {
             }
         }
         boolean isEntrada = false, isPlatoFuerte = false, isPostre = false, isBebida = false, isAcompniamiento = false, iscComidaRápida = false;
-        ArrayList<Seleccion> selecciones = consultaService.obtenerSeleccionesPorMenu(menuSeleccionado.getIdMenu());
+        ArrayList<Seleccion> selecciones = consultaService.obtenerSeleccionesPorMenu(menuSeleccionado.getMenu().getIdMenu());
         for (Seleccion seleccion : selecciones) {
-            switch (seleccion.getIdClasificacion()) {
+            switch (seleccion.getClasificacion().getIdClasificacion()) {
                 case 1:
                     isEntrada = true;
                     break;
@@ -265,7 +266,7 @@ public class CompraController {
         }
         ArrayList<Seleccion> seleccionesUsadas = CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorMenuSeleccionado(menuSeleccionado.getIdMenuSeleccionado()).getPaqueteMenuSeleccionado().getSelecciones();
         for (Seleccion seleccion : seleccionesUsadas) {
-            switch (seleccion.getIdClasificacion()) {
+            switch (seleccion.getClasificacion().getIdClasificacion()) {
                 case 1:
                     isEntrada = false;
                     break;

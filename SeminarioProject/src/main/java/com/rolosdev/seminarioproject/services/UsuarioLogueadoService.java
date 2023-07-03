@@ -1,4 +1,4 @@
-package com.rolosdev.seminarioproject.services.implementacionesServices;
+package com.rolosdev.seminarioproject.services;
 
 import com.rolosdev.seminarioproject.entity.Administrador;
 import com.rolosdev.seminarioproject.entity.Cliente;

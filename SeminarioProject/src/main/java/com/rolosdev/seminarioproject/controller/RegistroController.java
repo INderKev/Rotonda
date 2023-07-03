@@ -1,9 +1,9 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
-import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroService;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.RegistroService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ public class RegistroController {
 
     @Autowired
     @Qualifier("registroService")
-    private IRegistroService registroService;
+    private RegistroService registroService;
 
     @Autowired
     @Qualifier("consultaService")
@@ -86,7 +85,7 @@ public class RegistroController {
 
     @PostMapping("/registrarProducto")
     public String registrarProducto(HttpServletResponse response, @Validated Producto producto, Model model, RedirectAttributes redirAttrs) {
-        producto.setIdRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante());
+        producto.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
         String resultado = registroService.registrarProducto(producto);
         if (!resultado.equals("OK")) {
             model.addAttribute("error", resultado);
@@ -98,7 +97,7 @@ public class RegistroController {
 
     @PostMapping("/registrarMenu")
     public String registrarMenu(HttpServletResponse response, @Validated Menu menu, Model model, RedirectAttributes redirAttrs) {
-        menu.setIdRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante());
+        menu.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
         String resultado = registroService.registrarMenu(menu);
         if (!resultado.equals("OK")){
             model.addAttribute("error", resultado);
@@ -137,18 +136,13 @@ public class RegistroController {
         return "redirect:/home";
     }
     
-
     @PostMapping("/ModificarIngrediente")
-    public String registrarStock(@ModelAttribute("stock") @Valid Stock s,BindingResult bindingResult,HttpServletResponse response){
-       
-       if(bindingResult.hasErrors()){
-       return "/modificar-ingrediente";
-    }else{
-    registroService.modificarstockeingrediente(s); 
-    return "redirect:/home";
-    }
-        
-    }
+    public String registrarStock(@Valid Stock stock, BindingResult bindingResult, HttpServletResponse response){
+        if (bindingResult.hasErrors())
+            return "/modificar-ingrediente";
 
+        registroService.modificarStockEIngrediente(stock); 
+        return "redirect:/home";
+    }
 
 }

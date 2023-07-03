@@ -20,17 +20,18 @@ public class Stock {
     @Id
     @Column(name = "IDSTOCK", nullable = false)
     private int idStock;
+
     @Column(name = "CANTIDAD_STOCK", nullable = false)
-    @PositiveOrZero(message="La cantidad no puede ser menor a 0")
-    @NotNull(message="La cantidad no puede ser menor a 0")
+    @NotNull(message = "La cantidad no puede ser menor a 0")
+    @PositiveOrZero(message = "La cantidad no puede ser menor a 0")
     private double cantidadStock;
 
-    @ManyToOne(fetch = FetchType.LAZY , targetEntity = Ingrediente.class )
-    @JoinColumn(name = "IDINGREDIENTE")
+    @ManyToOne(fetch = FetchType.LAZY , targetEntity = Ingrediente.class)
+    @JoinColumn(name = "IDINGREDIENTE", nullable = false)
     private Ingrediente ingrediente;
 
     @ManyToOne (fetch = FetchType.LAZY, targetEntity = Restaurante.class)
-    @JoinColumn(name = "IDRESTAURANTE")
+    @JoinColumn(name = "IDRESTAURANTE", nullable = false)
     private Restaurante restaurante;
     
 }
