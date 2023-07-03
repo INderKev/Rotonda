@@ -9,10 +9,16 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Service("consultaService")
 @Transactional
 public class ConsultaService implements IConsultaService {
+
+    @Autowired
+    @Qualifier("stockRepository")
+    private IStockRepository stockRepository;
 
     @Autowired
     @Qualifier("clienteRepository")
@@ -120,5 +126,14 @@ public class ConsultaService implements IConsultaService {
     @Override
     public Menu obtenerMenuPorId(int IdMenu){
         return menuRepository.findById(IdMenu).get();
+    }
+
+    @Override
+    public List<Stock> obtenerIngredientesConResturante(int restaurante) {
+        return stockRepository.obtenerIngredientesConResturante( restaurante);
+    }
+
+    public List<Stock> obtenerIngredintes2(){
+        return stockRepository.findAll();
     }
 }

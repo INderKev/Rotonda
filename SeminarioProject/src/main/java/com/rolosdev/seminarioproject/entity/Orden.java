@@ -18,6 +18,8 @@ public class Orden {
     @Column(name = "OBSERVACIONES", nullable = false)
     private String observaciones;
 
+
+
     public int getIdOrden() {
         return idOrden;
     }

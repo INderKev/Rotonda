@@ -139,8 +139,8 @@ public class RegistroService implements IRegistroService {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
                 if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
                     for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
-                            System.out.println("Cantidad en stock: " + stock.getCantidadStock() + " - ingrediente: " + stock.getIdIngrediente());
+                        if (stock.getRestaurante().getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
+                            System.out.println("Cantidad en stock: " + stock.getCantidadStock() + " - ingrediente: " + stock.getIngrediente().getIdIngrediente());
                             System.out.println("Cantidad de producto: " + productoIngrediente.getCantidad() + " - ingrediente: " + productoIngrediente.getIdIngrediente());
                             if (stock.getCantidadStock() < productoIngrediente.getCantidad()) {
                                 System.out.println("Eliminar----------------------------------------------------------------");
@@ -167,7 +167,7 @@ public class RegistroService implements IRegistroService {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
                 if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
                     for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                        if (stock.getRestaurante().getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                             stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
                             stockRepository.save(stock);
                             break;

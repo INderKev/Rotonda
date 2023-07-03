@@ -7,10 +7,14 @@ import com.rolosdev.seminarioproject.services.implementacionesServices.CompraSer
 import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
 import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +68,7 @@ public class LoginController {
     }
 
     @PostMapping("/loguearse")
-    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu) {
+    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu, ModelMap modelo) {
         login.setTipoUsuario(loginService.verificarDatos(login));
         switch (login.getTipoUsuario()) {
             case "Cliente":
@@ -79,6 +83,8 @@ public class LoginController {
                 UsuarioLogueadoService.getUsuarioLogueadoService().setAdministrador(administrador);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
                 model.addAttribute("ingrediente", new Ingrediente());
+                ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
+                modelo.addAttribute("restaurantes", restaurantes);
                 return "/registro-ingrediente";
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);

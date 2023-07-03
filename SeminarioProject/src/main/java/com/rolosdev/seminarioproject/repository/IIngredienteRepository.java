@@ -1,12 +1,16 @@
 package com.rolosdev.seminarioproject.repository;
 
 import com.rolosdev.seminarioproject.entity.Ingrediente;
+import com.rolosdev.seminarioproject.entity.Stock;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Repository("ingredienteRepository")
 public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integer> {
@@ -34,5 +38,4 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
             nativeQuery = true
     )
     ArrayList<Ingrediente> obtenerIngredientesPorMenu(@Param("idMenu") int idMenu);
-
 }

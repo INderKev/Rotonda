@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Nombre del ingrediente</th>
+                <th scope="col">cantidad</th>
+            </tr>
+        </thead>
+        <tbody th:each=" stock : ${listaStock}">
+            <tr>       
+                <th scope="row" th:text="${stock.ingrediente.nombre}"></th>
+                <td th:text="${stock.cantidadStock}"></td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    
+
+    <div class="form-row">
+        <div class="col-lg-8">
+            <a class="boton-loguear mt-3 mb-5" th:href="@{/cerrarSesion}">Salir</a>
+        </div>
+    </div>
+</body>
+</html>

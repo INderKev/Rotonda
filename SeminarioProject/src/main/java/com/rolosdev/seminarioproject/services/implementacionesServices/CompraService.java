@@ -324,7 +324,7 @@ public class CompraService implements ICompraService {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
                 if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
                     for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                        if (stock.getRestaurante().getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                             if (stock.getCantidadStock() < productoIngrediente.getCantidad()) {
                                 confirmar = true;
                                 for (Producto productoAEliminar : productosAEliminar) {
@@ -353,7 +353,7 @@ public class CompraService implements ICompraService {
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                if (productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                     stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
                     stockRepository.save(stock);
                     break;
@@ -367,7 +367,7 @@ public class CompraService implements ICompraService {
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                if (productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                     stock.setCantidadStock(stock.getCantidadStock() + productoIngrediente.getCantidad());
                     stockRepository.save(stock);
                     break;
@@ -383,7 +383,7 @@ public class CompraService implements ICompraService {
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             confirmar = true;
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente() && productoIngrediente.getCantidad() <= stock.getCantidadStock()) {
+                if (productoIngrediente.getIdIngrediente() == stock.getIngrediente().getIdIngrediente() && productoIngrediente.getCantidad() <= stock.getCantidadStock()) {
                     confirmar = false;
                     break;
                 }
