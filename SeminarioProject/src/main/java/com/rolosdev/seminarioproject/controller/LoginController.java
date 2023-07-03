@@ -91,6 +91,9 @@ public class LoginController {
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
                 UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(restaurante);
+                //anadido
+                   
+
                 model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
@@ -99,6 +102,8 @@ public class LoginController {
                 model.addAttribute("menu", new Menu());
                 model.addAttribute("productoAConsultar", new Producto());
                 model.addAttribute("menuAConsultar", new Menu());
+                model.addAttribute("stock",restaurante.getStocks());
+                
                 return "/dashboard-restaurante";
 
             default:
@@ -120,6 +125,7 @@ public class LoginController {
                     model.addAttribute("ingrediente", new Ingrediente());
                     return "/registro-ingrediente";
                 case "Restaurante":
+                    UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(consultaService.obtenerRestauranteById(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
@@ -128,6 +134,8 @@ public class LoginController {
                     model.addAttribute("menu", new Menu());
                     model.addAttribute("productoAConsultar", new Producto());
                     model.addAttribute("menuAConsultar", new Menu());
+                    model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );
+                    
                     return "/dashboard-restaurante";
                 default:
                     return "/index";

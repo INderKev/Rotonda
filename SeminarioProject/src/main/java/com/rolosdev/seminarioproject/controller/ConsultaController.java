@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ import java.util.List;
 @Controller
 @RequestMapping
 public class ConsultaController {
-
+    
     @Autowired
     @Qualifier("consultaService")
     private ConsultaService consultaService;
@@ -67,6 +68,19 @@ public class ConsultaController {
         model.addAttribute("menuAConsultar", new Menu());
         return "/dashboard-restaurante";
     }
+    //Metodo que redirecciona al formulario de modificacion de ingredientes para un restaurante
+    @GetMapping("/modificar/{idStock}")
+    public String formulariodeingrediente(Model model,@PathVariable("idStock") String idStock) {
+       Stock stockseleccionado=consultaService.obtenerStock(Integer.valueOf(idStock));
+      /*  System.out.println(stockseleccionado.getIdStock()+"pito");
+        System.out.println(stockseleccionado.getIdIngrediente()+"pito");
+        System.out.println(stockseleccionado.getCantidadStock());
+        System.out.println(stockseleccionado.getIdRestaurante()+"pito");
+        System.out.println(stockseleccionado.getIdIngrediente()+"pito");*/
+        model.addAttribute("stock", stockseleccionado);
+        return "/modificar-ingrediente";
+    }
+    
 
     @PostMapping("/listarIngredientes")
     public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true) int idRestaurante) {

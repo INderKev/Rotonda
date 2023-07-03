@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -129,6 +130,24 @@ public class RegistroController {
     public String eliminarProducto(@PathVariable("idProducto") int idProducto, Model model) {
         registroService.eliminarProducto(idProducto);
         return "redirect:/home";
+    }
+     @GetMapping("/eliminarIngrediente/{idStock}")
+    public String eliminarStock(@PathVariable("idStock") int idStock, Model model) {
+        registroService.eliminarstock(idStock);
+        return "redirect:/home";
+    }
+    
+
+    @PostMapping("/ModificarIngrediente")
+    public String registrarStock(@ModelAttribute("stock") @Valid Stock s,BindingResult bindingResult,HttpServletResponse response){
+       
+       if(bindingResult.hasErrors()){
+       return "/modificar-ingrediente";
+    }else{
+    registroService.modificarstockeingrediente(s); 
+    return "redirect:/home";
+    }
+        
     }
 
 

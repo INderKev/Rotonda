@@ -15,5 +15,7 @@ public interface IRegistroService {
     public void pruebas();
     public void eliminarProducto(int id);
     public void eliminarMenu(int id);
+    public String modificarstockeingrediente(Stock stock);
+    public String eliminarstock(int id);
 
 }

@@ -194,5 +194,27 @@ public class RegistroService implements IRegistroService {
         }
         menuRepository.deleteById(id);
     }
+    @Override
+    public String modificarstockeingrediente(Stock stock) {
+        String descripcion=stock.getIngrediente().getDescripcion();
+        stock.setRestaurante(restauranteRepository.findById(stock.getIdRestaurante()).get());
+         stock.setIngrediente(ingredienteRepository.findById(stock.getIdIngrediente()).get());
+         stock.getIngrediente().setDescripcion(descripcion);
+        System.out.print(stock.getIdStock()+"");
+        System.out.print(stock.getIngrediente().getNombre()+"");
+        System.out.print(stock.getIngrediente().getDescripcion()+"");
+        System.out.print(stock.getCantidadStock());
+        System.out.print(stock.getIdRestaurante()+"");
+        System.out.print(stock.getIdIngrediente()+"");
+       stockRepository.save(stock);
+       return "ok";
+    }
+    @Override 
+    public String eliminarstock(int id){
+      Stock stock= stockRepository.findById(id).get();
+      stockRepository.delete(stock);
+      return "Ok";
+    }
+
 
 }

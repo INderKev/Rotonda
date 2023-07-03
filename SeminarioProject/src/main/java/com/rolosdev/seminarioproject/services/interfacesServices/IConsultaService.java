@@ -20,5 +20,7 @@ public interface IConsultaService {
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu);
     public Producto obtenerProductoPorId(int IdProducto);
     public Menu obtenerMenuPorId(int IdMenu);
+    public Restaurante obtenerStockRestaurante(int idRestaurante);
+    public Stock obtenerStock(int idStock);
 
 }

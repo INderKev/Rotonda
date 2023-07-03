@@ -16,10 +16,6 @@ import java.util.List;
 public class ConsultaService implements IConsultaService {
 
     @Autowired
-    @Qualifier("stockRepository")
-    private IStockRepository stockRepository;
-
-    @Autowired
     @Qualifier("clienteRepository")
     private IClienteRepository clienteRepository;
 
@@ -66,6 +62,10 @@ public class ConsultaService implements IConsultaService {
     @Autowired
     @Qualifier("especialidadRepository")
     private IEspecialidadRepository especialidadRepository;
+
+    @Autowired
+    @Qualifier("stockRepository")
+    private IStockRepository stockRepository;
 
     @Override
     public ArrayList<Menu> obtenerMenusDelRestaurante(int idRestaurante) {
@@ -129,10 +129,21 @@ public class ConsultaService implements IConsultaService {
 
     @Override
     public List<Stock> obtenerStockPorRestaurante(int restaurante) {
-        return stockRepository.obtenerStockPorRestaurante( restaurante);
+        return stockRepository.obtenerStockPorRestaurante(restaurante);
     }
 
+    @Override
     public List<Stock> obtenerTodoStock(){
         return stockRepository.findAll();
+    }
+
+    @Override
+    public Restaurante obtenerStockRestaurante(int idRestaurante) {
+       return restauranteRepository.findById(idRestaurante).get();
+    }
+
+    @Override
+    public Stock obtenerStock(int idStock) {
+       return stockRepository.findById(idStock).get();
     }
 }

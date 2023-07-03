@@ -1,9 +1,17 @@
 package com.rolosdev.seminarioproject.entity;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "RESTAURANTE")
@@ -26,6 +34,15 @@ public class Restaurante {
     private String password;
     @Column(name = "IMAGEN_RESTAURANTE", nullable = false)
     private String imagen;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="restaurante",cascade = CascadeType.ALL)
+    private List<Stock> stocks;
+    public List<Stock> getStocks() {
+    return stocks;
+}
+
+public void setStocks(List<Stock> stocks) {
+    this.stocks = stocks;
+}
 
     public int getIdRestaurante() {
         return idRestaurante;

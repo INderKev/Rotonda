@@ -211,9 +211,14 @@
                             <td th:text="${men.precio}"></td>
 							<td><a type="button" class="btn btn-outline-danger" th:href="@{/eliminarMenu/{idMenu}(idMenu=${men.idMenu})}">Eliminar</a></td>
                         </tr>
-                        <tr>
+                        
                     </tbody>
                 </table>
+                
+                    </main>
+                
+            
+                
                 
             </main>
 
@@ -260,9 +265,37 @@
                     </div>
                 </section>
             </main>
+            <main th:id="ver-ingredientes">
+                <section>
+                    <table class="table">
+                        <thead class="table-dark">
+                        <th scope="col">ID</th> 
+                                    <th scope="col">Nombre de ingrediente</th>
+                                    <th scope="col">cantidadStock</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Eliminar</th>
+                                    <th scope="col">Modificar</th>
+                                </thead>
+                                    <!--Resolver asunto del formulario -->
+                    <tbody class="tabla-menus-consultar"> 
+                        <tr th:each="s:${stock}"> 
+                            <th scope="row" th:text="${s.ingrediente.idIngrediente}"></th>
+                            <td th:text="${s.ingrediente.nombre}"></td>
+                            <td th:text="${s.cantidadStock}"> </td>
+                            <td th:text="${s.ingrediente.descripcion}"></td>
+                            <td><a type="button" th:href="@{/eliminarIngrediente/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Eliminar</a></td>
+                            <td><a type="button" th:href="@{/modificar/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Modificar</a></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </section>
+            
+             
+            
         </div>
     </section>
-
+    
 	<script th:src="@{https://cdn.jsdelivr.net/npm/apexcharts}"></script>
 	<script th:src="@{js/dashboard-restaurante.js}"></script>
 </body>
