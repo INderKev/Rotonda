@@ -83,6 +83,8 @@ public class CompraController {
         return "/carrito";
     }
 
+    
+
     @GetMapping("/cancelarCompra")
     public String cancelarCompra(Model model) {
         compraService.cancelarCompra();
@@ -91,9 +93,11 @@ public class CompraController {
 
     @GetMapping("/pagarCompra")
     public String pagarCompra(Model model) {
+        
         compraService.terminarCompra();
-        return "redirect:/home";
+        return "/pago.html";
     }
+
 
     @GetMapping("/seleccionarMenu/{idMenu}")
     public String seleccionarProducto(@PathVariable("idMenu") int idMenu, Model model) {

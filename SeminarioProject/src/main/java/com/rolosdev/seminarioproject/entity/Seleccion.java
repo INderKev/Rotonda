@@ -13,7 +13,7 @@ public class Seleccion {
 
     @Id
     @Column(name = "IDSELECCION", nullable = false)
-    private int idSeleccion;
+    private Integer idSeleccion;
     @Column(name = "IDMENU")
     private Integer idMenu;
     @Nullable
@@ -44,7 +44,7 @@ public class Seleccion {
         this.idMenu = idMenu;
     }
 
-    public int getIdMenuSeleccionado() {
+    public Integer getIdMenuSeleccionado() {
         return idMenuSeleccionado;
     }
 

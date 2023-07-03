@@ -79,7 +79,7 @@ TIPO
 /* Table: TARJETA                                               */
 /*==============================================================*/
 create table TARJETA (
-   NUMTARJETA		NUMERIC(16,0)	     not null,
+   NUMTARJETA		VARCHAR(16)	     not null,
    PIN			NUMERIC(4,0)	     not null,
    TIPO			VARCHAR(25)	     not null,
    FECHA_CADUCIDAD	DATE		     not null,
@@ -105,7 +105,7 @@ TIPO
 /*==============================================================*/
 create table TARJETAS_CLIENTE (
    IDCLIENTE            INT4                 not null,
-   NUMTARJETA		NUMERIC(16,0)	     not null
+   NUMTARJETA		VARCHAR(16)	     not null
 );
 
 /*==============================================================*/

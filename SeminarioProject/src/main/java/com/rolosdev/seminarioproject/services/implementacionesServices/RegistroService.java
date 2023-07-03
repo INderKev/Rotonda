@@ -23,6 +23,14 @@ public class RegistroService implements IRegistroService {
     private IClienteRepository clienteRepository;
 
     @Autowired
+    @Qualifier("tarjetaRepository")
+    private ITarjetaRepository tarjetaRepository;
+
+    @Autowired
+    @Qualifier("tipoTarjetaRepository")
+    private ITipoTarjetaRepository tipoTarjetaRepository;
+
+    @Autowired
     @Qualifier("ingredienteRepository")
     private IIngredienteRepository ingredienteRepository;
 
@@ -121,7 +129,17 @@ public class RegistroService implements IRegistroService {
         seleccionRepository.save(seleccion);
         return "OK";
     }
-
+    
+    @Override
+    public String registrarTarjeta(Tarjeta tarjeta) {
+        TipoTarjeta tipoTarjeta = tipoTarjetaRepository.tipoTarjeta(tarjeta.primerNumero());
+        if(tipoTarjeta != null){
+            tarjeta.setTipo(tipoTarjeta.getTipo());
+            tarjetaRepository.save(tarjeta);
+            return "OK";
+        }
+        return "La tarjeta no es valida";
+    }
     @Override
     public void pruebas() {
         boolean confirmar;
@@ -193,5 +211,5 @@ public class RegistroService implements IRegistroService {
         }
         menuRepository.deleteById(id);
     }
-
+        
 }

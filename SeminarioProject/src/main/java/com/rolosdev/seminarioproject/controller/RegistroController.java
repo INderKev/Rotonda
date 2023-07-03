@@ -149,6 +149,16 @@ public class RegistroController {
         return "redirect:/home";
     }
 
+    @GetMapping("/registrarTarjeta")
+    public String registrarTarjeta(HttpServletResponse response, @Validated Tarjeta tarjeta, Model model) {
+        String resultado = registroService.registrarTarjeta(tarjeta);
+        if(!resultado.equals("OK")){
+            model.addAttribute("Mensaje", resultado);
+            return "/registro-tarjeta";
+        }
+        return "/pago";
+    }
+
     @GetMapping("/eliminarMenu/{idMenu}")
     public String eliminarMenu(@PathVariable("idMenu") int idMenu, Model model) {
         registroService.eliminarMenu(idMenu);

@@ -5,6 +5,7 @@ import com.rolosdev.seminarioproject.entity.*;
 public interface IRegistroService {
 
     public String registrarCliente(Cliente cliente);
+    public String registrarTarjeta(Tarjeta tarjeta);
     public String registrarAdministrador(Administrador administrador);
     public String registrarRestaurante(Restaurante restaurante);
     public String registrarIngrediente(Ingrediente ingrediente);
