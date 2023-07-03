@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository("stockRepository")
 public interface IStockRepository extends JpaRepository<Stock, Integer> {
@@ -28,4 +29,10 @@ public interface IStockRepository extends JpaRepository<Stock, Integer> {
             nativeQuery = true
     )
     ArrayList<Stock> obtenerStockPorProducto(@Param("idProducto") int idProducto);
+
+   @Query(
+            value = "SELECT s.* FROM ingrediente i, stock s, restaurante r WHERE s.idingrediente = i.idingrediente AND s.idrestaurante = r.idrestaurante AND r.idrestaurante = ?1",
+            nativeQuery = true
+    )
+    List<Stock> obtenerStockPorRestaurante( int idRestaurante );
 }

@@ -3,6 +3,7 @@ package com.rolosdev.seminarioproject.services.interfacesServices;
 import com.rolosdev.seminarioproject.entity.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IConsultaService {
 
@@ -11,6 +12,7 @@ public interface IConsultaService {
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu);
     public ArrayList<Ingrediente> obtenerIngredientesPorProducto(int idProducto);
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto);
+    public List<Stock> obtenerStockPorRestaurante( int restaurante);
     public ArrayList<Restaurante> obtenerRestaurantes();
     public Restaurante obtenerRestauranteById(int id);
     public ArrayList<Clasificacion> obtenerClasificaciones();
@@ -18,4 +20,5 @@ public interface IConsultaService {
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu);
     public Producto obtenerProductoPorId(int IdProducto);
     public Menu obtenerMenuPorId(int IdMenu);
+
 }

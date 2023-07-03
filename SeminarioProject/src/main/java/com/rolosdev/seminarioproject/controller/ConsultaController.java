@@ -2,20 +2,25 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.Menu;
 import com.rolosdev.seminarioproject.entity.Producto;
+import com.rolosdev.seminarioproject.entity.Stock;
 import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
 import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -61,6 +66,19 @@ public class ConsultaController {
         model.addAttribute("productoAConsultar", new Producto());
         model.addAttribute("menuAConsultar", new Menu());
         return "/dashboard-restaurante";
+    }
+
+    @PostMapping("/listarIngredientes")
+    public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true)int idRestaurante){
+        List<Stock> listaStock = consultaService.obtenerStockPorRestaurante(idRestaurante);
+        
+        //List<Stock> listaStock = consultaService.obtenerIngredintes2();    SIRVE
+        for (int i = 0; i < listaStock.size(); i++) {
+            
+        }
+
+        modelo.addAttribute("listaStock", listaStock);
+        return "/ingrediente-cantidad";
     }
 
 }
