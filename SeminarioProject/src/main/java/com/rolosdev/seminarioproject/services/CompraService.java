@@ -260,6 +260,7 @@ public class CompraService {
         Orden orden = new Orden();
         orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden() + 1);
         orden.setCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
+        orden.setProducto(producto);
         orden.setObservaciones("");
         PaqueteOrden paqueteOrden = new PaqueteOrden();
         paqueteOrden.setOrden(orden);

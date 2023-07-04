@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -44,8 +42,10 @@ public class RegistroController {
     @PostMapping("/registrarCliente")
     public String registrarCliente(HttpServletResponse response, @Valid @Validated Cliente cliente, BindingResult result, Model model, RedirectAttributes redirAttrs){
         if (result.hasErrors()) {
-            if (result.hasFieldErrors("telefono"))
+            if (result.hasFieldErrors("telefono")) {
+                model.addAttribute("cliente", cliente);
                 model.addAttribute("error", "Por favor, introduzca un número de teléfono válido.");
+            }
             return "/registro-cliente";
         }
         String resultado = registroService.registrarCliente(cliente);
@@ -71,7 +71,7 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarRestaurante")
-    public String registrarRestaurante(HttpServletResponse response, @Validated Restaurante restaurante, @Validated ArrayList<Especialidad> especialidades, Model model, RedirectAttributes redirAttrs) {
+    public String registrarRestaurante(HttpServletResponse response, @Validated Restaurante restaurante, Model model, RedirectAttributes redirAttrs) {
         String resultado = registroService.registrarRestaurante(restaurante);
         if (!resultado.equals("OK")) {
             model.addAttribute("restaurante", restaurante);
