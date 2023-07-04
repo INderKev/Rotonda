@@ -104,7 +104,7 @@
                           <tr style="text-align: right;">
                             <td colspan="2" class="text-align-right" th:if="${compra != null}" th:text="${compra.total}"></td>
                             <td colspan="2" class="text-align-right" th:if="${compra == null}" >0</td>
-                            <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/pagarCompra}">Confirmar</a></td>
+                            <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/realizarPago}">Confirmar</a></td>
                             <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/cancelarCompra}">Cancelar</a></td>
                           </tr>
                         </tbody>

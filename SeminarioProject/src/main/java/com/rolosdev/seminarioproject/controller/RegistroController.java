@@ -149,6 +149,12 @@ public class RegistroController {
         return "redirect:/home";
     }
 
+    @GetMapping("/goTarjeta")
+    public String goTarjeta(Model model) {
+        model.addAttribute("tarjeta", new Tarjeta());
+        return "/registro-tarjeta";
+    }
+
     @GetMapping("/registrarTarjeta")
     public String registrarTarjeta(HttpServletResponse response, @Validated Tarjeta tarjeta, Model model) {
         String resultado = registroService.registrarTarjeta(tarjeta);

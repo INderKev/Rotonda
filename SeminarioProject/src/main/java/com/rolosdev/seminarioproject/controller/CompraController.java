@@ -91,11 +91,18 @@ public class CompraController {
         return "redirect:/home";
     }
 
+    @GetMapping("/realizarPago")
+    public String realizarPago(Model model) {
+        return "/pago";
+    }
+
+
+
     @GetMapping("/pagarCompra")
     public String pagarCompra(Model model) {
-        
+        System.err.println("Llego jaja");
         compraService.terminarCompra();
-        return "/pago.html";
+        return "redirect:/home";
     }
 
 

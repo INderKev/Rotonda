@@ -6,7 +6,6 @@ import com.rolosdev.seminarioproject.services.interfacesServices.IRegistroServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -129,6 +128,8 @@ public class RegistroService implements IRegistroService {
         seleccionRepository.save(seleccion);
         return "OK";
     }
+    
+    
     
     @Override
     public String registrarTarjeta(Tarjeta tarjeta) {
