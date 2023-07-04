@@ -128,6 +128,8 @@ NUMTARJETA
 create table COMPRA (
    IDCOMPRA             INT4                 not null,
    IDCLIENTE            INT4                 not null,
+   NUMTARJETA           VARCHAR(16)                  ,
+   TIPOPAGO             VARCHAR(16)          not null,  
    TOTAL                NUMERIC(15,2)        not null,
    FECHA                DATE                 not null,
    constraint PK_COMPRA primary key (IDCOMPRA)
