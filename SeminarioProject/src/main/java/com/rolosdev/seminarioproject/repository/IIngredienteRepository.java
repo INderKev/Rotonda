@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +39,16 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
     ArrayList<Ingrediente> obtenerIngredientesPorMenu(@Param("idMenu") int idMenu);
     
     @Query(
-        value = "SELECT i.nom_ingrediente, sum(s.cantidad_stock) FROM ingrediente i, stock s, restaurante r WHERE s.idingrediente = i.idingrediente AND s.idrestaurante = r.idrestaurante GROUP BY i.nom_ingrediente" ,
+        value = "SELECT i.nom_ingrediente, sum(s.cantidad_stock) FROM ingrediente i LEFT JOIN stock s ON s.idingrediente = i.idingrediente GROUP BY i.nom_ingrediente" ,
                 nativeQuery = true
     )
     List<Object[]> listarIngredientes ();
 
+    @Modifying
     @Query(
-        value = "DELETE from Stock where LOWER(nom_ingrediente) = LOWER('?1') ",
+        value = "DELETE FROM ingrediente i WHERE i.nom_ingrediente = :nombre",
         nativeQuery = true
     )
-    void borarIngrediente(@Param("nomIngrediente") String nomIngrediente);
+    void borarIngrediente(@Param("nombre") String nomIngrediente);
 
 }
