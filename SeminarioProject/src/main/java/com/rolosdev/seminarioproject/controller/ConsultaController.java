@@ -92,7 +92,7 @@ public class ConsultaController {
         return "/lista-ingrediente";
     }
 
-    @GetMapping("/elimarIngrediente/{id}")
+    @GetMapping("/eliminarIngredienteAdm/{nombre}")
     public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
         consultaService.eliminarIngrediente(nombre);
         return "redirect:/buscarIngredientesTotales";

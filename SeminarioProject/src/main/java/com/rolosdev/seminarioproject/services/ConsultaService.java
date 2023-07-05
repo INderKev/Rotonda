@@ -140,7 +140,7 @@ public class ConsultaService {
         List<Object[]> a = ingredienteRepository.listarIngredientes();
         for (Object [] arr: a){
             String key = (String) arr[0];
-            BigDecimal value = (BigDecimal)arr[1];
+            BigDecimal value = arr[1] != null ? (BigDecimal)arr[1] : BigDecimal.valueOf(0);
             Integer finalValue = value.intValue();
             lista.put(key, finalValue);
         }

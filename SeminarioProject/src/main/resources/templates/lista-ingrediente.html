@@ -18,7 +18,11 @@
             <tr>       
                 <th scope="row" th:text="${i}"></th>
                 <td th:text="${listaIngredientes.get(i)}"></td>
-                <td> <div th:if = "${listaIngredientes.get(i) == 0}"> <button>Eliminar</button></div></td>
+                <td> <div th:if = "${listaIngredientes.get(i) == 0}">
+                    <form th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
+                        <button>Eliminar</button>
+                    </form>
+                </div></td>
             </tr>
             <tr>
         </tbody>

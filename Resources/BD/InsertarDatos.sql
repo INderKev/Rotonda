@@ -1,4 +1,3 @@
-
 -- SCRIPT 
 
 
@@ -298,13 +297,6 @@ INSERT INTO seleccion(idseleccion, idmenu, idclasificacion, precio_bajo, precio_
 INSERT INTO seleccion(idseleccion, idmenu, idclasificacion, precio_bajo, precio_alto) VALUES (14, 7, 2, 10000, 10000);
 INSERT INTO seleccion(idseleccion, idmenu, idclasificacion, precio_bajo, precio_alto) VALUES (15, 7, 4, 3500, 3500);
 
--- Compra
-
-INSERT INTO compra VALUES (1, 111111111, 89000, '8-11-2022');
-INSERT INTO compra VALUES (2, 222222222, 50000, '8-11-2022');
-INSERT INTO compra VALUES (3, 333333333, 55000, '8-11-2022');
-INSERT INTO compra VALUES (4, 333333333, 8000, '9-11-2022');
-
 -- Menu_Seleccionado
 
 INSERT INTO menu_seleccionado VALUES (1, 1);
@@ -350,6 +342,43 @@ INSERT INTO seleccion(idseleccion, idmenu_seleccionado, idclasificacion, idprodu
 INSERT INTO seleccion(idseleccion, idmenu_seleccionado, idclasificacion, idproducto) VALUES (38, 10, 4, 16);
 INSERT INTO seleccion(idseleccion, idmenu_seleccionado, idclasificacion, idproducto) VALUES (39, 11, 6, 8);
 INSERT INTO seleccion(idseleccion, idmenu_seleccionado, idclasificacion, idproducto) VALUES (40, 11, 4, 4);
+
+-- Tipo Tarjeta
+
+INSERT INTO tipo_tarjeta(tipo, identificador) VALUES ('American Express', 3);
+INSERT INTO tipo_tarjeta(tipo, identificador) VALUES ('Master Card', 4);
+INSERT INTO tipo_tarjeta(tipo, identificador) VALUES ('Visa', 5);
+
+-- Tarjeta
+
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('333333333333337', 0000, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('300000000000007', 0000, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('310101010101013', 0000, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('301010101010101', 0000, 'American Express', '2023-06-30');
+
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4444444444444448', 0000, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4000000000000002', 0000, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4010101010101018', 0000, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4101010101010105', 0000, 'Master Card', '2023-06-30');
+
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5555555555555557', 0000, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5000000000000009', 0000, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5010101010101015', 0000, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5101010101010102', 0000, 'Visa', '2023-06-30');
+
+-- Tarjetas Cliente
+
+INSERT INTO tarjetas_cliente VALUES (111111111, '5101010101010102');
+INSERT INTO tarjetas_cliente VALUES (111111111, '4101010101010105');
+INSERT INTO tarjetas_cliente VALUES (222222222, '4101010101010105');
+
+-- Compra
+
+INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (1, 111111111, TRUE, 89000, '8-11-2022');
+INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (2, 222222222, TRUE, 50000, '8-11-2022');
+INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (3, 333333333, TRUE, 55000, '8-11-2022');
+INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (4, 333333333, TRUE, 8000, '9-11-2022');
+INSERT INTO compra(idcompra, idcliente, numtarjeta, pagaefectivo, total, fecha) VALUES (5, 222222222, '4101010101010105', FALSE, 8000, '9-11-2022');
 
 -- Orden
 
