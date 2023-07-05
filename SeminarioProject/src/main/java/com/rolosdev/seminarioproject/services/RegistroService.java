@@ -185,24 +185,15 @@ public class RegistroService {
     }
     //reutilizable
     public String modificarStockEIngrediente(Stock stock) {
-        String descripcion=stock.getIngrediente().getDescripcion();
-        stock.setRestaurante(restauranteRepository.findById(stock.getRestaurante().getIdRestaurante()).get());
-        stock.setIngrediente(ingredienteRepository.findById(stock.getIngrediente().getIdIngrediente()).get());
-        stock.getIngrediente().setDescripcion(descripcion);
-        System.out.print(stock.getIdStock()+"");
-        System.out.print(stock.getIngrediente().getNombre()+"");
-        System.out.print(stock.getIngrediente().getDescripcion()+"");
-        System.out.print(stock.getCantidadStock());
-        System.out.print(stock.getRestaurante().getIdRestaurante()+"");
-        System.out.print(stock.getIngrediente().getIdIngrediente()+"");
-       stockRepository.save(stock);
-       return "ok";
+        stock.setIdStock(stockRepository.obtenerUltimoId().getIdStock() + 1);
+        stockRepository.save(stock);
+        return "ok";
     }
     
     public String eliminarstock(int id){
-      Stock stock= stockRepository.findById(id).get();
-      stockRepository.delete(stock);
-      return "Ok";
+        Stock stock= stockRepository.findById(id).get();
+        stockRepository.delete(stock);
+        return "Ok";
     }
 
 

@@ -133,7 +133,7 @@ public class ConsultaService {
     
     public List<Ingrediente> obteneringredientescomplementorestaurante(int idrestaurante){
         return ingredienteRepository.obtenerIngredientesFaltantesderestaurante(idrestaurante);
-
+    }
 
     public Map<String, Integer> obtenerListaIngredientesTotales(){
         Map<String, Integer> lista = new HashMap<>();
