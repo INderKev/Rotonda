@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     13/11/2022 10:07:15 p. m.                    */
+/* Created on:     13/11/2022 10:07:15 p. m.                   */
 /*==============================================================*/
 
 /*==============================================================*/
@@ -87,16 +87,16 @@ create table TARJETA (
 );
 
 /*==============================================================*/
-/* Index: TARJETA_PK                                             */
+/* Index: TARJETA_PK                                            */
 /*==============================================================*/
 create unique index TARJETA_PK on TARJETA (
 NUMTARJETA
 );
 
 /*==============================================================*/
-/* Index: TIPO_TARJETA_FK                                  */
+/* Index: TIPO_TARJETA_FK                                  	*/
 /*==============================================================*/
-create  index TIPO_TARJETA_FK on TARJETA (
+create index TIPO_TARJETA_FK on TARJETA (
 TIPO
 );
 
@@ -105,22 +105,31 @@ TIPO
 /*==============================================================*/
 create table TARJETAS_CLIENTE (
    IDCLIENTE            INT4                 not null,
-   NUMTARJETA		VARCHAR(16)	     not null
+   NUMTARJETA		VARCHAR(16)	     not null,
+   constraint PK_TARJETAS_CLIENTE primary key (IDCLIENTE, NUMTARJETA)
 );
 
 /*==============================================================*/
 /* Index: CLIENTE_TARJETAS_CLIENTE_FK                           */
 /*==============================================================*/
-create unique index CLIENTE_TARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
+create index CLIENTE_TARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
 IDCLIENTE
 );
 
 /*==============================================================*/
 /* Index: TARJETA_TARJETAS_CLIENTE_FK                           */
 /*==============================================================*/
-create unique index TARJETATARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
+create index TARJETA_TARJETAS_CLIENTE_FK on TARJETAS_CLIENTE (
 NUMTARJETA
 );
+
+/*==============================================================*/
+/* Index: TARJETAS_CLIENTE_PK                                   */
+/*==============================================================*/
+create unique index TARJETAS_CLIENTE_PK on TARJETAS_CLIENTE (
+IDCLIENTE, NUMTARJETA
+);
+
 
 /*==============================================================*/
 /* Table: COMPRA                                                */
@@ -129,7 +138,7 @@ create table COMPRA (
    IDCOMPRA             INT4                 not null,
    IDCLIENTE            INT4                 not null,
    NUMTARJETA           VARCHAR(16)                  ,
-   TIPOPAGO             VARCHAR(16)          not null,  
+   PAGAEFECTIVO         BOOLEAN              not null,  
    TOTAL                NUMERIC(15,2)        not null,
    FECHA                DATE                 not null,
    constraint PK_COMPRA primary key (IDCOMPRA)
@@ -145,8 +154,15 @@ IDCOMPRA
 /*==============================================================*/
 /* Index: CLIENTE_COMPRA_FK                                     */
 /*==============================================================*/
-create  index CLIENTE_COMPRA_FK on COMPRA (
+create index CLIENTE_COMPRA_FK on COMPRA (
 IDCLIENTE
+);
+
+/*==============================================================*/
+/* Index: TARJETA_COMPRA_FK                                     */
+/*==============================================================*/
+create index TARJETA_COMPRA_FK on COMPRA (
+IDCLIENTE, NUMTARJETA
 );
 
 /*==============================================================*/
@@ -172,6 +188,7 @@ create table INGREDIENTE (
    IDINGREDIENTE        INT4                 not null,
    NOM_INGREDIENTE      VARCHAR(200)         not null,
    TIPO_UNIDAD          VARCHAR(150)         not null,
+   DESCRIPCION		VARCHAR(500)		     ,
    constraint PK_INGREDIENTE primary key (IDINGREDIENTE)
 );
 
@@ -426,7 +443,7 @@ create table STOCK (
    IDSTOCK              INT4                 not null,
    IDRESTAURANTE        INT4                 not null,
    IDINGREDIENTE        INT4                 not null,
-   CANTIDAD_STOCK       NUMERIC(10,2)        not null,
+   CANTIDAD_STOCK       NUMERIC(10,0)        not null,
    constraint PK_STOCK primary key (IDSTOCK)
 );
 
@@ -469,6 +486,11 @@ alter table TARJETAS_CLIENTE
 alter table COMPRA
    add constraint FK_COMPRA_CLIENTE_C_CLIENTE foreign key (IDCLIENTE)
       references CLIENTE (IDCLIENTE)
+      on delete restrict on update restrict;
+      
+alter table COMPRA
+   add constraint FK_COMPRA_TARJETA_CLIENTE foreign key (IDCLIENTE, NUMTARJETA)
+      references TARJETAS_CLIENTE (IDCLIENTE, NUMTARJETA)
       on delete restrict on update restrict;
 
 alter table MENU
