@@ -91,9 +91,6 @@ public class LoginController {
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
                 UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(restaurante);
-                //anadido
-                   
-
                 model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(restaurante.getIdRestaurante()));
                 model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
