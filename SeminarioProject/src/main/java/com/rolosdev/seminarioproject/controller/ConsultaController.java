@@ -22,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -84,4 +85,17 @@ public class ConsultaController {
         return "/ingrediente-cantidad";
     }
 
+    @GetMapping("/buscarIngredientesTotales")
+    public String buscarIngredientesTotales(ModelMap modelo){
+        Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
+        modelo.addAttribute("listaIngredientes",lista);
+        return "/lista-ingrediente";
+    }
+
+    @GetMapping("/elimarIngrediente/{id}")
+    public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
+        consultaService.eliminarIngrediente(nombre);
+        return "redirect:/buscarIngredientesTotales";
+    }
 }
+ 

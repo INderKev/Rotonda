@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("consultaService")
 @Transactional
@@ -124,5 +128,22 @@ public class ConsultaService {
 
     public Stock obtenerStock(int idStock) {
        return stockRepository.findById(idStock).get();
+    }
+
+    public Map<String, Integer> obtenerListaIngredientesTotales(){
+        Map<String, Integer> lista = new HashMap<>();
+        List<Object[]> a = ingredienteRepository.listarIngredientes();
+        for (Object [] arr: a){
+            String key = (String) arr[0];
+            BigDecimal value = (BigDecimal)arr[1];
+            Integer finalValue = value.intValue();
+            lista.put(key, finalValue);
+        }
+        return lista;
+    }
+
+    @Transactional
+    public void eliminarIngrediente(String nombIngrediente){
+        ingredienteRepository.borarIngrediente(nombIngrediente);
     }
 }
