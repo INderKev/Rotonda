@@ -16,7 +16,7 @@
     
 </head>
 <body>
-    
+    <script src="https:www.google.com/recaptcha/api.js" async defer></script>
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navigation-wrap">
@@ -52,7 +52,7 @@
                         <h1 class="font-weigth-bold py-3">Bienvenido</h1>
                         
                         <h4>Inicia sesión con tu cuenta</h4>
-                        <form th:action="@{/loguearse}" th:object="${login}" method="post">
+                        <form th:action="@{/loguearse}" th:object="${login}" method="post" onsubmit="return validarcaptcha()">
                             <div class="form-row">
                                 <div class="col-lg-8">
                                     <input type="text" placeholder="Usuario" class="form-control my-3 p-3" th:field="*{usuario}"/>
@@ -64,10 +64,12 @@
                                 </div>
                             </div>
                             <div class="form-row">
+                                <!--se implementa el widget del captcha-->    <div class="g-recaptcha" th:data-sitekey="${@environment.getProperty('recaptcha.key')}"></div>
                                 <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                                 <div class="col-lg-8">
                                    <button class="boton-loguear mt-3 mb-5">Iniciar sesión</button>
                                 </div>
+     
                             </div>
                             <p>¿No tienes una cuenta? <a th:href="@{seleccionarRol}">Registrate aquí.</a> </p>
                         </form>
@@ -76,6 +78,15 @@
             </div>
         </div>
     </section>
-   
+   <script type="text/javascript">
+    function validarcaptcha(){
+        if(grecaptcha.getResponse()){
+            return true;
+        }else {
+            alert('Sorry socio no se aceptan peruanos')
+            return false
+        }
+    }
+   </script>
 </body>
 </html>
