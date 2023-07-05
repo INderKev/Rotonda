@@ -370,6 +370,7 @@ INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('51010101010
 
 INSERT INTO tarjetas_cliente VALUES (111111111, '5101010101010102');
 INSERT INTO tarjetas_cliente VALUES (111111111, '4101010101010105');
+INSERT INTO tarjetas_cliente VALUES (222222222, '4101010101010105');
 
 -- Compra
 
@@ -377,6 +378,7 @@ INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (1, 1
 INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (2, 222222222, TRUE, 50000, '8-11-2022');
 INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (3, 333333333, TRUE, 55000, '8-11-2022');
 INSERT INTO compra(idcompra, idcliente, pagaefectivo, total, fecha) VALUES (4, 333333333, TRUE, 8000, '9-11-2022');
+INSERT INTO compra(idcompra, idcliente, numtarjeta, pagaefectivo, total, fecha) VALUES (5, 222222222, '4101010101010105', FALSE, 8000, '9-11-2022');
 
 -- Orden
 
@@ -406,5 +408,4 @@ INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (20, 4, 1
 INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (21, 4, 20, 'Comentario random');
 INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (22, 4, 21, 'Comentario random');
 
-SELECT * FROM tarjetas_cliente;
 

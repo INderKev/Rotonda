@@ -566,10 +566,9 @@ alter table SELECCION
 alter table STOCK
    add constraint FK_STOCK_RESTAURAN_RESTAURA foreign key (IDRESTAURANTE)
       references RESTAURANTE (IDRESTAURANTE)
-      on delete restrict on update restrict;
+      on delete cascade on update cascade;
 
 alter table STOCK
    add constraint FK_STOCK_STOCK_ING_INGREDIE foreign key (IDINGREDIENTE)
       references INGREDIENTE (IDINGREDIENTE)
-      on delete restrict on update restrict;
-
+      on delete cascade on update cascade;
