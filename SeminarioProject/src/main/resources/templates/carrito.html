@@ -56,9 +56,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/home}"
-                  >Inicio</a
-                >
+                <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/cerrarSesion}">Cerrar Sesión</a>
@@ -107,6 +105,11 @@
                             <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/realizarPago}">Confirmar</a></td>
                             <td class="mr-12"><a type="button" class="btn btn-success" th:if="${compra != null}" th:href="@{/cancelarCompra}">Cancelar</a></td>
                           </tr>
+                          <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+                          <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                          <div th:if="${success} OR ${error}">
+                            <a type="button" class="btn btn-success" th:href="@{/home}">Volver</a>
+                          </div>
                         </tbody>
                       </table>
                     </div>

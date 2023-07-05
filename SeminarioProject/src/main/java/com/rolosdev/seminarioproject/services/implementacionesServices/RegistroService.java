@@ -64,8 +64,9 @@ public class RegistroService implements IRegistroService {
             clienteRepository.save(cliente);
             return "OK";
         }
-        return "El correo " + cliente.getCorreo() + " Ya existe, verifique los datos";
+        return "El correo " + cliente.getCorreo() + " ya existe. Verifique los datos.";
     }
+
     @Override
     public String registrarAdministrador(Administrador administrador) {
         if (administradorRepository.verificarExistencia(administrador.getUserAdministrador()) == null) {
@@ -73,7 +74,7 @@ public class RegistroService implements IRegistroService {
             administradorRepository.save(administrador);
             return "OK";
         }
-        return "El usuario " + administrador.getUserAdministrador() + " Ya existe, verifique los datos";
+        return "El usuario " + administrador.getUserAdministrador() + " ya existe. Verifique los datos.";
     }
     @Override
     public String registrarRestaurante(Restaurante restaurante) {
@@ -82,7 +83,7 @@ public class RegistroService implements IRegistroService {
             restauranteRepository.save(restaurante);
             return "OK";
         }
-        return "El usuario " + restaurante.getIdRestaurante() + " Ya existe, verifique los datos";
+        return "El usuario " + restaurante.getUser() + " ya existe. Verifique los datos.";
     }
 
     @Override

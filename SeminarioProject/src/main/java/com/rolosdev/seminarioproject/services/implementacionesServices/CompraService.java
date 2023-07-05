@@ -160,7 +160,9 @@ public class CompraService implements ICompraService {
     }
 
     @Override
-    public void terminarCompra() {
+    public String terminarCompra() {
+        if (CarritoDeCompraService.getCarritoDeCompraService().getOrdenes().isEmpty())
+            return "¡Ninguna orden en el carrito! Primero debes añadir algo.";
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Producto> productosUsados = new ArrayList<>();
         for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
@@ -190,6 +192,7 @@ public class CompraService implements ICompraService {
             ordenRepository.save(orden.getOrden());
         }
         CarritoDeCompraService.getCarritoDeCompraService().finalizar();
+        return "OK";
     }
 
     @Override

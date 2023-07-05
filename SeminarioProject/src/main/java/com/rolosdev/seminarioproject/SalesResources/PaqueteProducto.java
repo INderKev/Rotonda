@@ -1,6 +1,7 @@
 package com.rolosdev.seminarioproject.SalesResources;
 
 import com.rolosdev.seminarioproject.entity.Producto;
+
 import java.util.ArrayList;
 
 public class PaqueteProducto {

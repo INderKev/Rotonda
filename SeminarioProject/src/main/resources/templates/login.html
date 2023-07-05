@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <h2 th:text="${Mensaje}"></h2>
+                                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                                 <div class="col-lg-8">
                                    <button class="boton-loguear mt-3 mb-5">Iniciar sesión</button>
                                 </div>
