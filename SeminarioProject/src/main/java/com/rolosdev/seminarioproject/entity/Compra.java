@@ -15,6 +15,10 @@ public class Compra {
     private int idCompra;
     @Column(name = "IDCLIENTE", nullable = false)
     private int idCliente;
+    @Column(name = "NUMTARJETA", nullable = true)
+    private String numTarteta;
+    @Column(name = "PAGAEFECTIVO", nullable = false)
+    private boolean pagaEfectivo;
     @Column(name = "TOTAL", nullable = false)
     private double total;
     @Column(name = "FECHA", nullable = false)
@@ -34,6 +38,22 @@ public class Compra {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getNumTarteta() {
+        return numTarteta;
+    }
+
+    public void setNumTarteta(String numTarteta) {
+        this.numTarteta = numTarteta;
+    }
+
+    public boolean isPagaEfectivo() {
+        return pagaEfectivo;
+    }
+
+    public void setPagaEfectivo(boolean pagaEfectivo) {
+        this.pagaEfectivo = pagaEfectivo;
     }
 
     public double getTotal() {

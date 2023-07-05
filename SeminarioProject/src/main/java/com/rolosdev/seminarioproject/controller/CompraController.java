@@ -99,7 +99,7 @@ public class CompraController {
 
     @GetMapping("/pagarCompra")
     public String pagarCompra(Model model) {
-        System.err.println("Llego jaja");
+
         compraService.terminarCompra();
         return "redirect:/home";
     }
