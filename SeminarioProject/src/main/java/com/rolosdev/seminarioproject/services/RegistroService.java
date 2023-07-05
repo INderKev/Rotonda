@@ -183,7 +183,7 @@ public class RegistroService {
         }
         menuRepository.deleteById(id);
     }
-    
+    //reutilizable
     public String modificarStockEIngrediente(Stock stock) {
         String descripcion=stock.getIngrediente().getDescripcion();
         stock.setRestaurante(restauranteRepository.findById(stock.getRestaurante().getIdRestaurante()).get());

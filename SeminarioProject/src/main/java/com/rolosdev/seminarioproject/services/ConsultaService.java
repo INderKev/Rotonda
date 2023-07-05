@@ -125,4 +125,8 @@ public class ConsultaService {
     public Stock obtenerStock(int idStock) {
        return stockRepository.findById(idStock).get();
     }
+    
+    public List<Ingrediente> obteneringredientescomplementorestaurante(int idrestaurante){
+        return ingredienteRepository.obtenerIngredientesFaltantesderestaurante(idrestaurante);
+    }
 }

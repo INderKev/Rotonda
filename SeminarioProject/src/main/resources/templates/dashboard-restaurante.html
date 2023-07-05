@@ -276,7 +276,7 @@
                                     <th scope="col">Eliminar</th>
                                     <th scope="col">Modificar</th>
                                 </thead>
-                                    <!--Resolver asunto del formulario -->
+                                    <!--Listar ingredientes -->
                     <tbody class="tabla-menus-consultar"> 
                         <tr th:each="s:${stock}"> 
                             <th scope="row" th:text="${s.ingrediente.idIngrediente}"></th>
@@ -290,7 +290,48 @@
                         </tbody>
                     </table>
                 </section>
-            
+                <!--Seleccionar un nuevo ingrediente para registrar -->
+                <main th:id="agregar-producto">
+                    <h3>Agrega un nuevo producto</h3>
+                    <section class="form my-3 mx-3" th:id="form-registro-producto">
+                        <div class="container g-0">
+                            <div class="row g-0">
+                                    <div class="col-lg 5 px-5 pt-5">
+                                        <form th:action="@{/registarStock}" th:object="${newstock}" method="post">
+                                            
+                                            <div class="row">
+                                                <div class="form-group col">
+                                                    <!--Seleccionar el ingrediente -->
+                                                    <label>Seleccionar ingrediente</label>
+                                                    <select class="form-select" name="ingredientes" th:id="ingredientes"
+                                                            th:field="*{ingrediente.idIngrediente}">
+                                                        <option th:each="ingredientess:${ingredientes}"
+                                                                th:value="${ingredientess.idIngrediente}"
+                                                                th:text="${ingredientess.nombre}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col">
+                                                    <label>Cantidad del producto</label>
+                                                    <input type="number" class="form-control" name="precio-producto"
+                                                           min="0" required th:field="*{cantidadStock}">
+                                                    
+                                                </div>
+                                            </div>
+    
+                                            <div class="form-row">
+                                                <div class="col-lg-8">
+                                                    <button class="boton-registrar mt-3 mb-5">Registrar ingrediente</button>
+                                                </div>
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
              
             
         </div>

@@ -116,6 +116,7 @@ public class CompraService {
     public ArrayList<Producto> obtenerProductosDisponibles(int idRestaurante) {
         ArrayList<Producto> productos = productoRepository.obtenerProductosPorRestaurante(idRestaurante);
         ArrayList<Producto> productosEliminados = new ArrayList<>();
+        
         for (Producto producto: productos) {
             if (!verificarQueSePuedePrepararProducto(producto)) {
                 productosEliminados.add(producto);

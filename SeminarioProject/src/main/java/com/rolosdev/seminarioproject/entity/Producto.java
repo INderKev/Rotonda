@@ -28,7 +28,7 @@ public class Producto {
     @Column(name = "IMAGEN_PRODUCTO", nullable = false)
     private String imagenProducto;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Restaurante.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Restaurante.class)
     @JoinColumn(name = "IDRESTAURANTE", nullable = false)
     private Restaurante restaurante;
     

@@ -103,7 +103,8 @@ public class LoginController {
                 model.addAttribute("productoAConsultar", new Producto());
                 model.addAttribute("menuAConsultar", new Menu());
                 model.addAttribute("stock",restaurante.getStocks());
-                
+                model.addAttribute("ingredientes",consultaService.obteneringredientescomplementorestaurante(restaurante.getIdRestaurante()));
+                model.addAttribute("newstock",new Stock());
                 return "/dashboard-restaurante";
 
             default:
@@ -135,6 +136,10 @@ public class LoginController {
                     model.addAttribute("productoAConsultar", new Producto());
                     model.addAttribute("menuAConsultar", new Menu());
                     model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );
+                    model.addAttribute("ingredientes",consultaService.obteneringredientescomplementorestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+                    Stock newstock=new Stock();
+                    newstock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                    model.addAttribute("newstock",newstock);
                     
                     return "/dashboard-restaurante";
                 default:

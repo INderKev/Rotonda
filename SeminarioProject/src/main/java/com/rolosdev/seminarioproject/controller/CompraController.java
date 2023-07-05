@@ -78,7 +78,9 @@ public class CompraController {
         for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
             menusSeleccionados.add(paqueteMenuSeleccionado.getMenuSeleccionado());
         }
+        
         model.addAttribute("productos", carritoDeCompraService.getProductos());
+        System.out.println(carritoDeCompraService.getProductos().get(0).getRestaurante().getNombre());
         model.addAttribute("menus", compraService.obtenerMenusCarro());
         model.addAttribute("menusSeleccionados", menusSeleccionados);
         model.addAttribute("compra", carritoDeCompraService.getCompra());

@@ -34,5 +34,10 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
             nativeQuery = true
     )
     ArrayList<Ingrediente> obtenerIngredientesPorMenu(@Param("idMenu") int idMenu);
+     @Query(
+            value = "select I.idingrediente,I.nom_ingrediente,I.tipo_unidad,I.descripcion from ingrediente as I except (select  s.idingrediente,K.nom_ingrediente,k.tipo_unidad,k.descripcion from stock as s,ingrediente as k where s.idrestaurante=?1 and k.idingrediente=s.idingrediente)",
+            nativeQuery = true
+    )
+    ArrayList<Ingrediente> obtenerIngredientesFaltantesderestaurante(@Param("idRestaurante") int idRestaurante);
 
 }
