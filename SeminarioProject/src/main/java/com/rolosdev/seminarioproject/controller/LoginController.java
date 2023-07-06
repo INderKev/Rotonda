@@ -1,6 +1,7 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
+import com.rolosdev.seminarioproject.entity.entityHelp.CaptchaResponse;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
 import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
 import com.rolosdev.seminarioproject.services.CompraService;
@@ -10,16 +11,29 @@ import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 @RequestMapping
@@ -36,6 +50,18 @@ public class LoginController {
     @Autowired
     @Qualifier("consultaService")
     private ConsultaService consultaService;
+
+    @Value("${recaptcha.secret}")
+    private String recaptchasecret;
+    @Value("${recaptcha.url}")
+    private String recaptchaurl;
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder){
+        return builder.build();
+    };
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/login")
     public String getLogin(Model model) {
@@ -67,8 +93,11 @@ public class LoginController {
     }
 
     @PostMapping("/loguearse")
-    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus status) {
+    public String loguearse(@Validated Login login, BindingResult bindingResult,HttpServletRequest request, Model model, SessionStatus status) {
         login.setTipoUsuario(loginService.verificarDatos(login));
+        //verificar el captcha desde el controlador tambien :n
+        String captcha=request.getParameter("g-recaptcha-response");
+        System.out.print(verificarcaptcha(captcha));
         switch (login.getTipoUsuario()) {
             case "Cliente":
                 Cliente cliente = loginService.obtenerCliente(login);
@@ -153,6 +182,23 @@ public class LoginController {
         }
         UsuarioLogueadoService.getUsuarioLogueadoService().cerrarSesion();
         return "/index";
+    }
+    private Boolean verificarcaptcha(String gRecaptchaResponse){
+        HttpHeaders Headers=new HttpHeaders();
+        Headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        MultiValueMap<String,String> map=new LinkedMultiValueMap<>();
+        System.out.println(recaptchaurl);
+        map.add("secret",recaptchasecret);
+        map.add("response",gRecaptchaResponse);
+        HttpEntity<MultiValueMap<String,String>> request= new HttpEntity<>(map,Headers);
+
+        CaptchaResponse response=restTemplate.postForObject(recaptchaurl,request,CaptchaResponse.class);
+        ResponseEntity<String> response2=restTemplate.postForEntity(recaptchaurl, request, String.class);
+        System.out.println(response2);
+        System.out.println(response.isSucess());
+      
+        return response.isSucess();
+        
     }
 
 }
