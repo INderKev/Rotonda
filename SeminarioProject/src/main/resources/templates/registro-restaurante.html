@@ -41,7 +41,7 @@
                             <div class="form-group col">
                                 <label>Especialidad</label>
                                 <select class="form-select" name="elegir-especialidad" id="elegir-especialidad"
-                                        th:field="*{idEspecialidad}">
+                                        th:field="*{especialidad}">
                                     <option th:each="especialidad:${especialidades}"
                                             th:value="${especialidad.idEspecialidad}"
                                             th:text="${especialidad.nombre}"></option>

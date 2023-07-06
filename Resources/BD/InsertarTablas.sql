@@ -531,8 +531,8 @@ alter table PRODUCTO
 alter table PRODUCTO_INGREDIENTE
    add constraint FK_PRODUCTO_PRODUCTO__INGREDIE foreign key (IDINGREDIENTE)
       references INGREDIENTE (IDINGREDIENTE)
-      on delete restrict on update restrict;
-
+      on delete cascade on update cascade;
+      
 alter table PRODUCTO_INGREDIENTE
    add constraint FK_PRODUCTO_PRODUCTO__PRODUCTO foreign key (IDPRODUCTO)
       references PRODUCTO (IDPRODUCTO)

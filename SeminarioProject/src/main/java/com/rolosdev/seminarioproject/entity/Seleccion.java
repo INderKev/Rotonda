@@ -2,85 +2,46 @@ package com.rolosdev.seminarioproject.entity;
 
 import org.springframework.lang.Nullable;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@Data
 @Table(name = "SELECCION")
 public class Seleccion {
 
     @Id
     @Column(name = "IDSELECCION", nullable = false)
-    private Integer idSeleccion;
-    @Column(name = "IDMENU")
-    private Integer idMenu;
-    @Nullable
-    @Column(name = "IDMENU_SELECCIONADO")
-    private Integer idMenuSeleccionado;
-    @Column(name = "IDCLASIFICACION", nullable = false)
-    private int idClasificacion;
-    @Column(name = "IDPRODUCTO")
-    private Integer idProducto;
+    private int idSeleccion;
+
     @Column(name = "PRECIO_BAJO")
     private Double precioBajo;
+
     @Column(name = "PRECIO_ALTO")
     private Double precioAlto;
 
-    public Integer getIdSeleccion() {
-        return idSeleccion;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Menu.class)
+    @JoinColumn(name = "IDMENU", nullable = false)
+    private Menu menu;
 
-    public void setIdSeleccion(int idSeleccion) {
-        this.idSeleccion = idSeleccion;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Producto.class)
+    @JoinColumn(name = "IDPRODUCTO")
+    private Producto producto;
 
-    public int getIdMenu() {
-        return idMenu;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = MenuSeleccionado.class)
+    @Nullable
+    @JoinColumn(name = "IDMENU_SELECCIONADO")
+    private MenuSeleccionado menuSeleccionado;
 
-    public void setIdMenu(int idMenu) {
-        this.idMenu = idMenu;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Clasificacion.class)
+    @JoinColumn(name = "IDCLASIFICACION", nullable = false)
+    private Clasificacion clasificacion;
 
-    public Integer getIdMenuSeleccionado() {
-        return idMenuSeleccionado;
-    }
-
-    public void setIdMenuSeleccionado(int idMenuSeleccionado) {
-        this.idMenuSeleccionado = idMenuSeleccionado;
-    }
-
-    public int getIdClasificacion() {
-        return idClasificacion;
-    }
-
-    public void setIdClasificacion(int idClasificacion) {
-        this.idClasificacion = idClasificacion;
-    }
-
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public double getPrecioBajo() {
-        return precioBajo;
-    }
-
-    public void setPrecioBajo(double precioBajo) {
-        this.precioBajo = precioBajo;
-    }
-
-    public double getPrecioAlto() {
-        return precioAlto;
-    }
-
-    public void setPrecioAlto(double precioAlto) {
-        this.precioAlto = precioAlto;
-    }
 }

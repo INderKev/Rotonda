@@ -82,6 +82,7 @@
                           <tr>
                             <th scope="col">Imagen</th>
                             <th scope="col">Nombre</th>
+                            <th scope="col">restaurante</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Remover</th>
                           </tr>
@@ -90,13 +91,14 @@
                           <tr th:if="productos != null" th:each="producto : ${productos}">
                             <td><img th:src="${producto.imagenProducto}" alt="" style="width: 100px; height:100px;"></td>
                             <td th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.restaurante.nombre}"></td>
                             <td th:text="${producto.precio}"></td>
                             <td><a type="button" class="btn btn-outline-danger" th:href="@{/quitarProductoCarrito/{idProducto}(idProducto=${producto.idProducto})}">Remover</a></td>
                           </tr>
                           <tr th:if="menusSeleccionados != null" th:each="menuSeleccionado : ${menusSeleccionados}">
-                            <td><img th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}" th:src="${menu.imagenMenu}" alt="" style="width: 100px; height:100px;"></td>
-                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}" th:text="${menu.nombre}"></td>
-                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.idMenu}"  th:text="${menu.precio}"></td>
+                            <td><img th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.menu.idMenu}" th:src="${menu.imagenMenu}" alt="" style="width: 100px; height:100px;"></td>
+                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.menu.idMenu}" th:text="${menu.nombre}"></td>
+                            <td th:each="menu : ${menus}" th:if="${menu.idMenu == menuSeleccionado.menu.idMenu}"  th:text="${menu.precio}"></td>
                             <td><a type="button" class="btn btn-outline-danger" th:href="@{/quitarMenuCarrito/{idMenuSeleccionado}(idMenuSeleccionado=${menuSeleccionado.idMenuSeleccionado})}">Remover</a></td>
                           </tr>
                           <tr style="text-align: right;">

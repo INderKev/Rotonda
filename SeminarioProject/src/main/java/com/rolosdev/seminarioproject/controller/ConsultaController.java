@@ -2,26 +2,33 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.Menu;
 import com.rolosdev.seminarioproject.entity.Producto;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
+import com.rolosdev.seminarioproject.entity.Stock;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
 @RequestMapping
 public class ConsultaController {
-
+    
     @Autowired
     @Qualifier("consultaService")
     private ConsultaService consultaService;
@@ -63,4 +70,32 @@ public class ConsultaController {
         return "/dashboard-restaurante";
     }
 
+    //Metodo que redirecciona al formulario de modificacion de ingredientes para un restaurante
+    @GetMapping("/modificar/{idStock}")
+    public String formularioDeIngrediente(Model model, @PathVariable("idStock") String idStock) {
+        Stock stockseleccionado = consultaService.obtenerStock(Integer.valueOf(idStock));
+        model.addAttribute("stock", stockseleccionado);
+        return "/modificar-ingrediente";
+    }
+
+    @PostMapping("/listarIngredientes")
+    public String listarIngredientes(ModelMap modelo, @RequestParam (name = "idrestaurante" , required = true) int idRestaurante) {
+        List<Stock> listaStock = consultaService.obtenerStockPorRestaurante(idRestaurante);
+        modelo.addAttribute("listaStock", listaStock);
+        return "/ingrediente-cantidad";
+    }
+
+    @GetMapping("/buscarIngredientesTotales")
+    public String buscarIngredientesTotales(ModelMap modelo){
+        Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
+        modelo.addAttribute("listaIngredientes",lista);
+        return "/lista-ingrediente";
+    }
+
+    @GetMapping("/eliminarIngredienteAdm/{nombre}")
+    public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
+        consultaService.eliminarIngrediente(nombre);
+        return "redirect:/buscarIngredientesTotales";
+    }
 }
+ 

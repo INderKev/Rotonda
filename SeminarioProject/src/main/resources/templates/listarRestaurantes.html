@@ -77,7 +77,7 @@
             </div>
             <div class="card-body b">
               <div th:each="especialidad:${especialidades}">
-                <h5 class=""  th:if="${especialidad.idEspecialidad == restaurante.idEspecialidad}" th:text="${especialidad.nombre}"></h5>
+                <h5 class=""  th:if="${especialidad.idEspecialidad == restaurante.especialidad.idEspecialidad}" th:text="${especialidad.nombre}"></h5>
               </div>
               <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarRestaurante/{idRestaurante}(idRestaurante=${restaurante.idRestaurante})}">
                 Ver carta

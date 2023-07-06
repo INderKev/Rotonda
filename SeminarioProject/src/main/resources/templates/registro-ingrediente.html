@@ -9,12 +9,15 @@
     <!-- Bootsrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-   
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS -->
     <link rel="stylesheet" href="css/form.css">
+    <!-- <link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}"> -->
 </head>
 <body>
     
+	
+   
     <section class="Form my-3 mx-3" id="form-registro">
         <div class="container g-0">
             <div class="row g-0">
@@ -28,6 +31,12 @@
                                 <div class="form-group col">
                                     <label>Nombre del ingrediente</label>
                                     <input type="text" class="form-control" name="primerNombre" required th:field="*{nombre}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label>Descripción del ingrediente</label>
+                                    <input type="text" class="form-control" name="descripcion" required th:field="*{descripcion}">
                                 </div>
                             </div>
                             <div class="row">
@@ -58,5 +67,33 @@
             </div>
         </div>
     </section>
+    
+    <section class="Form my-3 mx-3" id="form-registro">
+        <div class="container g-0">
+            <div class="row g-0">
+                    <div class="col-lg 4 px-5 pt-5">
+                        <h1 class="font-weigth-bold py-3">Búscar cantidad de ingrediente por restaurante</h1>
+                        <form th:action="@{/listarIngredientes}"  method="post">
+                            <select class="form-select" name="idrestaurante" id="idrestaurante">
+                                <option>Seleccionar valor</option>
+                                <option th:each="restaurante: ${restaurantes}"
+                                        th:value="${restaurante.idRestaurante}"
+                                        th:text="${restaurante.nombre}">
+                            </select>
+                            <div class="form-row">
+                                <div class="col-lg-8">
+                                   <button type="submit" class="boton-loguear mt-3 mb-5">Buscar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <div>
+        <a th:action="@{/buscarIngredientesTotales}" href="/buscarIngredientesTotales">Ingredientes</a>
+    </div>
+
+
 </body>
 </html>
