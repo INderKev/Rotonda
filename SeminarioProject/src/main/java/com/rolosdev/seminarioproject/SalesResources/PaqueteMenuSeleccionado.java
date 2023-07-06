@@ -63,7 +63,7 @@ public class PaqueteMenuSeleccionado {
         boolean confirmar = false;
         PaqueteProducto paqueteProductoAEliminar = new PaqueteProducto();
         for (PaqueteProducto paqueteProducto : productosSeleccionados) {
-            if (paqueteProducto.getProducto().getIdClasificacion() == producto.getProducto().getIdClasificacion()) {
+            if (paqueteProducto.getProducto().getClasificacion().getIdClasificacion() == producto.getProducto().getClasificacion().getIdClasificacion()) {
                 confirmar = true;
                 paqueteProductoAEliminar = paqueteProducto;
                 break;

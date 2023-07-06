@@ -96,7 +96,7 @@
             </div>
             <h3 class="card-title font-weigth-bold py-2" th:text="${producto.precio}"></h3>
             <div class="card-body b">
-              <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarProducto/{idProducto}/detail/{idRestaurante}(idRestaurante=${producto.idRestaurante}, idProducto=${producto.idProducto})}">
+              <a type="button" class="btn btn-outline-dark" th:href="@{/seleccionarProducto/{idProducto}/detail/{idRestaurante}(idRestaurante=${producto.restaurante.idRestaurante}, idProducto=${producto.idProducto})}">
                 Agregar al carrito
               </a>
             </div>

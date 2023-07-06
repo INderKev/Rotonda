@@ -1,4 +1,4 @@
-package com.rolosdev.seminarioproject.services.implementacionesServices;
+package com.rolosdev.seminarioproject.services;
 
 import com.rolosdev.seminarioproject.SalesResources.PaqueteMenuSeleccionado;
 import com.rolosdev.seminarioproject.SalesResources.PaqueteOrden;
@@ -6,7 +6,6 @@ import com.rolosdev.seminarioproject.SalesResources.PaqueteProducto;
 import com.rolosdev.seminarioproject.SalesResources.PaqueteProductoIngrediente;
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.repository.*;
-import com.rolosdev.seminarioproject.services.interfacesServices.ICompraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 
 @Service("compraService")
 @Transactional
-public class CompraService implements ICompraService {
+public class CompraService {
 
     @Autowired
     @Qualifier("clienteRepository")
@@ -63,7 +62,6 @@ public class CompraService implements ICompraService {
     @Qualifier("stockRepository")
     private IStockRepository stockRepository;
 
-    @Override
     public ArrayList<Menu> obtenerMenusDisponibles(int idRestaurante) {
         boolean confirmar;
         ArrayList<Menu> menus = menuRepository.obtenerMenusPorRestaurante(idRestaurante);
@@ -98,7 +96,7 @@ public class CompraService implements ICompraService {
             for (Seleccion seleccion : selecciones) {
                 confirmar = true;
                 for (Producto producto : productos) {
-                    if (producto.getIdClasificacion() == seleccion.getIdClasificacion() && producto.getPrecio() <= seleccion.getPrecioAlto() && producto.getPrecio() >= seleccion.getPrecioBajo()) {
+                    if (producto.getClasificacion().getIdClasificacion() == seleccion.getClasificacion().getIdClasificacion() && producto.getPrecio() <= seleccion.getPrecioAlto() && producto.getPrecio() >= seleccion.getPrecioBajo()) {
                         confirmar = false;
                         break;
                     }
@@ -115,10 +113,10 @@ public class CompraService implements ICompraService {
         return menus;
     }
 
-    @Override
     public ArrayList<Producto> obtenerProductosDisponibles(int idRestaurante) {
         ArrayList<Producto> productos = productoRepository.obtenerProductosPorRestaurante(idRestaurante);
         ArrayList<Producto> productosEliminados = new ArrayList<>();
+        
         for (Producto producto: productos) {
             if (!verificarQueSePuedePrepararProducto(producto)) {
                 productosEliminados.add(producto);
@@ -130,18 +128,16 @@ public class CompraService implements ICompraService {
         return productos;
     }
 
-    @Override
     public void iniciarCompra() {
         Compra compra = new Compra();
         compra.setIdCompra(compraRepository.obtenerUltimoId().getIdCompra() + 1);
         compra.setFecha(LocalDate.now());
         compra.setTotal(0);
-        compra.setIdCliente(UsuarioLogueadoService.getUsuarioLogueadoService().getCliente().getIdCliente());
+        compra.setCliente(UsuarioLogueadoService.getUsuarioLogueadoService().getCliente());
         compraRepository.save(compra);
         CarritoDeCompraService.getCarritoDeCompraService().setCompra(compra);
     }
 
-    @Override
     public void cancelarCompra() {
         compraRepository.delete(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
         ArrayList<Producto> productos = CarritoDeCompraService.getCarritoDeCompraService().getProductos();
@@ -159,7 +155,6 @@ public class CompraService implements ICompraService {
         CarritoDeCompraService.getCarritoDeCompraService().finalizar();
     }
 
-    @Override
     public String terminarCompra() {
         if (CarritoDeCompraService.getCarritoDeCompraService().getOrdenes().isEmpty())
             return "¡Ninguna orden en el carrito! Primero debes añadir algo.";
@@ -195,16 +190,15 @@ public class CompraService implements ICompraService {
         return "OK";
     }
 
-    @Override
     public MenuSeleccionado crearMenuSeleccionado(int idMenu) {
         MenuSeleccionado menuSeleccionado = new MenuSeleccionado();
         Menu menu = menuRepository.findById(idMenu).get();
-        menuSeleccionado.setIdMenu(idMenu);
+        menuSeleccionado.setMenu(menuRepository.findById(idMenu).get());
         menuSeleccionado.setIdMenuSeleccionado(menuSeleccionadoRepository.obtenerUltimoId().getIdMenuSeleccionado() + 1);
         Orden orden = new Orden();
-        orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden());
-        orden.setIdCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getIdCompra());
-        orden.setIdMenuSeleccionado(menuSeleccionado.getIdMenuSeleccionado());
+        orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden() + 1);
+        orden.setCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
+        orden.setMenuSeleccionado(menuSeleccionado);
         orden.setObservaciones("");
         PaqueteOrden paqueteOrden = new PaqueteOrden();
         paqueteOrden.setOrden(orden);
@@ -212,7 +206,7 @@ public class CompraService implements ICompraService {
         paqueteMenuSeleccionado.setMenuSeleccionado(menuSeleccionado);
         paqueteOrden.setPaqueteMenuSeleccionado(paqueteMenuSeleccionado);
         //paqueteMenuSeleccionado.setSelecciones(seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu()));
-        ArrayList<Producto> productosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getIdMenu());
+        ArrayList<Producto> productosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getMenu().getIdMenu());
         for (Producto producto : productosMenu) {
             descontarCantidadStock(producto);
             PaqueteProducto paqueteProducto = new PaqueteProducto();
@@ -221,7 +215,7 @@ public class CompraService implements ICompraService {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
                 PaqueteProductoIngrediente paqueteProductoIngrediente = new PaqueteProductoIngrediente();
                 paqueteProductoIngrediente.setProductoIngrediente(productoIngrediente);
-                paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIdIngrediente()).orElse(null));
+                paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIngrediente().getIdIngrediente()).orElse(null));
                 paqueteProducto.agregarPaqueteProductoIngrediente(paqueteProductoIngrediente);
             }
             paqueteMenuSeleccionado.agregarProducto(paqueteProducto);
@@ -232,21 +226,20 @@ public class CompraService implements ICompraService {
         return menuSeleccionado;
     }
 
-    @Override
     public void seleccionarProductoParaMenu(int idProducto, int idMenuSeleccionado) {
         Producto producto = productoRepository.findById(idProducto).get();
         PaqueteProducto paqueteProducto = new PaqueteProducto();
         Seleccion seleccion = new Seleccion();
         seleccion.setIdSeleccion(seleccionRepository.obtenerUltimoId().getIdSeleccion() + 1);
-        seleccion.setIdMenuSeleccionado(idMenuSeleccionado);
-        seleccion.setIdProducto(idProducto);
-        seleccion.setIdClasificacion(producto.getIdClasificacion());
+        seleccion.setMenuSeleccionado(menuSeleccionadoRepository.findById(idMenuSeleccionado).get());
+        seleccion.setProducto(productoRepository.findById(idProducto).get());
+        seleccion.setClasificacion(producto.getClasificacion());
         paqueteProducto.setProducto(producto);
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             PaqueteProductoIngrediente paqueteProductoIngrediente = new PaqueteProductoIngrediente();
             paqueteProductoIngrediente.setProductoIngrediente(productoIngrediente);
-            paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIdIngrediente()).orElse(null));
+            paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIngrediente().getIdIngrediente()).orElse(null));
             paqueteProducto.agregarPaqueteProductoIngrediente(paqueteProductoIngrediente);
         }
         PaqueteOrden paqueteOrden = CarritoDeCompraService.carritoDeCompraService.obtenerOrdenPorMenuSeleccionado(idMenuSeleccionado);
@@ -254,7 +247,6 @@ public class CompraService implements ICompraService {
         paqueteOrden.getPaqueteMenuSeleccionado().agregaSeleccion(seleccion);
     }
 
-    @Override
     public void agregarProductoCarrito(int idProducto) {
         Producto producto = productoRepository.findById(idProducto).get();
         PaqueteProducto paqueteProducto = new PaqueteProducto();
@@ -263,12 +255,13 @@ public class CompraService implements ICompraService {
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             PaqueteProductoIngrediente paqueteProductoIngrediente = new PaqueteProductoIngrediente();
             paqueteProductoIngrediente.setProductoIngrediente(productoIngrediente);
-            paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIdIngrediente()).orElse(null));
+            paqueteProductoIngrediente.setIngrediente(ingredienteRepository.findById(productoIngrediente.getIngrediente().getIdIngrediente()).orElse(null));
             paqueteProducto.agregarPaqueteProductoIngrediente(paqueteProductoIngrediente);
         }
         Orden orden = new Orden();
-        orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden());
-        orden.setIdCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getIdCompra());
+        orden.setIdOrden(ordenRepository.obtenerUltimoId().getIdOrden() + 1);
+        orden.setCompra(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
+        orden.setProducto(producto);
         orden.setObservaciones("");
         PaqueteOrden paqueteOrden = new PaqueteOrden();
         paqueteOrden.setOrden(orden);
@@ -278,11 +271,10 @@ public class CompraService implements ICompraService {
         descontarCantidadStock(producto);
     }
 
-    @Override
     public void quitarSeleccionMenuCarrito(int idMenuSeleccionado) {
         PaqueteOrden paqueteOrden = CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorMenuSeleccionado(idMenuSeleccionado);
         MenuSeleccionado menuSeleccionado = menuSeleccionadoRepository.findById(idMenuSeleccionado).get();
-        Menu menu = menuRepository.findById(menuSeleccionado.getIdMenu()).get();
+        Menu menu = menuRepository.findById(menuSeleccionado.getMenu().getIdMenu()).get();
         for (PaqueteProducto producto: paqueteOrden.getPaqueteMenuSeleccionado().getProductos()) {
             recuperarCantidadStock(producto.getProducto());
         }
@@ -291,27 +283,25 @@ public class CompraService implements ICompraService {
         menuSeleccionadoRepository.deleteById(idMenuSeleccionado);
     }
 
-    @Override
     public void quitarSeleccionProducto(int idProducto) {
         recuperarCantidadStock(productoRepository.findById(idProducto).get());
         CarritoDeCompraService.getCarritoDeCompraService().getCompra().setTotal(CarritoDeCompraService.getCarritoDeCompraService().getCompra().getTotal() - productoRepository.findById(idProducto).get().getPrecio());
         CarritoDeCompraService.getCarritoDeCompraService().eliminarOrden(CarritoDeCompraService.getCarritoDeCompraService().obtenerOrdenPorProducto(idProducto));
     }
 
-    @Override
     public ArrayList<Menu> obtenerMenusCarro() {
         ArrayList<Menu> menus = new ArrayList<>();
         boolean confirmar;
         for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
             confirmar = true;
             for (Menu menu : menus) {
-                if (menu.getIdMenu() == menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getIdMenu()).get().getIdMenu()) {
+                if (menu.getIdMenu() == menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getMenu().getIdMenu()).get().getIdMenu()) {
                     confirmar = false;
                     break;
                 }
             }
             if (confirmar) {
-                menus.add(menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getIdMenu()).get());
+                menus.add(menuRepository.findById(paqueteMenuSeleccionado.menuSeleccionado.getMenu().getIdMenu()).get());
             }
         }
         return menus;
@@ -325,9 +315,9 @@ public class CompraService implements ICompraService {
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredientePorMenu(idMenu);
         for (Producto producto : opcionesProductosMenu) {
             for (ProductoIngrediente productoIngrediente : productosIngredientes) {
-                if (productoIngrediente.getIdProducto() == producto.getIdProducto()) {
+                if (productoIngrediente.getProducto().getIdProducto() == producto.getIdProducto()) {
                     for (Stock stock : stocks) {
-                        if (stock.getIdRestaurante() == producto.getIdRestaurante() && productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                        if (stock.getRestaurante().getIdRestaurante() == producto.getRestaurante().getIdRestaurante() && productoIngrediente.getIngrediente().getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                             if (stock.getCantidadStock() < productoIngrediente.getCantidad()) {
                                 confirmar = true;
                                 for (Producto productoAEliminar : productosAEliminar) {
@@ -356,7 +346,7 @@ public class CompraService implements ICompraService {
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                if (productoIngrediente.getIngrediente().getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                     stock.setCantidadStock(stock.getCantidadStock() - productoIngrediente.getCantidad());
                     stockRepository.save(stock);
                     break;
@@ -370,7 +360,7 @@ public class CompraService implements ICompraService {
         ArrayList<ProductoIngrediente> productosIngredientes = productoIngredienteRepository.obtenerProductoIngredietePorProducto(producto.getIdProducto());
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente()) {
+                if (productoIngrediente.getIngrediente().getIdIngrediente() == stock.getIngrediente().getIdIngrediente()) {
                     stock.setCantidadStock(stock.getCantidadStock() + productoIngrediente.getCantidad());
                     stockRepository.save(stock);
                     break;
@@ -386,7 +376,7 @@ public class CompraService implements ICompraService {
         for (ProductoIngrediente productoIngrediente : productosIngredientes) {
             confirmar = true;
             for (Stock stock : stocks) {
-                if (productoIngrediente.getIdIngrediente() == stock.getIdIngrediente() && productoIngrediente.getCantidad() <= stock.getCantidadStock()) {
+                if (productoIngrediente.getIngrediente().getIdIngrediente() == stock.getIngrediente().getIdIngrediente() && productoIngrediente.getCantidad() <= stock.getCantidadStock()) {
                     confirmar = false;
                     break;
                 }

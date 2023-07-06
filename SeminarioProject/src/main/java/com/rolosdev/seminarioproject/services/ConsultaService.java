@@ -1,18 +1,22 @@
-package com.rolosdev.seminarioproject.services.implementacionesServices;
+package com.rolosdev.seminarioproject.services;
 
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.repository.*;
-import com.rolosdev.seminarioproject.services.interfacesServices.IConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("consultaService")
 @Transactional
-public class ConsultaService implements IConsultaService {
+public class ConsultaService {
 
     @Autowired
     @Qualifier("clienteRepository")
@@ -62,63 +66,90 @@ public class ConsultaService implements IConsultaService {
     @Qualifier("especialidadRepository")
     private IEspecialidadRepository especialidadRepository;
 
-    @Override
+    @Autowired
+    @Qualifier("stockRepository")
+    private IStockRepository stockRepository;
+
     public ArrayList<Menu> obtenerMenusDelRestaurante(int idRestaurante) {
         return menuRepository.obtenerMenusPorRestaurante(idRestaurante);
     }
 
-    @Override
     public ArrayList<Producto> obtenerProductosDelRestaurante(int idRestaurante) {
         return productoRepository.obtenerProductosPorRestaurante(idRestaurante);
     }
 
-    @Override
     public ArrayList<Producto> obtenerProductosPorMenu(int idMenu) {
         return productoRepository.obtenerProductosPorMenu(idMenu);
     }
 
-    @Override
     public ArrayList<Ingrediente> obtenerIngredientesPorProducto(int idProducto) {
         return ingredienteRepository.obtenerIngredientesPorProducto(idProducto);
     }
 
-    @Override
     public ArrayList<ProductoIngrediente> obtenerProductoIngrediente(int idProducto) {
         return productoIngredienteRepository.obtenerProductoIngredietePorProducto(idProducto);
     }
 
-    @Override
     public ArrayList<Restaurante> obtenerRestaurantes() {
         return (ArrayList<Restaurante>) restauranteRepository.findAll();
     }
 
-    @Override
     public Restaurante obtenerRestauranteById(int id) {
         return restauranteRepository.findById(id).get();
     }
 
-    @Override
     public ArrayList<Clasificacion> obtenerClasificaciones() {
         return clasificacionRepository.obtenerTodasClasificaciones();
     }
 
-    @Override
     public ArrayList<Especialidad> obtenerEspecialidades() {
         return (ArrayList<Especialidad>) especialidadRepository.findAll();
     }
 
-    @Override
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu) {
         return seleccionRepository.obtenerSeleccionPorMenu(idMenu);
     }
 
-    @Override
     public Producto obtenerProductoPorId(int IdProducto) {
         return productoRepository.findById(IdProducto).get();
     }
 
-    @Override
     public Menu obtenerMenuPorId(int IdMenu){
         return menuRepository.findById(IdMenu).get();
+    }
+
+    public List<Stock> obtenerStockPorRestaurante(int restaurante) {
+        return stockRepository.obtenerStockPorRestaurante(restaurante);
+    }
+
+    public Restaurante obtenerStockRestaurante(int idRestaurante) {
+       return restauranteRepository.findById(idRestaurante).get();
+    }
+
+    public Stock obtenerStock(int idStock) {
+       return stockRepository.findById(idStock).get();
+    }
+
+    
+    public List<Ingrediente> obteneringredientescomplementorestaurante(int idrestaurante){
+        return ingredienteRepository.obtenerIngredientesFaltantesderestaurante(idrestaurante);
+    }
+
+    public Map<String, Integer> obtenerListaIngredientesTotales(){
+        Map<String, Integer> lista = new HashMap<>();
+        List<Object[]> a = ingredienteRepository.listarIngredientes();
+        for (Object [] arr: a){
+            String key = (String) arr[0];
+            BigDecimal value = arr[1] != null ? (BigDecimal)arr[1] : BigDecimal.valueOf(0);
+            Integer finalValue = value.intValue();
+            lista.put(key, finalValue);
+        }
+        return lista;
+    }
+
+    @Transactional
+    public void eliminarIngrediente(String nombIngrediente){
+        ingredienteRepository.borarIngrediente(nombIngrediente);
+ 
     }
 }

@@ -2,11 +2,14 @@ package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.entity.entityHelp.Login;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CarritoDeCompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.CompraService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.ConsultaService;
-import com.rolosdev.seminarioproject.services.implementacionesServices.UsuarioLogueadoService;
-import com.rolosdev.seminarioproject.services.interfacesServices.ILoginService;
+import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
+import com.rolosdev.seminarioproject.services.CompraService;
+import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.LoginService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,7 +27,7 @@ public class LoginController {
 
     @Autowired
     @Qualifier("loginService")
-    private ILoginService loginService;
+    private LoginService loginService;
 
     @Autowired
     @Qualifier("compraService")
@@ -64,7 +67,7 @@ public class LoginController {
     }
 
     @PostMapping("/loguearse")
-    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus statu) {
+    public String loguearse(@Validated Login login, BindingResult bindingResult, Model model, SessionStatus status) {
         login.setTipoUsuario(loginService.verificarDatos(login));
         switch (login.getTipoUsuario()) {
             case "Cliente":
@@ -74,12 +77,16 @@ public class LoginController {
                 model.addAttribute("restaurantes", consultaService.obtenerRestaurantes());
                 model.addAttribute("especialidades", consultaService.obtenerEspecialidades());
                 return "/listarRestaurantes";
+
             case "Administrador":
                 Administrador administrador = loginService.obtenerAdministrador(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().setAdministrador(administrador);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionAdministrador("Administrador", administrador);
                 model.addAttribute("ingrediente", new Ingrediente());
+                ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
+                model.addAttribute("restaurantes", restaurantes);
                 return "/registro-ingrediente";
+
             case "Restaurante":
                 Restaurante restaurante = loginService.obtenerRestaurante(login);
                 UsuarioLogueadoService.getUsuarioLogueadoService().abrirSesionRestaurante("Restaurante", restaurante);
@@ -92,10 +99,14 @@ public class LoginController {
                 model.addAttribute("menu", new Menu());
                 model.addAttribute("productoAConsultar", new Producto());
                 model.addAttribute("menuAConsultar", new Menu());
+                model.addAttribute("stock",restaurante.getStocks());
+                model.addAttribute("ingredientes",consultaService.obteneringredientescomplementorestaurante(restaurante.getIdRestaurante()));
+                model.addAttribute("newstock",new Stock());
                 return "/dashboard-restaurante";
+
             default:
                 model.addAttribute("login", new Login());
-                model.addAttribute("error", "El usuario no fue encontrado");
+                model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
                 return "/login";
         }
     }
@@ -112,6 +123,7 @@ public class LoginController {
                     model.addAttribute("ingrediente", new Ingrediente());
                     return "/registro-ingrediente";
                 case "Restaurante":
+                    UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(consultaService.obtenerRestauranteById(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
                     model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
@@ -120,6 +132,12 @@ public class LoginController {
                     model.addAttribute("menu", new Menu());
                     model.addAttribute("productoAConsultar", new Producto());
                     model.addAttribute("menuAConsultar", new Menu());
+                    model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );
+                    model.addAttribute("ingredientes",consultaService.obteneringredientescomplementorestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+                    Stock newstock=new Stock();
+                    newstock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+                    model.addAttribute("newstock",newstock);
+                    
                     return "/dashboard-restaurante";
                 default:
                     return "/index";

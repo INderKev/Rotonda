@@ -2,53 +2,36 @@ package com.rolosdev.seminarioproject.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "STOCK")
 public class Stock {
 
     @Id
     @Column(name = "IDSTOCK", nullable = false)
     private int idStock;
-    @Column(name = "IDINGREDIENTE", nullable = false)
-    private int idIngrediente;
 
-    @Column(name = "IDRESTAURANTE", nullable = false)
-    private int idRestaurante;
     @Column(name = "CANTIDAD_STOCK", nullable = false)
+    @NotNull(message = "La cantidad no puede ser menor a 0")
+    @PositiveOrZero(message = "La cantidad no puede ser menor a 0")
     private double cantidadStock;
 
-    public int getIdIngrediente() {
-        return idIngrediente;
-    }
+    @ManyToOne(fetch = FetchType.LAZY , targetEntity = Ingrediente.class)
+    @JoinColumn(name = "IDINGREDIENTE", nullable = false)
+    private Ingrediente ingrediente;
 
-    public void setIdIngrediente(int idIngrediente) {
-        this.idIngrediente = idIngrediente;
-    }
-
-    public int getIdRestaurante() {
-        return idRestaurante;
-    }
-
-    public void setIdRestaurante(int idRestaurante) {
-        this.idRestaurante = idRestaurante;
-    }
-
-    public int getIdStock() {
-        return idStock;
-    }
-
-    public void setIdStock(int idStock) {
-        this.idStock = idStock;
-    }
-
-    public double getCantidadStock() {
-        return cantidadStock;
-    }
-
-    public void setCantidadStock(double cantidadStock) {
-        this.cantidadStock = cantidadStock;
-    }
+    @ManyToOne (fetch = FetchType.LAZY, targetEntity = Restaurante.class)
+    @JoinColumn(name = "IDRESTAURANTE", nullable = false)
+    private Restaurante restaurante;
+    
 }

@@ -2,62 +2,35 @@ package com.rolosdev.seminarioproject.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "PRODUCTO_INGREDIENTE")
 public class ProductoIngrediente {
 
     @Id
     @Column(name = "IDPRODUCTOINGREDIENTE", nullable = false)
     private int idProductoIngrediente;
-    @Column(name = "IDINGREDIENTE", nullable = false)
-    private int idIngrediente;
-    @Column(name = "IDPRODUCTO", nullable = false)
-    private int idProducto;
+
     @Column(name = "CANTIDAD", nullable = false)
     private double cantidad;
+
     @Column(name = "EDITABLE", nullable = false)
     private boolean editable;
 
-    public int getIdProductoIngrediente() {
-        return idProductoIngrediente;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Ingrediente.class)
+    @JoinColumn(name = "IDINGREDIENTE", nullable = false)
+    private Ingrediente ingrediente;
 
-    public void setIdProductoIngrediente(int idProductoIngrediente) {
-        this.idProductoIngrediente = idProductoIngrediente;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Producto.class)
+    @JoinColumn(name = "IDPRODUCTO", nullable = false)
+    private Producto producto;
 
-    public int getIdIngrediente() {
-        return idIngrediente;
-    }
-
-    public void setIdIngrediente(int idIngrediente) {
-        this.idIngrediente = idIngrediente;
-    }
-
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public double getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(double cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
 }
