@@ -5,6 +5,7 @@ import com.rolosdev.seminarioproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -125,7 +126,7 @@ public class RegistroService {
         seleccionRepository.save(seleccion);
         return "OK";
     }
-    
+        
     public String registrarTarjeta(Cliente cliente, Tarjeta tarjeta) {
 
         // Revisar que haya un suario
@@ -137,34 +138,22 @@ public class RegistroService {
             return "¡La tarjeta no puede ser nula!";
         
         // Verificar valores de la cadena
-        String numTarjeta = tarjeta.getNumTarjeta().replaceAll(" ", "");
+        String numTarjeta = tarjeta.getNumTarjeta();
 
-        if(!numTarjeta.matches("\\d+"))
-            return "La tarjeta contiene valores no numericos";
-
-        // Verificar que la tarjeta tenga el minimo de caracteres
-        if(numTarjeta.length() < 15 || numTarjeta.length() > 16)
-            return "La tarjeta no cuenta con la cantidad de caracteres requerida";
-        
-        // Verificar que el pin sea de 4 digitos
-        if (tarjeta.getPin() < 1000 || tarjeta.getPin() > 9999)
-            return "El pin "+ tarjeta.getPin()+"no contiene la longitud requerida";
-        
         Tarjeta tarjetaAux = tarjetaRepository.buscarPorNumTarjeta(numTarjeta);
         
         // Verificar que la tarjeta exista
         if(tarjetaAux != null){
             // Verificar que tengan los mismos atributos
-            if(!tarjeta.equals(tarjetaAux))
-            return "La tarjeta ya existe";
+            if (    tarjeta.getPin() != tarjetaAux.getPin()
+                 || !tarjeta.getFechaCaducidad().equals(tarjetaAux.getFechaCaducidad()))
+            return "Tarjeta rechazada, por favor verifique datos.";
         }
             
         // Revisar que la tarjeta de credito no pertenezca al usuario
         if(tarjetasClienteRepository.tarjetaAsignadaAlCliente(cliente.getIdCliente(),tarjeta.getNumTarjeta()) != null){
             return "Esta tarjeta ya le pertenece al usuario "+ cliente.getPrimerNombre();
         }
-        
-        // Ahora si viene el puto registro xd
         
         // Algoritmo de Luhn.
         int digitos_pares = 0;
@@ -186,11 +175,11 @@ public class RegistroService {
         // Se valida el tipo de tarjeta que sea
         TipoTarjeta tipoTarjeta = tipoTarjetaRepository.tipoTarjeta(tarjeta.primerNumero());
 
-
         if(tipoTarjeta == null)
-            return "El tipo de tarjeta que desea digitar no existe";
+            return "El tipo de tarjeta que desea digitar no es aceptado.";
 
         tarjeta.setTipo(tipoTarjeta.getTipo());
+
         tarjetaRepository.save(tarjeta);
 
         TarjetasCliente tc = new TarjetasCliente(

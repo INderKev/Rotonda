@@ -22,7 +22,7 @@ public interface ITarjetaRepository extends JpaRepository<Tarjeta, Integer> {
                             @Param("tipo") String tipo, @Param("fechaCaducidad") Date fechaCaducidad);
 
     @Query(
-        value = "SELECT t FROM tarjeta t WHERE t.numtarjeta = :numTarjeta",
+        value = "SELECT * FROM tarjeta WHERE numtarjeta = :numTarjeta",
         nativeQuery = true
     )
     Tarjeta buscarPorNumTarjeta(@Param("numTarjeta") String numTarjeta);

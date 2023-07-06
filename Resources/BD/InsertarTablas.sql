@@ -80,7 +80,7 @@ TIPO
 /*==============================================================*/
 create table TARJETA (
    NUMTARJETA		VARCHAR(16)	     not null,
-   PIN			NUMERIC(4,0)	     not null,
+   PIN			NUMERIC(3,0)	     not null,
    TIPO			VARCHAR(25)	     not null,
    FECHA_CADUCIDAD	DATE		     not null,
    constraint PK_TARJETA primary key (NUMTARJETA)
