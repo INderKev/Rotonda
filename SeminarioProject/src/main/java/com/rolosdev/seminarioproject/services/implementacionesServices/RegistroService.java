@@ -30,6 +30,10 @@ public class RegistroService implements IRegistroService {
     private ITipoTarjetaRepository tipoTarjetaRepository;
 
     @Autowired
+    @Qualifier("tarjetasClienteRepository")
+    private ITarjetasClienteRepository tarjetasClienteRepository;
+
+    @Autowired
     @Qualifier("ingredienteRepository")
     private IIngredienteRepository ingredienteRepository;
 
@@ -130,17 +134,79 @@ public class RegistroService implements IRegistroService {
         return "OK";
     }
     
-    
-    
     @Override
-    public String registrarTarjeta(Tarjeta tarjeta) {
-        TipoTarjeta tipoTarjeta = tipoTarjetaRepository.tipoTarjeta(tarjeta.primerNumero());
-        if(tipoTarjeta != null){
-            tarjeta.setTipo(tipoTarjeta.getTipo());
-            tarjetaRepository.save(tarjeta);
-            return "OK";
+    public String registrarTarjeta(Cliente cliente, Tarjeta tarjeta) {
+
+        // Revisar que haya un suario
+        if (cliente == null)
+            return "¡El usuario no puede ser nulo!";
+        
+        // Revisar que haya una tarjeta    
+        if (tarjeta == null)
+            return "¡La tarjeta no puede ser nula!";
+        
+        // Verificar valores de la cadena
+        String numTarjeta = tarjeta.getNumTarjeta().replaceAll(" ", "");
+
+        if(!numTarjeta.matches("\\d+"))
+            return "La tarjeta contiene valores no numericos";
+
+        // Verificar que la tarjeta tenga el minimo de caracteres
+        if(numTarjeta.length() < 15 || numTarjeta.length() > 16)
+            return "La tarjeta no cuenta con la cantidad de caracteres requerida";
+        
+        // Verificar que el pin sea de 4 digitos
+        if (tarjeta.getPin() < 1000 || tarjeta.getPin() > 9999)
+            return "El pin "+ tarjeta.getPin()+"no contiene la longitud requerida";
+        
+        Tarjeta tarjetaAux = tarjetaRepository.buscarPorNumTarjeta(numTarjeta);
+        
+        // Verificar que la tarjeta exista
+        if(tarjetaAux != null){
+            // Verificar que tengan los mismos atributos
+            if(!tarjeta.equals(tarjetaAux))
+            return "La tarjeta ya existe";
         }
-        return "La tarjeta no es valida";
+            
+        // Revisar que la tarjeta de credito no pertenezca al usuario
+        if(tarjetasClienteRepository.tarjetaAsignadaAlCliente(cliente.getIdCliente(),tarjeta.getNumTarjeta()) != null){
+            return "Esta tarjeta ya le pertenece al usuario "+ cliente.getPrimerNombre();
+        }
+        
+        // Ahora si viene el puto registro xd
+        
+        // Algoritmo de Luhn.
+        int digitos_pares = 0;
+        int digitos_impares = 0;
+        for (int i = numTarjeta.length()-1; i >= 0; i--) {
+            if (i % 2 == 0) {
+                int digito = 2 * (int)(numTarjeta.charAt(i) - '0');
+                if (digito > 9)
+                    digito = 1 + digito % 10;
+
+                digitos_pares += digito;
+            }
+            else
+                digitos_impares += (int)(numTarjeta.charAt(i) - '0');
+        }
+        if ((digitos_pares + digitos_impares) % 10 != 0)
+            return "El número '" + tarjeta.getNumTarjeta() + "' de tarjeta de crédito es inválido por el algoritmo de Luhn.";
+        
+        // Se valida el tipo de tarjeta que sea
+        TipoTarjeta tipoTarjeta = tipoTarjetaRepository.tipoTarjeta(tarjeta.primerNumero());
+
+
+        if(tipoTarjeta == null)
+            return "El tipo de tarjeta que desea digitar no existe";
+
+        tarjeta.setTipo(tipoTarjeta.getTipo());
+        tarjetaRepository.save(tarjeta);
+
+        TarjetasCliente tc = new TarjetasCliente(
+                        new TarjetasClienteId(cliente.getIdCliente(), numTarjeta));
+
+        tarjetasClienteRepository.save(tc);
+        return "OK";
     }
     @Override
     public void pruebas() {

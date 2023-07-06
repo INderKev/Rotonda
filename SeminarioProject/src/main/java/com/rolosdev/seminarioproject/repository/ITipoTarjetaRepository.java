@@ -9,10 +9,17 @@ import com.rolosdev.seminarioproject.entity.TipoTarjeta;
 
 @Repository("tipoTarjetaRepository")
 public interface ITipoTarjetaRepository extends JpaRepository<TipoTarjeta, Integer>{
+    
     @Query(
         value = "SELECT * FROM tipo_tarjeta where identificador = ?1",
         nativeQuery = true
     )
     TipoTarjeta tipoTarjeta(@Param("identificador") int identificador);
+
+    @Query(
+        value = "SELECT identificador FROM tipo_tarjeta",
+        nativeQuery = true
+    )
+    int[] tiposTarjetas();
 
 }

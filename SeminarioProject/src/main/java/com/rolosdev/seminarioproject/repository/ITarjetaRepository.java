@@ -1,7 +1,10 @@
 package com.rolosdev.seminarioproject.repository;
 
+import java.sql.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.rolosdev.seminarioproject.entity.Tarjeta;
@@ -12,8 +15,15 @@ import com.rolosdev.seminarioproject.entity.Tarjeta;
 public interface ITarjetaRepository extends JpaRepository<Tarjeta, Integer> {
 
     @Query(
-        value = "SELECT identificador FROM tipo_tarjeta",
+        value = "SELECT * FROM tarjeta WHERE numtarjeta = ?1 AND pin = ?2 AND tipo = ?3 AND fecha_caducidad = ?4",
         nativeQuery = true
     )
-    int[] tiposTarjetas();
+    Tarjeta verificarDatosTarjeta(@Param("numTarjeta") String numTarjeta, @Param("PIN") Integer pin, 
+                            @Param("tipo") String tipo, @Param("fechaCaducidad") Date fechaCaducidad);
+
+    @Query(
+        value = "SELECT t FROM tarjeta t WHERE t.numtarjeta = :numTarjeta",
+        nativeQuery = true
+    )
+    Tarjeta buscarPorNumTarjeta(@Param("numTarjeta") String numTarjeta);
 }

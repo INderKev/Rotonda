@@ -125,13 +125,20 @@ public class RegistroController {
         return "/registro-tarjeta";
     }
 
-    @GetMapping("/registrarTarjeta")
+    @PostMapping("/registrarTarjeta")
     public String registrarTarjeta(HttpServletResponse response, @Validated Tarjeta tarjeta, Model model) {
-        String resultado = registroService.registrarTarjeta(tarjeta);
+        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
+        
+        System.err.println(cliente.getIdCliente() + " " + tarjeta.getTipo());
+        String resultado = registroService.registrarTarjeta(cliente, tarjeta);
+        System.err.println(cliente.getIdCliente() + " " + tarjeta.getTipo());
+        System.err.println(resultado);
         if(!resultado.equals("OK")){
             model.addAttribute("Mensaje", resultado);
             return "/registro-tarjeta";
         }
+
+        //redirAttrs.addAttribute("success", "¡Tarjeta de crédito registrada con éxito!");
         return "/pago";
     }
 
