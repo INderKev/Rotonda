@@ -78,6 +78,16 @@ public class RegistroService {
                 pass += caracteres.charAt(random.nextInt(caracteres.length()));
 
             cliente.setPassword(pass);
+
+            cliente.setTelefono(
+                cliente.getTelefono()
+                       .replaceAll(" ", "")
+                       .replaceAll("-", "")
+                       .replaceAll("\\+", "")
+                       .replaceAll("\\(", "")
+                       .replaceAll("\\)", "")
+            );
+
             clienteRepository.save(cliente);
             return "OK";
         }
