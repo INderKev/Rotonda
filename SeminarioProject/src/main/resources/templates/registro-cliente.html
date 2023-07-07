@@ -71,13 +71,13 @@
                                 </div>
                             </div>
                         </form>
-                        <form th:if="${success}" th:action="@{/home}">
-                            <div class="form-group col">
-                                <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
-                            </div>
-                            <div class="form-group col">
+                            <div th:if="${success}" class="form-group col">
                                 <label>Contraseña</label>
                                 <input type="text" th:field="*{cliente.password}" readonly>
+                            </div>
+                        <form th:if="${success}" th:action="@{/cerrarSesion}">
+                            <div class="form-group col">
+                                <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
                             </div>
                             <div class="form-row col">
                                 <div class="col-lg-8">

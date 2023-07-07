@@ -285,4 +285,18 @@ public class RegistroService {
         return "Ok";
     }
 
+    public String cambiarContrasenaCliente(Cliente cliente, String passwordViejo, String passwordNuevo) {
+        if (!cliente.getPassword().equals(passwordViejo))
+            return "¡La contraseña es incorrecta!";
+        
+        if (passwordViejo.equals(passwordNuevo))
+            return "¡La nueva contraseña no puede ser la misma que la original!";
+        
+        // Validaciones de contraseña
+
+        cliente.setPassword(passwordNuevo);
+        clienteRepository.save(cliente);
+        return "OK";
+    }
+
 }

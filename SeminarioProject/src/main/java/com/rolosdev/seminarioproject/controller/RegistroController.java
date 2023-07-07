@@ -58,15 +58,25 @@ public class RegistroController {
         return "/registro-cliente";
     }
 
+    @GetMapping("/cambiar-contrasena-cliente")
+    public String cambiarContrasenaClienteVista(Model model) {
+        model.addAttribute("passwordViejo", "");
+        model.addAttribute("passwordNuevo", "");
+        return "/cambiar-contrasena-cliente";
+    }
+
     @PostMapping("/cambiarContrasenaCliente")
     public String cambiarContrasenaCliente(HttpServletResponse response, String passwordViejo, String passwordNuevo, Model model) {
         Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
-        if (!cliente.getPassword().equals(passwordViejo)) {
-            model.addAttribute("error", "¡La contraseña es incorrecta!");
+        if (cliente == null)
+            return "redirect:/home";
+        
+        String mensaje = registroService.cambiarContrasenaCliente(cliente, passwordViejo, passwordNuevo);
+        if (!mensaje.equals("OK")) {
+            model.addAttribute("error", mensaje);
             return "/cambiar-contrasena-cliente";
         }
 
-        cliente.setPassword(passwordNuevo);
         return "redirect:/home";
     }
 

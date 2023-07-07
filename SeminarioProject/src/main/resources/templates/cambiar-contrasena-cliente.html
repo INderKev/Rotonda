@@ -7,10 +7,11 @@
 </head>
 <body>
     <form th:action="@{/cambiarContrasenaCliente}" th:method="post">
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
         <label>Password viejo</label>
-        <input type="pass" th:field="${passwordViejo}">
+        <input type="password" name="passwordViejo" th:value="${passwordViejo}" required>
         <label>Password nuevo</label>
-        <input type="pass" th:field="${passwordNuevo}">
+        <input type="password" name="passwordNuevo" th:value="${passwordNuevo}" required>
         <button>Enviar</button>
     </form>
 </body>
