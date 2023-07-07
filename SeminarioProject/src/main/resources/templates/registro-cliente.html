@@ -56,24 +56,35 @@
                                     <label>Correo electrónico</label>
                                     <input type="email" class="form-control" name="correo" required th:field="*{correo}">
                                 </div>
-                
                                 <div class="form-group col">
                                     <label>Dirección</label>
                                     <input type="text" class="form-control" name="direccion" required th:field="*{direccion}">
                                 </div>
-                
-                                <div class="form-group col">
-                                    <label>Contraseña</label>
-                                    <input type="password" class="form-control" name="password" required th:field="*{password}">
-                                </div>
                             </div>
-
-                            <div class="form-row">
+                            <div class="form-row col">
+                                <div class="alert alert-danger mt-3 bm-5" role="alert" th:text="${error}" th:if="${error}"></div>
+                            </div>
+                            <div th:if="not ${success}" class="form-row col">
                                 <div class="col-lg-8">
                                    <button class="boton-loguear mt-3 mb-5">Registrar</button>
                                 </div>
                             </div>
-                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        </form>
+                        <form th:if="${success}" th:action="@{/cerrarSesion}">
+                            <div class="form-group col">
+                                <div class="alert alert-primary mt-3 bm-5" role="alert" th:text="${success}" th:if="${success}"></div>
+                            </div>
+                            <div class="form-row col">
+                                <div th:if="${success}" class="form-group col">
+                                    <label>Contraseña</label>
+                                    <input type="text" class="form-control" name="password" th:value="${cliente.password}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row col">
+                                <div class="col-lg-8">
+                                    <button class="boton-loguear mt-3 mb-5">Volver</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Service("registroService")
 @Transactional
@@ -64,6 +65,29 @@ public class RegistroService {
     public String registrarCliente(Cliente cliente) {
         if (clienteRepository.verificarExistencia(cliente.getCorreo()) == null) {
             cliente.setIdCliente(clienteRepository.obtenerUltimoId().getIdCliente() + 1);
+
+            //Generación contraseña
+            String caracteres = "@$!%*?&"
+                              + "1234567890"
+                              + "abcdefghijklmnopqrstuvwxyz"
+                              + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            String pass = "";
+            Random random = new Random();
+            while (!pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"))
+                pass += caracteres.charAt(random.nextInt(caracteres.length()));
+
+            cliente.setPassword(pass);
+
+            cliente.setTelefono(
+                cliente.getTelefono()
+                       .replaceAll(" ", "")
+                       .replaceAll("-", "")
+                       .replaceAll("\\+", "")
+                       .replaceAll("\\(", "")
+                       .replaceAll("\\)", "")
+            );
+
             clienteRepository.save(cliente);
             return "OK";
         }
@@ -269,6 +293,20 @@ public class RegistroService {
         Stock stock= stockRepository.findById(id).get();
         stockRepository.delete(stock);
         return "Ok";
+    }
+
+    public String cambiarContrasenaCliente(Cliente cliente, String passwordViejo, String passwordNuevo) {
+        if (!cliente.getPassword().equals(passwordViejo))
+            return "¡La contraseña es incorrecta!";
+        
+        if (passwordViejo.equals(passwordNuevo))
+            return "¡La nueva contraseña no puede ser la misma que la original!";
+        
+        // Validaciones de contraseña
+
+        cliente.setPassword(passwordNuevo);
+        clienteRepository.save(cliente);
+        return "OK";
     }
 
 }

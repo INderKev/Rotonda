@@ -8,9 +8,9 @@ INSERT INTO administrador VALUES (2, 'cristopher', '123456789');
 
 -- Cliente
 
-INSERT INTO cliente VALUES (111111111, 'Maria', 'Paula', 'Gonzalez', 'Cuellar', '666', 'mpgc@correo.com', 'Calle 142 # 12 - 34', 'asd123');
-INSERT INTO cliente VALUES (222222222, 'Brayan', 'David', 'Pinto', 'Castillo', '666', 'bdpc@correo.com', 'Calle 134 # 12 - 35', 'asd123');
-INSERT INTO cliente VALUES (333333333, 'Jefferson', 'Alexander', 'Romero', 'Buitrago', '666', 'asdf@correo.com', 'Calle 134 # 12 - 35', 'asd123');
+INSERT INTO cliente VALUES (111111111, 'Maria', 'Paula', 'Gonzalez', 'Cuellar', '6666666', 'mpgc@correo.com', 'Calle 142 # 12 - 34', 'asd123');
+INSERT INTO cliente VALUES (222222222, 'Brayan', 'David', 'Pinto', 'Castillo', '6666666', 'bdpc@correo.com', 'Calle 134 # 12 - 35', 'asd123');
+INSERT INTO cliente VALUES (333333333, 'Jefferson', 'Alexander', 'Romero', 'Buitrago', '6666666', 'asdf@correo.com', 'Calle 134 # 12 - 35', 'asd123');
 
 -- Especialidad
 
@@ -407,5 +407,3 @@ INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (19, 4, 1
 INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (20, 4, 19, 'Comentario random');
 INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (21, 4, 20, 'Comentario random');
 INSERT INTO orden(idorden, idcompra, idproducto, observaciones) VALUES (22, 4, 21, 'Comentario random');
-
-
