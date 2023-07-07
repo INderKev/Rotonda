@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Random;
 
 @Service("registroService")
 @Transactional
@@ -64,6 +65,19 @@ public class RegistroService {
     public String registrarCliente(Cliente cliente) {
         if (clienteRepository.verificarExistencia(cliente.getCorreo()) == null) {
             cliente.setIdCliente(clienteRepository.obtenerUltimoId().getIdCliente() + 1);
+
+            //Generación contraseña
+            String pass = "";
+            Random random = new Random();
+            for (int i = 0; i < 6; i++) {
+                char c = (char)(random.nextInt(26) + 'a');
+                if (random.nextDouble() < 0.5)
+                    c = Character.toUpperCase(c);
+                pass += c;
+            }
+            pass += Integer.toString(random.nextInt(999));
+
+            cliente.setPassword(pass);
             clienteRepository.save(cliente);
             return "OK";
         }

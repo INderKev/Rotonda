@@ -40,7 +40,7 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarCliente")
-    public String registrarCliente(HttpServletResponse response, @Valid @Validated Cliente cliente, BindingResult result, Model model, RedirectAttributes redirAttrs){
+    public String registrarCliente(HttpServletResponse response, @Valid @Validated Cliente cliente, BindingResult result, Model model){
         if (result.hasErrors()) {
             if (result.hasFieldErrors("telefono")) {
                 model.addAttribute("cliente", cliente);
@@ -54,7 +54,19 @@ public class RegistroController {
             model.addAttribute("error", resultado);
             return "/registro-cliente";
         }
-        redirAttrs.addFlashAttribute("success", "¡Cliente registrado con éxito!");
+        model.addAttribute("success", "¡Cliente registrado con éxito!");
+        return "/registro-cliente";
+    }
+
+    @PostMapping("/cambiarContrasenaCliente")
+    public String cambiarContrasenaCliente(HttpServletResponse response, String passwordViejo, String passwordNuevo, Model model) {
+        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
+        if (!cliente.getPassword().equals(passwordViejo)) {
+            model.addAttribute("error", "¡La contraseña es incorrecta!");
+            return "/cambiar-contrasena-cliente";
+        }
+
+        cliente.setPassword(passwordNuevo);
         return "redirect:/home";
     }
 
