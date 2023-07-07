@@ -79,9 +79,9 @@ TIPO
 /* Table: TARJETA                                               */
 /*==============================================================*/
 create table TARJETA (
-   NUMTARJETA		VARCHAR(16)	     not null,
-   PIN			VARCHAR(4)     not null,
-   TIPO			VARCHAR(25)	     not null,
+   NUMTARJETA  		VARCHAR(16)	  not null,
+   PIN			      VARCHAR(3)    not null,
+   TIPO			      VARCHAR(25)   not null,
    FECHA_CADUCIDAD	DATE		     not null,
    constraint PK_TARJETA primary key (NUMTARJETA)
 );
@@ -90,14 +90,14 @@ create table TARJETA (
 /* Index: TARJETA_PK                                            */
 /*==============================================================*/
 create unique index TARJETA_PK on TARJETA (
-NUMTARJETA
+   NUMTARJETA
 );
 
 /*==============================================================*/
 /* Index: TIPO_TARJETA_FK                                  	*/
 /*==============================================================*/
 create index TIPO_TARJETA_FK on TARJETA (
-TIPO
+   TIPO
 );
 
 /*==============================================================*/

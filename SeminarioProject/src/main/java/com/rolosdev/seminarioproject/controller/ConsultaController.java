@@ -51,7 +51,6 @@ public class ConsultaController {
         model.addAttribute("menu", new Menu());
         model.addAttribute("productoAConsultar", new Producto());
         model.addAttribute("menuAConsultar", new Menu());
-        System.out.println("MIERDA");
         return "/dashboard-restaurante";
     }
 

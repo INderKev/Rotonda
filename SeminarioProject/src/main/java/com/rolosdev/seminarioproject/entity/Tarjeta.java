@@ -1,14 +1,12 @@
 package com.rolosdev.seminarioproject.entity;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -22,44 +20,21 @@ public class Tarjeta {
     @Column(name = "NUMTARJETA")
     private String numTarjeta;
 
+    @Pattern(regexp = "^\\d{3}$")
     @Column(name = "PIN")
     private String pin;
+
     @Column(name = "TIPO")
     private String tipo;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "FECHA_CADUCIDAD")
-    private LocalDate fechaCaducidad;
+    private Date fechaCaducidad;
 
-    
-    public String getNumTarjeta() {
-        return numTarjeta;
-    }
-    public void setNumTarjeta(String numTarjeta) {
-        this.numTarjeta = numTarjeta;
-    }
-    public String getPin() {
-        return pin;
-    }
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    public Date getFechaCaducidad() {
-        return fechaCaducidad;
-    }
-    public void setFechaCaducidad(Date fechaCaducidad) {
-        this.fechaCaducidad = fechaCaducidad;
-    }
     public int primerNumero() {
         String primerCaracter = String.valueOf(this.numTarjeta.charAt(0));
         return Integer.parseInt(primerCaracter);
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -70,6 +45,7 @@ public class Tarjeta {
         result = prime * result + ((fechaCaducidad == null) ? 0 : fechaCaducidad.hashCode());
         return result;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

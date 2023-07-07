@@ -11,7 +11,6 @@ import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
