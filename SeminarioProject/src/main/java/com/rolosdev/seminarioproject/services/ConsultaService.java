@@ -110,8 +110,11 @@ public class ConsultaService {
         return (ArrayList<Especialidad>) especialidadRepository.findAll();
     }
 
-    public ArrayList<Tarjeta> obtenerTarjetasCliente(int idCliente){
-        return (ArrayList<Tarjeta>) tarjetasClienteRepository.tarjetasCliente(111111111);
+    public ArrayList<String> obtenerTarjetasCliente(int idCliente){
+        for (String tarjeta : tarjetasClienteRepository.tarjetasCliente(idCliente)) {
+            System.out.println(tarjeta);
+        }
+        return (ArrayList<String>) tarjetasClienteRepository.tarjetasCliente(idCliente);
     }
 
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu) {

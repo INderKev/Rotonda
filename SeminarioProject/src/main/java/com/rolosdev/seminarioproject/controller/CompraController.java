@@ -5,6 +5,7 @@ import com.rolosdev.seminarioproject.entity.*;
 import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
 import com.rolosdev.seminarioproject.services.CompraService;
 import com.rolosdev.seminarioproject.services.ConsultaService;
+import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -94,6 +95,8 @@ public class CompraController {
 
     @GetMapping("/realizarPago")
     public String realizarPago(Model model) {
+        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
+        model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
         return "/pago";
     }
 

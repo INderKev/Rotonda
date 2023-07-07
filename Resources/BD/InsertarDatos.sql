@@ -351,26 +351,27 @@ INSERT INTO tipo_tarjeta(tipo, identificador) VALUES ('Visa', 5);
 
 -- Tarjeta
 
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('333333333333337', 1111, 'American Express', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('300000000000007', 1111, 'American Express', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('310101010101013', 1111, 'American Express', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('301010101010101', 1111, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('333333333333337', 111, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('300000000000007', 111, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('310101010101013', 111, 'American Express', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('301010101010101', 111, 'American Express', '2023-06-30');
 
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4444444444444448', 1111, 'Master Card', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4000000000000002', 1111, 'Master Card', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4010101010101018', 1111, 'Master Card', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4101010101010105', 1111, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4444444444444448', 111, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4000000000000002', 111, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4010101010101018', 111, 'Master Card', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4101010101010105', 111, 'Master Card', '2023-06-30');
 
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5555555555555557', 1111, 'Visa', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5000000000000009', 1111, 'Visa', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5010101010101015', 1111, 'Visa', '2023-06-30');
-INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5101010101010102', 1111, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5555555555555557', 111, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5000000000000009', 111, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5010101010101015', 111, 'Visa', '2023-06-30');
+INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('5101010101010102', 111, 'Visa', '2023-06-30');
 
 -- Tarjetas Cliente
 
 INSERT INTO tarjetas_cliente VALUES (111111111, '5101010101010102');
 INSERT INTO tarjetas_cliente VALUES (111111111, '4101010101010105');
 INSERT INTO tarjetas_cliente VALUES (222222222, '4101010101010105');
+INSERT INTO tarjetas_cliente VALUES (333333333, '333333333333337');
 
 -- Compra
 

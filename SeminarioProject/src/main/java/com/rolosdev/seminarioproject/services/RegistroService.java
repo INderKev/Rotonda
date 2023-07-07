@@ -164,10 +164,6 @@ public class RegistroService {
         // Verificar que la tarjeta exista
         String numTarjeta = tarjeta.getNumTarjeta();
 
-        TarjetasCliente tarjetaCliente = new TarjetasCliente (
-            new TarjetasClienteId(cliente.getIdCliente(), numTarjeta)
-        );
-
         Tarjeta tarjetaAux = tarjetaRepository.buscarPorNumTarjeta(numTarjeta);
         if (tarjetaAux != null) {
             // Verificar que tengan los mismos atributos
@@ -178,6 +174,8 @@ public class RegistroService {
             if (tarjetasClienteRepository.tarjetaAsignadaAlCliente(cliente.getIdCliente(),tarjeta.getNumTarjeta()) != null)
                 return "Esta tarjeta ya está registrada para el usuario " + cliente.getCorreo() + ".";
             else {
+                TarjetasCliente tarjetaCliente = new TarjetasCliente (
+                    new TarjetasClienteId(cliente.getIdCliente(), numTarjeta));
                 tarjetasClienteRepository.save(tarjetaCliente);
                 return "OK";
             }
@@ -208,8 +206,12 @@ public class RegistroService {
 
         // Salió bien
         tarjeta.setTipo(tipoTarjeta.getTipo());
-        tarjetasClienteRepository.save(tarjetaCliente);
         tarjetaRepository.save(tarjeta);
+
+        TarjetasCliente tarjetaCliente = new TarjetasCliente (
+            new TarjetasClienteId(cliente.getIdCliente(), numTarjeta));
+        tarjetasClienteRepository.save(tarjetaCliente);
+                    
         return "OK";
     }
 

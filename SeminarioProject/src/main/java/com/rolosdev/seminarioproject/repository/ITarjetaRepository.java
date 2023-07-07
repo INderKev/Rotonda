@@ -18,7 +18,7 @@ public interface ITarjetaRepository extends JpaRepository<Tarjeta, Integer> {
         value = "SELECT * FROM tarjeta WHERE numtarjeta = ?1 AND pin = ?2 AND tipo = ?3 AND fecha_caducidad = ?4",
         nativeQuery = true
     )
-    Tarjeta verificarDatosTarjeta(@Param("numTarjeta") String numTarjeta, @Param("PIN") Integer pin, 
+    Tarjeta verificarDatosTarjeta(@Param("numTarjeta") String numTarjeta, @Param("PIN") String pin, 
                             @Param("tipo") String tipo, @Param("fechaCaducidad") Date fechaCaducidad);
 
     @Query(

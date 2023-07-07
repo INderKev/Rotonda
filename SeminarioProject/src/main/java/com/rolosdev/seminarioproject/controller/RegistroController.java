@@ -143,9 +143,7 @@ public class RegistroController {
 
     @GetMapping("/goTarjeta")
     public String goTarjeta(Model model) {
-        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
         model.addAttribute("tarjeta", new Tarjeta());
-        model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
         return "/registro-tarjeta";
     }
 
