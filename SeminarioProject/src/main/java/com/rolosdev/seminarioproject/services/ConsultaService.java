@@ -39,6 +39,10 @@ public class ConsultaService {
     private IMenuRepository menuRepository;
 
     @Autowired
+    @Qualifier("tarjetasClienteRepository")
+    private ITarjetasClienteRepository tarjetasClienteRepository;
+
+    @Autowired
     @Qualifier("menuSeleccionadoRepository")
     private IMenuSeleccionadoRepository menuSeleccionadoRepository;
 
@@ -104,6 +108,10 @@ public class ConsultaService {
 
     public ArrayList<Especialidad> obtenerEspecialidades() {
         return (ArrayList<Especialidad>) especialidadRepository.findAll();
+    }
+
+    public ArrayList<Tarjeta> obtenerTarjetasCliente(int idCliente){
+        return (ArrayList<Tarjeta>) tarjetasClienteRepository.tarjetasCliente(111111111);
     }
 
     public ArrayList<Seleccion> obtenerSeleccionesPorMenu(int idMenu) {

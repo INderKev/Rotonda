@@ -73,13 +73,33 @@
     <section class="intro">
         Aqui va lo del pago xd
         <h1>medio de pago</h1>
-        <section>
-          <option value="efectivo">Efectivo</option>
+        <select id="forma-pago" name="forma-pago" onchange="mostrarBoton()">
           <option value="tarjeta">Tarjeta</option>
-        </section>git 
-        <a class="nav-link active" aria-current="page" th:href="@{/goTarjeta}">registrarTarjeta</a>
+          <option value="efectivo">Efectivo</option>
+        </select>
+
+        <div id="boton-registrar-tarjeta" style="display: none;">
+          <select name="elegir-tarjeta" id="elegir-tarjeta">
+            <option th:each="tarjeta:${tarjetas_cliente}"
+                    th:value="${tarjeta.numTarjeta}"
+                    th:text="${tarjeta.numTarjeta}">f</option>
+          </select>
+          <a class="nav-link active" aria-current="page" th:href="@{/goTarjeta}">registrarTarjeta</a>
+        </div>
 
         <button th:href="@{/pagarCompra}">PAGAR COMPRA</button>
+        <script>
+          function mostrarBoton() {
+            var formaPago = document.getElementById("forma-pago").value;
+            var botonTarjeta = document.getElementById("boton-registrar-tarjeta");
+        
+            if (formaPago === "tarjeta") {
+              botonTarjeta.style.display = "block";
+            } else {
+              botonTarjeta.style.display = "none";
+            }
+          }
+        </script>
     </section>
 
     <!-- Footer -->

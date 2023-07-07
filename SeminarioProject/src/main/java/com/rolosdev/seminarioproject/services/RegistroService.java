@@ -146,23 +146,33 @@ public class RegistroService {
         if(numTarjeta.length() < 15 || numTarjeta.length() > 16)
             return "La tarjeta no cuenta con la cantidad de caracteres requerida";
         
-        // Verificar que el pin sea de 4 digitos
-        if (tarjeta.getPin() < 1000 || tarjeta.getPin() > 9999)
-            return "El pin "+ tarjeta.getPin()+"no contiene la longitud requerida";
+        // Verificar que el pin sea de 4 digitos y numerico
+        if (tarjeta.getPin().length() != 4 || !tarjeta.getPin().matches("\\d+"))
+            return "El pin "+ tarjeta.getPin() +"no es valido";
         
         Tarjeta tarjetaAux = tarjetaRepository.buscarPorNumTarjeta(numTarjeta);
         
+        TarjetasCliente tc = new TarjetasCliente(
+                        new TarjetasClienteId(cliente.getIdCliente(), numTarjeta));
+
+
         // Verificar que la tarjeta exista
         if(tarjetaAux != null){
             // Verificar que tengan los mismos atributos
-            if(!tarjeta.equals(tarjetaAux))
-            return "La tarjeta ya existe";
+            if(!tarjeta.equals(tarjetaAux)){
+                System.out.println("La tarjeta que llego:"+tarjetaAux);
+                return "La tarjeta existe y digito los datos mal";
+            }
+            // Revisar que la tarjeta de credito no pertenezca al usuario
+            if(tarjetasClienteRepository.tarjetaAsignadaAlCliente(cliente.getIdCliente(),tarjeta.getNumTarjeta()) != null){
+                return "Esta tarjeta ya le pertenece al usuario "+ cliente.getPrimerNombre();
+            }else{
+                tarjetasClienteRepository.save(tc);
+                System.out.println("Gracia papa dio");
+                return "OK";
+            }
         }
             
-        // Revisar que la tarjeta de credito no pertenezca al usuario
-        if(tarjetasClienteRepository.tarjetaAsignadaAlCliente(cliente.getIdCliente(),tarjeta.getNumTarjeta()) != null){
-            return "Esta tarjeta ya le pertenece al usuario "+ cliente.getPrimerNombre();
-        }
         
         // Ahora si viene el puto registro xd
         
@@ -193,9 +203,7 @@ public class RegistroService {
         tarjeta.setTipo(tipoTarjeta.getTipo());
         tarjetaRepository.save(tarjeta);
 
-        TarjetasCliente tc = new TarjetasCliente(
-                        new TarjetasClienteId(cliente.getIdCliente(), numTarjeta));
-
+    
         tarjetasClienteRepository.save(tc);
         return "OK";
     }
