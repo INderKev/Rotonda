@@ -67,15 +67,15 @@ public class RegistroService {
             cliente.setIdCliente(clienteRepository.obtenerUltimoId().getIdCliente() + 1);
 
             //Generación contraseña
+            String caracteres = "@$!%*?&";
+            caracteres += "1234567890";
+            caracteres += "abcdefghijklmnopqrstuvwxyz";
+            caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
             String pass = "";
             Random random = new Random();
-            for (int i = 0; i < 6; i++) {
-                char c = (char)(random.nextInt(26) + 'a');
-                if (random.nextDouble() < 0.5)
-                    c = Character.toUpperCase(c);
-                pass += c;
-            }
-            pass += Integer.toString(random.nextInt(999));
+            while (!pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"))
+                pass += caracteres.charAt(random.nextInt(caracteres.length()));
 
             cliente.setPassword(pass);
             clienteRepository.save(cliente);
