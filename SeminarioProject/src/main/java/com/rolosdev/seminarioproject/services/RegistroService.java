@@ -79,7 +79,6 @@ public class RegistroService {
 
             cliente.setPassword(pass);
 
-            // Ajuste teléfono
             cliente.setTelefono(
                 cliente.getTelefono()
                        .replaceAll(" ", "")
