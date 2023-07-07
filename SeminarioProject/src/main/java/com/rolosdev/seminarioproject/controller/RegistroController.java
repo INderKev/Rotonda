@@ -128,19 +128,28 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarTarjeta")
-    public String registrarTarjeta(HttpServletResponse response, @Validated Tarjeta tarjeta, Model model) {
-        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
-        
-        System.err.println(cliente.getIdCliente() + " " + tarjeta.getTipo());
-        String resultado = registroService.registrarTarjeta(cliente, tarjeta);
-        System.err.println(cliente.getIdCliente() + " " + tarjeta.getTipo());
-        System.err.println(resultado);
-        if(!resultado.equals("OK")){
-            model.addAttribute("Mensaje", resultado);
+    public String registrarTarjeta(HttpServletResponse response, @Validated @Valid Tarjeta tarjeta, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("tarjeta", tarjeta);
+            if (result.hasFieldErrors("numTarjeta"))
+                model.addAttribute("error", "Por favor, ingrese un número de tarjeta AMEX, VISA o MASTERCARD válido.");
+            
+            if (result.hasFieldErrors("pin"))
+                model.addAttribute("error", "Por favor, ingrese un pin válido.");
+            
             return "/registro-tarjeta";
         }
 
-        //redirAttrs.addAttribute("success", "¡Tarjeta de crédito registrada con éxito!");
+        tarjeta.setNumTarjeta(tarjeta.getNumTarjeta().replaceAll(" ", "").replaceAll("-", ""));
+        Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
+        
+        String resultado = registroService.registrarTarjeta(cliente, tarjeta);
+        if(!resultado.equals("OK")){
+            model.addAttribute("error", resultado);
+            return "/registro-tarjeta";
+        }
+
+        model.addAttribute("success", "¡Tarjeta de crédito registrada con éxito!");
         return "/pago";
     }
 

@@ -5,6 +5,7 @@ import com.rolosdev.seminarioproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -125,7 +126,7 @@ public class RegistroService {
         seleccionRepository.save(seleccion);
         return "OK";
     }
-    
+        
     public String registrarTarjeta(Cliente cliente, Tarjeta tarjeta) {
 
         // Revisar que haya un suario
@@ -137,7 +138,7 @@ public class RegistroService {
             return "¡La tarjeta no puede ser nula!";
         
         // Verificar valores de la cadena
-        String numTarjeta = tarjeta.getNumTarjeta().replaceAll(" ", "");
+        String numTarjeta = tarjeta.getNumTarjeta();
 
         if(!numTarjeta.matches("\\d+"))
             return "La tarjeta contiene valores no numericos";
@@ -196,11 +197,11 @@ public class RegistroService {
         // Se valida el tipo de tarjeta que sea
         TipoTarjeta tipoTarjeta = tipoTarjetaRepository.tipoTarjeta(tarjeta.primerNumero());
 
-
         if(tipoTarjeta == null)
-            return "El tipo de tarjeta que desea digitar no existe";
+            return "El tipo de tarjeta que desea digitar no es aceptado.";
 
         tarjeta.setTipo(tipoTarjeta.getTipo());
+
         tarjetaRepository.save(tarjeta);
 
     
