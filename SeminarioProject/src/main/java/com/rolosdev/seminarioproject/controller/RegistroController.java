@@ -169,6 +169,8 @@ public class RegistroController {
             return "/registro-tarjeta";
         }
 
+        model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
+
         model.addAttribute("success", "¡Tarjeta de crédito registrada con éxito!");
         return "/pago";
     }

@@ -193,9 +193,7 @@ public class LoginController {
 
         CaptchaResponse response=restTemplate.postForObject(recaptchaurl,request,CaptchaResponse.class);
         ResponseEntity<String> response2=restTemplate.postForEntity(recaptchaurl, request, String.class);
-        System.out.println(response2);
-        System.out.println(response.isSucess());
-      
+
         return response.isSucess();
         
     }

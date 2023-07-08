@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping
@@ -96,16 +99,15 @@ public class CompraController {
     @GetMapping("/realizarPago")
     public String realizarPago(Model model) {
         Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
+        model.addAttribute("compra", carritoDeCompraService.getCompra());
         model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
         return "/pago";
     }
 
-
-
-    @GetMapping("/pagarCompra")
-    public String pagarCompra(Model model) {
-
-        compraService.terminarCompra();
+    @PostMapping("/pagarCompra")
+    public String pagarCompra(HttpServletResponse response, String pago,Model model) {
+        System.out.println("En lo del pago: "+pago);
+        compraService.terminarCompra(pago);
         return "redirect:/home";
     }
 

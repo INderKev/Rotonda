@@ -155,7 +155,7 @@ public class CompraService {
         CarritoDeCompraService.getCarritoDeCompraService().finalizar();
     }
 
-    public String terminarCompra() {
+    public String terminarCompra(String pago) {
         if (CarritoDeCompraService.getCarritoDeCompraService().getOrdenes().isEmpty())
             return "¡Ninguna orden en el carrito! Primero debes añadir algo.";
         ArrayList<Producto> productos = new ArrayList<>();
@@ -182,6 +182,15 @@ public class CompraService {
                 seleccionRepository.save(seleccion);
             }
         }
+
+        //Registra el tipo de pago
+        if(pago == "efectivo"){
+            CarritoDeCompraService.getCarritoDeCompraService().getCompra().setPagaEfectivo(true);
+        }else{
+            CarritoDeCompraService.getCarritoDeCompraService().getCompra().setPagaEfectivo(false);
+            CarritoDeCompraService.getCarritoDeCompraService().getCompra().setNumTarteta(pago);
+        }
+
         compraRepository.save(CarritoDeCompraService.getCarritoDeCompraService().getCompra());
         for (PaqueteOrden orden : CarritoDeCompraService.getCarritoDeCompraService().getOrdenes()) {
             ordenRepository.save(orden.getOrden());

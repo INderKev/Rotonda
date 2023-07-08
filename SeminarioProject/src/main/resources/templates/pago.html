@@ -72,36 +72,65 @@
 
     <!--Pago papadio-->
     <section class="intro">
-        Aqui va lo del pago xd
-        <h1>medio de pago</h1>
+      <h1>Valor a Pagar</h1>
+      <h2 th:text="${compra.total}"></h2>
+      <h1>Medio de pago</h1>
+      <form th:action="@{/pagarCompra}" method="post">
         <select id="forma-pago" name="forma-pago" onchange="mostrarBoton()">
+          <option value="" disabled selected>Elige una opción</option>
           <option value="efectivo">Efectivo</option>
           <option value="tarjeta">Tarjeta</option>
         </select>
-
+    
         <div id="boton-registrar-tarjeta" style="display: none;">
-          <select name="elegir-tarjeta" id="elegir-tarjeta">
+          <select name="elegir-tarjeta" id="elegir-tarjeta" onchange="habilitarBoton()">
+            <option value="" disabled selected>Elige una opción</option>
             <option th:each="tarjeta:${tarjetas_cliente}"
                     th:value="${tarjeta}"
-                    th:text="${tarjeta}">f</option>
+                    th:text="${tarjeta}"></option>
           </select>
           <a class="nav-link active" aria-current="page" th:href="@{/goTarjeta}">registrarTarjeta</a>
         </div>
-
-        <button th:href="@{/pagarCompra}">PAGAR COMPRA</button>
-        <script>
-          function mostrarBoton() {
-            var formaPago = document.getElementById("forma-pago").value;
-            var botonTarjeta = document.getElementById("boton-registrar-tarjeta");
-        
-            if (formaPago === "tarjeta") {
-              botonTarjeta.style.display = "block";
-            } else {
-              botonTarjeta.style.display = "none";
-            }
+    
+        <input type="hidden" id="pago" name="pago">
+    
+        <button type="submit" id="myButton" disabled>PAGAR COMPRA</button>
+      </form>
+    
+      <script th:inline="javascript">
+        function mostrarBoton() {
+          var formaPago = document.getElementById("forma-pago").value;
+          var botonTarjeta = document.getElementById("boton-registrar-tarjeta");
+    
+          if (formaPago === "tarjeta") {
+            botonTarjeta.style.display = "block";
+            document.getElementById("myButton").disabled = true;
+          } else {
+            botonTarjeta.style.display = "none";
+            document.getElementById("myButton").disabled = false;
           }
-        </script>
+        }
+    
+        function habilitarBoton() {
+          var tarjetaSeleccionada = document.getElementById("elegir-tarjeta").value;
+          var formaPago = document.getElementById("forma-pago").value;
+          var myButton = document.getElementById("myButton");
+          var pagoInput = document.getElementById("pago");
+    
+          if (formaPago === "tarjeta") {
+            myButton.disabled = tarjetaSeleccionada === "";
+            pagoInput.value = tarjetaSeleccionada;
+          } else {
+            myButton.disabled = false;
+            pagoInput.value = "efectivo";
+          }
+        }
+      </script>
     </section>
+    
+    
+    
+    
 
     <!-- Footer -->
     <footer class="bg-dark text-center text-white mt-10">
