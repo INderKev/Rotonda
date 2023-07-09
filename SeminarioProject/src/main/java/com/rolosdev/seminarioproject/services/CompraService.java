@@ -182,7 +182,7 @@ public class CompraService {
         }
 
         //Registra el tipo de pago
-        if(pago == "efectivo"){
+        if(pago == ""){
             CarritoDeCompraService.getCarritoDeCompraService().getCompra().setPagaEfectivo(true);
         }else{
             CarritoDeCompraService.getCarritoDeCompraService().getCompra().setPagaEfectivo(false);

@@ -150,6 +150,7 @@ public class RegistroController {
 
     @PostMapping("/registrarTarjeta")
     public String registrarTarjeta(HttpServletResponse response, @Validated @Valid Tarjeta tarjeta, BindingResult result, Model model) {
+        System.out.println("xd: "+ tarjeta.getFechaCaducidad());
         if (result.hasErrors()) {
             model.addAttribute("tarjeta", tarjeta);
             if (result.hasFieldErrors("numTarjeta"))
