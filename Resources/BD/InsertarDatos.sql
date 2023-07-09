@@ -355,7 +355,6 @@ INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('33333333333
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('300000000000007', 111, 'American Express', '2023-06-01');
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('310101010101013', 111, 'American Express', '2023-06-01');
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('301010101010101', 111, 'American Express', '2023-06-01');
-
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4444444444444448', 111, 'Master Card', '2023-06-01');
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4010101010101018', 111, 'Master Card', '2023-06-01');
 INSERT INTO tarjeta(numtarjeta, pin, tipo, fecha_caducidad) VALUES ('4000000000000002', 111, 'Master Card', '2023-06-01');
