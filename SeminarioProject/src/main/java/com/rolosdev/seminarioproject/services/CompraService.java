@@ -156,8 +156,6 @@ public class CompraService {
     }
 
     public String terminarCompra(String pago) {
-        if (CarritoDeCompraService.getCarritoDeCompraService().getOrdenes().isEmpty())
-            return "¡Ninguna orden en el carrito! Primero debes añadir algo.";
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Producto> productosUsados = new ArrayList<>();
         for (PaqueteMenuSeleccionado paqueteMenuSeleccionado : CarritoDeCompraService.getCarritoDeCompraService().getMenusSeleccionados()) {
@@ -214,7 +212,6 @@ public class CompraService {
         PaqueteMenuSeleccionado paqueteMenuSeleccionado = new PaqueteMenuSeleccionado();
         paqueteMenuSeleccionado.setMenuSeleccionado(menuSeleccionado);
         paqueteOrden.setPaqueteMenuSeleccionado(paqueteMenuSeleccionado);
-        //paqueteMenuSeleccionado.setSelecciones(seleccionRepository.obtenerSeleccionPorMenu(menuSeleccionado.getIdMenu()));
         ArrayList<Producto> productosMenu = productoRepository.obtenerProductosPorMenu(menuSeleccionado.getMenu().getIdMenu());
         for (Producto producto : productosMenu) {
             descontarCantidadStock(producto);

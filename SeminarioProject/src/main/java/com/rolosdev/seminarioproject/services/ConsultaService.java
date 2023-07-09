@@ -111,9 +111,6 @@ public class ConsultaService {
     }
 
     public ArrayList<String> obtenerTarjetasCliente(int idCliente){
-        for (String tarjeta : tarjetasClienteRepository.tarjetasCliente(idCliente)) {
-            System.out.println(tarjeta);
-        }
         return (ArrayList<String>) tarjetasClienteRepository.tarjetasCliente(idCliente);
     }
 

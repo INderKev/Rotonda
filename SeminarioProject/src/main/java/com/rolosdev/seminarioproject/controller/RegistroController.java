@@ -1,6 +1,7 @@
 package com.rolosdev.seminarioproject.controller;
 
 import com.rolosdev.seminarioproject.entity.*;
+import com.rolosdev.seminarioproject.services.CarritoDeCompraService;
 import com.rolosdev.seminarioproject.services.ConsultaService;
 import com.rolosdev.seminarioproject.services.RegistroService;
 import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
@@ -169,8 +170,8 @@ public class RegistroController {
             return "/registro-tarjeta";
         }
 
+        model.addAttribute("compra", CarritoDeCompraService.getCarritoDeCompraService().getCompra());
         model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
-
         model.addAttribute("success", "¡Tarjeta de crédito registrada con éxito!");
         return "/pago";
     }

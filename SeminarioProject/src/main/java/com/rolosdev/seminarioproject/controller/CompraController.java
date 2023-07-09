@@ -98,6 +98,10 @@ public class CompraController {
 
     @GetMapping("/realizarPago")
     public String realizarPago(Model model) {
+        if (CarritoDeCompraService.getCarritoDeCompraService().getOrdenes().isEmpty()) {
+            model.addAttribute("error", "¡Ninguna orden en el carrito! Primero debes añadir algo.");
+            return verCarrito(model);
+        }
         Cliente cliente = UsuarioLogueadoService.getUsuarioLogueadoService().getCliente();
         model.addAttribute("compra", carritoDeCompraService.getCompra());
         model.addAttribute("tarjetas_cliente", consultaService.obtenerTarjetasCliente(cliente.getIdCliente()));
@@ -106,7 +110,6 @@ public class CompraController {
 
     @PostMapping("/pagarCompra")
     public String pagarCompra(HttpServletResponse response, String pago,Model model) {
-        System.out.println("En lo del pago: "+pago);
         compraService.terminarCompra(pago);
         return "redirect:/home";
     }
