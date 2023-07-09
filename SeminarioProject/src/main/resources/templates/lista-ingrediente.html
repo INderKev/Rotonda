@@ -3,37 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootsrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+
+    <!-- Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+
     <title>Document</title>
+    <link rel="stylesheet" href="css/navbar.css" />
+    <style>
+        section {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+      
+        .tabla {
+          width: 80%;
+          margin-top: 20px;
+          border-collapse: collapse;
+          border: 2px solid #007bff;
+          text-align: center;
+        }
+      
+        .title-nom-ingrediente,
+        .title-can-ingrediente {
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px;
+        }
+      
+        .nom-ingrediente,
+        .can-ingrediente,
+        .accion-ingrediente {
+          border-bottom: 1px solid #007bff;
+          padding: 10px;
+        }
+      
+        .nom-ingrediente:last-child,
+        .can-ingrediente:last-child,
+        .accion-ingrediente:last-child {
+          border-bottom: none;
+        }
+
+        .accion-ingrediente button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .accion-ingrediente button:hover {
+            background-color: #c82333;
+        }
+    </style>
+      
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Nombre del ingrediente</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody th:each=" i : ${listaIngredientes.keySet()}">
-            <tr>       
-                <th scope="row" th:text="${i}"></th>
-                <td th:text="${listaIngredientes.get(i)}"></td>
-                <td> <div th:if = "${listaIngredientes.get(i) == 0}">
-                    <form th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
-                        <button>Eliminar</button>
-                    </form>
-                </div></td>
-            </tr>
-            <tr>
-        </tbody>
-    </table>
-
-    
-
-    <div class="form-row">
-        <div class="col-lg-8">
-            <a class="boton-loguear mt-3 mb-5" th:href="@{/cerrarSesion}">Salir</a>
-        </div>
-    </div>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navigation-wrap">
+          <div class="container">
+            <a class="navbar-brand" href="#">
+              <img src="img/logo.png" alt="logo" class="img-fluid" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <!-- <span class="navbar-toggler-icon"></span> -->
+              <i class="fas fa-stream navbar-toggler-icon"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/cerrarSesion}">Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <section>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th class="title-nom-ingrediente" scope="col">Nombre del ingrediente</th>
+                    <th class="title-can-ingrediente" scope="col">Cantidad</th>
+                    <th class="title-can-ingrediente" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody th:each=" i : ${listaIngredientes.keySet()}">
+                <tr>       
+                    <th class="nom-ingrediente" scope="row" th:text="${i}"></th>
+                    <td class="can-ingrediente" th:text="${listaIngredientes.get(i)}"></td>
+                    <td> <div th:if = "${listaIngredientes.get(i) == 0}">
+                        <form class="accion-ingrediente" th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
+                            <button>Eliminar</button>
+                        </form>
+                    </div></td>
+                </tr>
+                <tr>
+            </tbody>
+        </table>
+      </section>
 </body>
 </html>

@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -192,7 +192,10 @@ public class LoginController {
         HttpEntity<MultiValueMap<String,String>> request= new HttpEntity<>(map,Headers);
 
         CaptchaResponse response=restTemplate.postForObject(recaptchaurl,request,CaptchaResponse.class);
-        ResponseEntity<String> response2=restTemplate.postForEntity(recaptchaurl, request, String.class);
+        //ResponseEntity<String> response2=restTemplate.postForEntity(recaptchaurl, request, String.class);
+
+        if(response == null)
+            return false;
 
         return response.isSucess();
         

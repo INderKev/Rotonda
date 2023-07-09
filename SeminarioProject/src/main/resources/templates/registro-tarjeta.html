@@ -30,6 +30,75 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/carrito.css">
+    <style>
+      .intro {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+    
+      .intro label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #555555;
+      }
+    
+      .intro input[type="text"],
+      .intro input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+    
+      .intro .alert-danger {
+        color: #dc3545;
+        margin-top: 10px;
+      }
+    
+      /* Estilo para el campo de fecha de caducidad */
+      .intro input[type="date"]::-webkit-calendar-picker-indicator {
+        background: none;
+        padding: 0;
+        margin: 0;
+        width: auto;
+      }
+    
+      .intro input[type="date"]::-webkit-inner-spin-button,
+      .intro input[type="date"]::-webkit-clear-button {
+        display: none;
+      }
+    
+      .intro input[type="date"] {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        padding-right: 20px;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpolygon fill='%23000000' points='8,3.5 6.8,2.3 3.5,5.6 0.2,2.3 0,3.5 3.5,7 7,3.5 '%3E%3C/polygon%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: 12px 12px;
+      }
+    
+      .intro input[type="date"]::-webkit-input-placeholder {
+        color: #999999;
+      }
+    
+      .intro input[type="date"]::-moz-placeholder {
+        color: #999999;
+      }
+    
+      .intro input[type="date"]::-ms-input-placeholder {
+        color: #999999;
+      }
+    </style>
+    
+    
   </head>
 
   <body>
@@ -83,7 +152,7 @@
             </div>
             <div class="form-group col">
               <label>FECHA CADUCIDAD</label>
-              <input type="date" class="form-control" required name="pin" th:field="*{fechaCaducidad}">
+              <input type="date" class="fecha form-control" required name="pin" th:field="*{fechaCaducidad}">
           </div>
             <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
         </div>
