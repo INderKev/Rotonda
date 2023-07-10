@@ -155,7 +155,23 @@
         </table>
     </section>
 
-
+    <section>
+        <h2>Productos que se pueden eliminar</h2>
+        <form th:action="@{/eliminarIngredienteAdmLista}" method="get">
+            <select class="form-select" id="idrestaurante" name="value">
+                <option disabled selected>Posible a eliminar</option>
+                <option th:each=" ingrediente : ${listaIngredientes.keySet()}"
+                        th:if = "${listaIngredientes.get(ingrediente) == 0}"
+                        th:value="${ingrediente}"
+                        th:text="${ingrediente}"/>
+            </select>
+            <div class="form-row">
+                <div class="col-lg-8">
+                    <button class="boton-loguear mt-3 mb-5">Eliminar</button>
+                </div>
+            </div>
+        </form>
+    </section>
 
 </body>
 </html>

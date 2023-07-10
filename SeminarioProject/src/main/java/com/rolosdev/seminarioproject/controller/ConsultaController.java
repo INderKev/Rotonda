@@ -125,11 +125,18 @@ public class ConsultaController {
 
     @GetMapping("/eliminarIngredienteAdm/{nombre}")
     public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
+        System.out.println(nombre);
+        consultaService.eliminarIngrediente(nombre);
+        return "redirect:/home";
+    }
+    
+    @GetMapping("/eliminarIngredienteAdmLista")
+    public String elimarIngredienteLista(@RequestParam (name = "value") String nombre , ModelMap modelo){
         consultaService.eliminarIngrediente(nombre);
         return "redirect:/home";
     }
      
-    @PostMapping("/modificarDescripcionIngrediente")
+    @GetMapping("/modificarDescripcionIngrediente")
     public String modificarDescripcionIngrediente(Ingrediente ingrediente, ModelMap modelo){
         consultaService.editarDescripcionIngrediente(ingrediente.getNombre(), ingrediente.getDescripcion());
         return "redirect:/home";
