@@ -138,7 +138,7 @@ public class ConsultaController {
         return "redirect:/home";
     }
      
-    @GetMapping("/modificarDescripcionIngrediente")
+    @PostMapping("/modificarDescripcionIngrediente")
     public String modificarDescripcionIngrediente(Ingrediente ingrediente, ModelMap modelo){
         consultaService.editarDescripcionIngrediente(ingrediente.getNombre(), ingrediente.getDescripcion());
         return "redirect:/home";
