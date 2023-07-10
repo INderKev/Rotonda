@@ -7,9 +7,9 @@
 </head>
 <body>
     <section>
-        <form th:action="@{/modificarDescripcionIngrediente/'+${ingrediente}}"  method="post">
-            <input type="text" th:value="${ingrediente}" th:text="${ingrediente}" name="ingre" disabled> 
-            <input type="text" name="desc" placeholder="Ingrese la nueva descripción">
+        <form th:action="@{/modificarDescripcionIngrediente}" th:object="${ingrediente}" method="post">
+            <input type="text" th:field="*{nombre}" name="ingrediente" readonly> 
+            <input type="text" th:field="*{descripcion}" name="desc" placeholder="Ingrese la nueva descripción">
             <button type="submit">Guardar</button>
         </form>
     </section>

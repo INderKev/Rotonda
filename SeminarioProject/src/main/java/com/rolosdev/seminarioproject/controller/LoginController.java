@@ -152,6 +152,10 @@ public class LoginController {
                     return "/listarRestaurantes";
                 case "Administrador":
                     model.addAttribute("ingrediente", new Ingrediente());
+                    ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
+                    model.addAttribute("restaurantes", restaurantes);
+                    Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
+                    model.addAttribute("listaIngredientes",lista); 
                     return "/registro-ingrediente";
                 case "Restaurante":
                     UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(consultaService.obtenerRestauranteById(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));

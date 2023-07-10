@@ -162,4 +162,8 @@ public class ConsultaService {
     public void editarDescripcionIngrediente(String nomIngrediente, String desc){
         ingredienteRepository.modificarDescripcionIngrediente(nomIngrediente, desc);
     }
+
+    public Ingrediente obtenerIngredientePorNombre(String nombre) {
+        return ingredienteRepository.getByNombre(nombre);
+    }
 }
