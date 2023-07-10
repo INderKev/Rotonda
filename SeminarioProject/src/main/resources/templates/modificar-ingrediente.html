@@ -8,22 +8,110 @@
     <!-- Bootsrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    
+
     <!-- CSS -->
-	<link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}">
+	<link rel="stylesheet" href="css/dashboard-restaurante.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<style>
+		/* Estilos personalizados */
+		body {
+			background-color: #ffffffd7;
+		}
+        .navbar {
+            background-color: white;
+            color: black;
+        }
+
+        .navbar .profile {
+            margin-left: auto;
+        }
+
+        .navbar .profile img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+            .navbar .profile-link li a {
+            color: var(--black-color);
+            }
+
+            .navbar .profile-link li a:hover {
+            color: var(--primary-color);
+            }
+
+		.lbl {
+			color: #2b4e98;
+		}
+
+		.btn-outline-danger {
+			border-color: #f5c332;
+			color: #f5c332;
+		}
+
+		.btn-outline-danger:hover {
+			background-color: #f5c332;
+			color: #ffffff;
+		}
+
+        .container {
+            margin: 2px solid #2b4e98;
+        }
+
+	</style>
 </head>
 
 <body>
+
     <section class="form my-3 mx-3">
+        <nav class="navbar navbar-expand-lg navigation-wrap sticky-top">
+			<i class='bx bx-menu toggle-sidebar' ></i>
+
+			<div class="profile">
+                <img th:src="${restaurante.imagen}" alt="">
+				<ul class="profile-link">
+					<li><a th:href="@{/cerrarSesion}"><i class='bx bxs-log-out-circle' ></i> Cerrar sesión</a></li>
+				</ul>
+			</div>
+		</nav>
         <form th:action="@{/ModificarIngrediente}" th:object="${stock}" method="post">
-            <p th:text="${stock.ingrediente.idIngrediente}"></p>
-            <input hidden type="text" th:field="*{idStock}" th:value="*{idStock}">
-            <input hidden type="text" th:field="*{restaurante.idRestaurante}" th:value="*{restaurante.idRestaurante}">
-            <input hidden type="text" th:field="*{ingrediente.idIngrediente}" th:value="*{ingrediente.idIngrediente}">
-            <input min="0" type="number" th:field="*{cantidadStock}" th:value="*{cantidadStock}">
-            <input hidden type="text" th:field="*{ingrediente.descripcion}" th:value="*{ingrediente.descripcion}">
-            <button type="submit"  class="btn btn-outline-danger">Modificar</button>
-            
-            <div th:errors="*{cantidadStock}"></div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="lbl">Restaurante: </h2>
+                        <h3 class="lbl-total" th:text="${restaurante.nombre}"></h3>
+                        <input hidden type="text" th:field="*{restaurante.nombre}" th:value="*{restaurante.nombre}">    
+                    </div>
+                    <div class="col">
+                        <h2 class="lbl">Id ingrediente: </h2>
+                        <h3 class="lbl-total" th:text="${ingrediente.idIngrediente}"></h3>
+                        <input hidden type="text" th:field="*{ingrediente.idIngrediente}" th:value="*{ingrediente.idIngrediente}">
+                    </div>
+                    <div class="col">
+                        <h2 class="lbl">Nombre: </h2>
+                        <h3 class="lbl-total" th:text="${ingrediente.nombre}"></h3>
+                        <input hidden type="text" th:field="*{ingrediente.nombre}" th:value="*{ingrediente.nombre}">
+                    </div>
+                    <div class="col">
+                        <h2 class="lbl">Cantidad</h2>
+                        <input class="imputable" min="0" type="number" th:field="*{cantidadStock}" th:value="*{cantidadStock}">
+                        <input hidden type="text" th:field="*{idStock}" th:value="*{idStock}">
+                        <input hidden type="text" th:field="*{ingrediente.descripcion}" th:value="*{ingrediente.descripcion}">
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <button type="submit"  class="btn btn-outline-danger">Modificar</button>
+                    
+                    <div th:errors="*{cantidadStock}"></div>
+                </div>
+                    
+
+            </div>
         </form>
     </section>
 </body>

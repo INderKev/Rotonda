@@ -59,4 +59,9 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
     void borarIngrediente(@Param("nombre") String nomIngrediente);
 
 
+    @Query(
+        value = "SELECT * FROM ingrediente WHERE idingrediente = ?1",
+        nativeQuery = true
+    )
+    Ingrediente buscaIngredientePorId(@Param("idIngrediente") int idIngrediente);
 }

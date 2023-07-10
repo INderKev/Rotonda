@@ -112,7 +112,6 @@ p{
     color:var(--black-color);
     border-radius: 7px;
     text-align: center;
-    
 }
 .main-btn:hover{
     background: transparent;

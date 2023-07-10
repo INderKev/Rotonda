@@ -77,7 +77,8 @@
                             <div class="form-row col">
                                 <div th:if="${success}" class="form-group col">
                                     <label>Contraseña</label>
-                                    <input type="text" class="form-control" name="password" th:value="${cliente.password}" readonly>
+                                    <input type="text" id="password" class="form-control" name="password" th:value="${cliente.password}" readonly>
+                                    <button id="btn-mostrar" value="mostrar">Mostrar/Ocultar</button>
                                 </div>
                             </div>
                             <div class="form-row col">
@@ -90,6 +91,26 @@
                
             </div>
         </div>
+        <script>
+            function modificarVistaContrasenia(event) {
+            event.preventDefault();
+
+            var passwordInput = document.getElementById('password');
+            var btnMostrar = document.getElementById('btn-mostrar');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btnMostrar.textContent = 'Ocultar';
+            } else {
+                passwordInput.type = 'password';
+                btnMostrar.textContent = 'Mostrar';
+            }
+        }
+
+        var btnMostrar = document.getElementById('btn-mostrar');
+        btnMostrar.addEventListener('click', modificarVistaContrasenia);
+
+        </script>
     </section>
    
 </body>

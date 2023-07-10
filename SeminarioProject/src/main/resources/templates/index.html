@@ -27,57 +27,57 @@
     />
 
     <!-- CSS -->
+    
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
     <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
-  <!-- Header -->
-  <header>
-    <nav class="navbar navbar-expand-lg navigation-wrap">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="img/logo.png" alt="logo" class="img-fluid" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <!-- <span class="navbar-toggler-icon"></span> -->
-          <i class="fas fa-stream navbar-toggler-icon"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" th:href="@{/home}"
-                >Inicio</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#quienes-somos">¿Quiénes somos?</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#nuestro-equipo">Nuestro equipo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
-            </li>
-            
-            
-          </ul>
+    
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg navigation-wrap">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="logo" class="img-fluid" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="fas fa-stream navbar-toggler-icon"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#quienes-somos">¿Quiénes somos?</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#nuestro-equipo">Nuestro equipo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Inicia sesión</a>
+              </li>
+              
+              
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
 
 
     <!--seccion 1 banner-->
-    <section id="inicio">
+    <div id="inicio">
       <div class="top-banner">
         <div class="container">
           <div class="row">
@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!--seccion 2 -->
     <section class="division">

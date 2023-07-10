@@ -13,7 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/login.css">
-    
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <script src="https:www.google.com/recaptcha/api.js" async defer></script>
@@ -67,7 +67,7 @@
                                 <!--se implementa el widget del captcha-->    <div class="g-recaptcha" th:data-sitekey="${@environment.getProperty('recaptcha.key')}"></div>
                                 <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                                 <div class="col-lg-8">
-                                   <button class="boton-loguear mt-3 mb-5">Iniciar sesión</button>
+                                   <button class="main-btn mt-3 mb-5">Iniciar sesión</button>
                                 </div>
      
                             </div>

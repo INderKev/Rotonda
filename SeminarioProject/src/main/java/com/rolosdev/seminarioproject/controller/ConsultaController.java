@@ -29,7 +29,7 @@ import java.util.Map;
 @Controller
 @RequestMapping
 public class ConsultaController {
-    
+
     @Autowired
     @Qualifier("consultaService")
     private ConsultaService consultaService;
@@ -114,6 +114,8 @@ public class ConsultaController {
     public String formularioDeIngrediente(Model model, @PathVariable("idStock") String idStock) {
         Stock stockseleccionado = consultaService.obtenerStock(Integer.valueOf(idStock));
         model.addAttribute("stock", stockseleccionado);
+        model.addAttribute("ingrediente", stockseleccionado.getIngrediente());
+        model.addAttribute("restaurante", stockseleccionado.getRestaurante());
         return "/modificar-ingrediente";
     }
 
