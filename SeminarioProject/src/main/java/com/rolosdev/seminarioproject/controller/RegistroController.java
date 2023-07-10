@@ -198,7 +198,6 @@ public class RegistroController {
     public String registrarStock(@Valid Stock stock, BindingResult bindingResult, HttpServletResponse response){
         if (bindingResult.hasErrors())
             return "/modificar-ingrediente";
-
         registroService.modificarStockEIngrediente(stock); 
         return "redirect:/home";
     }

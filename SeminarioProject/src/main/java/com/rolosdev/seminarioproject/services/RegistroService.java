@@ -284,9 +284,7 @@ public class RegistroService {
         menuRepository.deleteById(id);
     }
 
-    //reutilizable
     public String modificarStockEIngrediente(Stock stock) {
-        stock.setIdStock(stockRepository.obtenerUltimoId().getIdStock() + 1);
         stockRepository.save(stock);
         return "ok";
     }
@@ -305,7 +303,6 @@ public class RegistroService {
             return "¡La nueva contraseña no puede ser la misma que la original!";
         
         // Validaciones de contraseña
-
         cliente.setPassword(passwordNuevo);
         clienteRepository.save(cliente);
         return "OK";
