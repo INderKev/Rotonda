@@ -124,6 +124,7 @@ public class LoginController {
                 model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
                 model.addAttribute("producto", new Producto());
                 model.addAttribute("menu", new Menu());
+                model.addAttribute("ingredienteAConsultar", new Ingrediente());
                 model.addAttribute("productoAConsultar", new Producto());
                 model.addAttribute("menuAConsultar", new Menu());
                 model.addAttribute("stock",restaurante.getStocks());
@@ -157,6 +158,7 @@ public class LoginController {
                     model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
                     model.addAttribute("producto", new Producto());
                     model.addAttribute("menu", new Menu());
+                    model.addAttribute("ingredienteAConsultar", new Ingrediente());
                     model.addAttribute("productoAConsultar", new Producto());
                     model.addAttribute("menuAConsultar", new Menu());
                     model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );

@@ -1,5 +1,6 @@
 package com.rolosdev.seminarioproject.controller;
 
+import com.rolosdev.seminarioproject.entity.Ingrediente;
 import com.rolosdev.seminarioproject.entity.Menu;
 import com.rolosdev.seminarioproject.entity.Producto;
 import com.rolosdev.seminarioproject.entity.Stock;
@@ -49,8 +50,14 @@ public class ConsultaController {
         model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
         model.addAttribute("producto", new Producto());
         model.addAttribute("menu", new Menu());
+        model.addAttribute("ingredienteAConsultar", new Ingrediente());
+        model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );
         model.addAttribute("productoAConsultar", new Producto());
         model.addAttribute("menuAConsultar", new Menu());
+        model.addAttribute("ingredientes", consultaService.obteneringredientescomplementorestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+        Stock newstock = new Stock();
+        newstock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+        model.addAttribute("newstock", newstock);
         return "/dashboard-restaurante";
     }
 
@@ -64,8 +71,41 @@ public class ConsultaController {
         model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
         model.addAttribute("producto", new Producto());
         model.addAttribute("menu", new Menu());
+        model.addAttribute("ingredienteAConsultar", new Ingrediente());
+        model.addAttribute("stock",UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks() );
         model.addAttribute("productoAConsultar", new Producto());
         model.addAttribute("menuAConsultar", new Menu());
+        model.addAttribute("ingredientes", consultaService.obteneringredientescomplementorestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+        Stock newstock = new Stock();
+        newstock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+        model.addAttribute("newstock", newstock);
+        return "/dashboard-restaurante";
+    }
+
+    @PostMapping("/ingredientePorId")
+    public String consultarMenuPorId(@Validated Ingrediente ingredienteBuscado, BindingResult bindingResult, Model model, SessionStatus status) {
+        ArrayList<Stock> stock = new ArrayList<>();
+        List<Stock> stockAux = UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getStocks();
+        for (Stock s : stockAux)
+            if (s.getIngrediente().getNombre().toLowerCase().equals(ingredienteBuscado.getNombre().toLowerCase())) {
+                stock.add(s);
+                break;
+            }
+
+        model.addAttribute("productos", consultaService.obtenerProductosDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+        model.addAttribute("menus", consultaService.obtenerMenusDelRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+        model.addAttribute("clasificaciones", consultaService.obtenerClasificaciones());
+        model.addAttribute("restaurante", UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+        model.addAttribute("producto", new Producto());
+        model.addAttribute("menu", new Menu());
+        model.addAttribute("ingredienteAConsultar", new Ingrediente());
+        model.addAttribute("stock", stock);
+        model.addAttribute("productoAConsultar", new Producto());
+        model.addAttribute("menuAConsultar", new Menu());
+        model.addAttribute("ingredientes", consultaService.obteneringredientescomplementorestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));
+        Stock newstock = new Stock();
+        newstock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
+        model.addAttribute("newstock", newstock);
         return "/dashboard-restaurante";
     }
 

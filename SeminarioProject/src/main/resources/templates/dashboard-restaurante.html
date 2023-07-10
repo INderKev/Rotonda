@@ -29,8 +29,6 @@
 				<ul class="side-dropdown">
 					<li><a href="#ver-ingredientes">Ver ingrediente</a></li>
 					<li><a href="#agregar-ingrediente">Agregar ingrediente</a></li>
-					<li><a href="#editar-ingrediente">Editar ingrediente</a></li>
-					<li><a href="#eliminar-ingrediente">Eliminar ingrediente</a></li>
 				</ul>
 			</li>
 
@@ -39,8 +37,6 @@
 				<ul class="side-dropdown">
 					<li><a href="#ver-productos">Ver producto</a></li>
 					<li><a href="#agregar-producto">Agregar producto</a></li>
-					<li><a href="#editar-producto">Editar producto</a></li>
-					<li><a href="#eliminar-producto">Eliminar producto</a></li>
 				</ul>
 			</li>
 
@@ -49,8 +45,6 @@
 				<ul class="side-dropdown">
 					<li><a href="#ver-menus">Ver menú</a></li>
 					<li><a href="#agregar-menu">Agregar menú</a></li>
-					<li><a href="#editar-menu">Editar menú</a></li>
-					<li><a href="#">Eliminar menú</a></li>
 				</ul>
 			</li>
 
@@ -79,7 +73,85 @@
 				</ul>
 			</div>
 		</nav>
-
+        <div  class="container-ingredientes">
+            <main th:id="ver-ingredientes">
+                <h1 class="title">Bienvenid@ a la sección de ingredientes</h1>
+                <h3>Consulta tus ingredientes</h3>
+                <div class="id">
+                    <form th:action="@{/ingredientePorId}" th:object="${ingredienteAConsultar}" method="post" style="display: flex">
+                        <label th:id="label-id">Ingresa el nombre de tu producto:</label>
+                        <input type="text" class="form-control" placeholder="Nombre de tu ingrediente" th:id="input-id"
+                               th:field="*{nombre}">
+                        <button class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+                <section>
+                    <table class="table">
+                        <thead class="table-dark">
+                            <th scope="col">ID</th> 
+                            <th scope="col">Nombre de ingrediente</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Modificar</th>
+                        </thead>
+                        <!--Listar ingredientes -->
+                        <tbody class="tabla-menus-consultar"> 
+                            <tr th:each="s:${stock}"> 
+                                <th scope="row" th:text="${s.ingrediente.idIngrediente}"></th>
+                                <td th:text="${s.ingrediente.nombre}"></td>
+                                <td th:text="${s.cantidadStock}"> </td>
+                                <td th:text="${s.ingrediente.descripcion}"></td>
+                                <td><a type="button" th:href="@{/eliminarIngrediente/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Eliminar</a></td>
+                                <td><a type="button" th:href="@{/modificar/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Modificar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+            <!--Seleccionar un nuevo ingrediente para registrar -->
+            <main th:id="agregar-ingrediente">
+                <h3>Agrega un nuevo ingrediente</h3>
+                <section class="form my-3 mx-3" th:id="form-registro-ingrediente">
+                    <div class="container g-0">
+                        <div class="row g-0">
+                                <div class="col-lg-5">
+                                    <img th:src="@{img/dashboard/ingredientes.jpg}" class="img-fluid" alt="productos">
+                                </div>
+                                <div class="col-lg 5 px-5 pt-5">
+                                <form th:action="@{/registarStock}" th:object="${newstock}" method="post">
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <!--Seleccionar el ingrediente -->
+                                            <label>Seleccionar ingrediente</label>
+                                            <select class="form-select" name="ingredientes" th:id="ingredientes"
+                                                    th:field="*{ingrediente.idIngrediente}">
+                                                <option th:each="ingredientess:${ingredientes}"
+                                                        th:value="${ingredientess.idIngrediente}"
+                                                        th:text="${ingredientess.nombre}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label>Cantidad del ingrediente</label>
+                                            <input type="number" class="form-control" name="precio-producto"
+                                                    min="0" required th:field="*{cantidadStock}">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-8">
+                                            <button class="boton-registrar mt-3 mb-5">Registrar ingrediente</button>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
 
 		<div class="container-productos">
             <main th:id="ver-productos">
@@ -97,28 +169,28 @@
                 
                 <table class="table">
                     <thead class="table-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-						<th scope="col">Imagen de tu producto</th>
-                        <th scope="col">Nombre de producto</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Especialidad</th>
-						<th scope="col">Eliminar</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Imagen de tu producto</th>
+                            <th scope="col">Nombre de producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Especialidad</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
                     </thead>
                     <tbody class="tabla-productos-consultar">
-                    <tr th:each="prod:${productos}">
-                        <th scope="row" th:text="${prod.idProducto}"></th>
-                        <td><img th:src="${prod.imagenProducto}" alt="imagen_producto" th:id="imagen-producto"></td>
-                        <td th:text="${prod.nombre}"></td>
-                        <td th:text="${prod.precio}"></td>
-                        <td th:each="clasificacion:${clasificaciones}"
-                            th:if="${clasificacion.idClasificacion == prod.clasificacion.idClasificacion}"
-                            th:text="${clasificacion.nombreClasificacion}"></td>
-                        <td><a type="button" class="btn btn-outline-danger"
-                               th:href="@{/eliminarProducto/{idProducto}(idProducto=${prod.idProducto})}">Eliminar</a>
-                        </td>
-                    </tr>
+                        <tr th:each="prod:${productos}">
+                            <th scope="row" th:text="${prod.idProducto}"></th>
+                            <td><img th:src="${prod.imagenProducto}" alt="imagen_producto" th:id="imagen-producto"></td>
+                            <td th:text="${prod.nombre}"></td>
+                            <td th:text="${prod.precio}"></td>
+                            <td th:each="clasificacion:${clasificaciones}"
+                                th:if="${clasificacion.idClasificacion == prod.clasificacion.idClasificacion}"
+                                th:text="${clasificacion.nombreClasificacion}"></td>
+                            <td><a type="button" class="btn btn-outline-danger"
+                                th:href="@{/eliminarProducto/{idProducto}(idProducto=${prod.idProducto})}">Eliminar</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </main>
@@ -214,12 +286,6 @@
                         
                     </tbody>
                 </table>
-                
-                    </main>
-                
-            
-                
-                
             </main>
 
             <main th:id="agregar-menu">
@@ -265,73 +331,7 @@
                     </div>
                 </section>
             </main>
-            <main th:id="ver-ingredientes">
-                <section>
-                    <table class="table">
-                        <thead class="table-dark">
-                        <th scope="col">ID</th> 
-                                    <th scope="col">Nombre de ingrediente</th>
-                                    <th scope="col">cantidadStock</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col">Eliminar</th>
-                                    <th scope="col">Modificar</th>
-                                </thead>
-                                    <!--Listar ingredientes -->
-                    <tbody class="tabla-menus-consultar"> 
-                        <tr th:each="s:${stock}"> 
-                            <th scope="row" th:text="${s.ingrediente.idIngrediente}"></th>
-                            <td th:text="${s.ingrediente.nombre}"></td>
-                            <td th:text="${s.cantidadStock}"> </td>
-                            <td th:text="${s.ingrediente.descripcion}"></td>
-                            <td><a type="button" th:href="@{/eliminarIngrediente/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Eliminar</a></td>
-                            <td><a type="button" th:href="@{/modificar/{idStock}(idStock=${s.idStock})}" class="btn btn-outline-danger" >Modificar</a></td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </section>
-                <!--Seleccionar un nuevo ingrediente para registrar -->
-                <main th:id="agregar-producto">
-                    <h3>Agrega un nuevo producto</h3>
-                    <section class="form my-3 mx-3" th:id="form-registro-producto">
-                        <div class="container g-0">
-                            <div class="row g-0">
-                                    <div class="col-lg 5 px-5 pt-5">
-                                        <form th:action="@{/registarStock}" th:object="${newstock}" method="post">
-                                            
-                                            <div class="row">
-                                                <div class="form-group col">
-                                                    <!--Seleccionar el ingrediente -->
-                                                    <label>Seleccionar ingrediente</label>
-                                                    <select class="form-select" name="ingredientes" th:id="ingredientes"
-                                                            th:field="*{ingrediente.idIngrediente}">
-                                                        <option th:each="ingredientess:${ingredientes}"
-                                                                th:value="${ingredientess.idIngrediente}"
-                                                                th:text="${ingredientess.nombre}"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col">
-                                                    <label>Cantidad del producto</label>
-                                                    <input type="number" class="form-control" name="precio-producto"
-                                                           min="0" required th:field="*{cantidadStock}">
-                                                    
-                                                </div>
-                                            </div>
-    
-                                            <div class="form-row">
-                                                <div class="col-lg-8">
-                                                    <button class="boton-registrar mt-3 mb-5">Registrar ingrediente</button>
-                                                </div>
-                                            </div>
-                                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
-                                        </form>
-                                    </div>
-                            </div>
-                        </div>
-                    </section>
-                </main>
+
              
             
         </div>
