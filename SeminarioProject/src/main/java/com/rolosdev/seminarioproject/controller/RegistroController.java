@@ -205,8 +205,7 @@ public class RegistroController {
     @PostMapping("/registarStock")
     public String registarStock(HttpServletResponse response, @Validated Stock stock, Model model, RedirectAttributes redirAttrs) {
         stock.setRestaurante(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante());
-        registroService.modificarStockEIngrediente(stock);
-      
+        registroService.agregarStockEIngrediente(stock);
         redirAttrs.addFlashAttribute("success", "¡Ingrediente registrado con exito!");
         return "redirect:/home";
     }

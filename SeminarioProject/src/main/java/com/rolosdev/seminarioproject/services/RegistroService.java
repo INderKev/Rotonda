@@ -284,15 +284,20 @@ public class RegistroService {
         menuRepository.deleteById(id);
     }
 
+    public String agregarStockEIngrediente(Stock stock) {
+        stock.setIdStock(stockRepository.obtenerUltimoId().getIdStock() + 1);
+        return modificarStockEIngrediente(stock);
+    }
+
     public String modificarStockEIngrediente(Stock stock) {
         stockRepository.save(stock);
-        return "ok";
+        return "OK";
     }
     
     public String eliminarstock(int id){
         Stock stock= stockRepository.findById(id).get();
         stockRepository.delete(stock);
-        return "Ok";
+        return "OK";
     }
 
     public String cambiarContrasenaCliente(Cliente cliente, String passwordViejo, String passwordNuevo) {
