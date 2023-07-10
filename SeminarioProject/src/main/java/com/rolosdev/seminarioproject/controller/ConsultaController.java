@@ -124,17 +124,26 @@ public class ConsultaController {
         return "/ingrediente-cantidad";
     }
 
-    @GetMapping("/buscarIngredientesTotales")
-    public String buscarIngredientesTotales(ModelMap modelo){
-        Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
-        modelo.addAttribute("listaIngredientes",lista);
-        return "/lista-ingrediente";
-    }
-
     @GetMapping("/eliminarIngredienteAdm/{nombre}")
     public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
         consultaService.eliminarIngrediente(nombre);
-        return "redirect:/buscarIngredientesTotales";
+        return "redirect:/registro-ingrediente";
+    }
+
+     
+    @PostMapping("/modificarDescripcionIngrediente")
+    //public String modificarDescripcionIngrediente(@PathVariable (name = "nombre") String nombre, @PathVariable(name = "desc") String desc, ModelMap modelo){
+    public String modificarDescripcionIngrediente( @RequestParam(name = "desc") String desc, @PathVariable(name = "ingrediente") String ingre, ModelMap modelo){
+        System.out.println(ingre);
+        System.out.println(desc);
+        //consultaService.eliminarIngrediente(nombre);
+        return "redirect:/registro-ingrediente.html";
+    }
+
+    @GetMapping("/mostrarDescripcionIngrediente/{nombre}")
+    public String mostrarDescripcionIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
+        modelo.addAttribute("ingrediente", nombre);
+        return "/modificar-descripcion";
     }
 }
  
