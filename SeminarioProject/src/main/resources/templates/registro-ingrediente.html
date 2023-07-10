@@ -121,6 +121,57 @@
         </div>
     </section>
 
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Nombre del ingrediente</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Editar descripción</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody th:each=" i : ${listaIngredientes.keySet()}">
+                <tr>       
+                    <td scope="row" th:text="${i}"></td>
+                    <td th:text="${listaIngredientes.get(i)}"></td>
+                    <td>
+                        <div>
+                            <form th:action="@{'/mostrarDescripcionIngrediente/'+${i}}" method="get">
+                                <button>Editar</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td> 
+                        <div th:if = "${listaIngredientes.get(i) == 0}">
+                            <form th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
+                                <button>Eliminar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Productos que se pueden eliminar</h2>
+        <form th:action="@{/eliminarIngredienteAdmLista}" method="get">
+            <select class="form-select" id="idrestaurante" name="value">
+                <option disabled selected>Posible a eliminar</option>
+                <option th:each=" ingrediente : ${listaIngredientes.keySet()}"
+                        th:if = "${listaIngredientes.get(ingrediente) == 0}"
+                        th:value="${ingrediente}"
+                        th:text="${ingrediente}"/>
+            </select>
+            <div class="form-row">
+                <div class="col-lg-8">
+                    <button class="boton-loguear mt-3 mb-5">Eliminar</button>
+                </div>
+            </div>
+        </form>
+    </section>
 
 </body>
 </html>

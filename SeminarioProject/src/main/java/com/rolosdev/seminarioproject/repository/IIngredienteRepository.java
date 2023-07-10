@@ -58,6 +58,18 @@ public interface IIngredienteRepository extends JpaRepository<Ingrediente, Integ
     )
     void borarIngrediente(@Param("nombre") String nomIngrediente);
 
+    @Modifying
+    @Query(
+        value = "update ingrediente set descripcion = :nuevaDescripcion where lower(nom_ingrediente) = lower(:nombre)",
+        nativeQuery = true
+    )
+    void modificarDescripcionIngrediente(@Param("nombre") String nomIngrediente, @Param("nuevaDescripcion") String desc);
+
+    @Query(
+        value = "SELECT * FROM ingrediente WHERE nom_ingrediente = :nombre",
+        nativeQuery = true
+    )
+    Ingrediente getByNombre(String nombre);
 
     @Query(
         value = "SELECT * FROM ingrediente WHERE idingrediente = ?1",

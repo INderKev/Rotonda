@@ -155,9 +155,15 @@ public class ConsultaService {
         return lista;
     }
 
-    @Transactional
     public void eliminarIngrediente(String nombIngrediente){
         ingredienteRepository.borarIngrediente(nombIngrediente);
- 
+    }
+
+    public void editarDescripcionIngrediente(String nomIngrediente, String desc){
+        ingredienteRepository.modificarDescripcionIngrediente(nomIngrediente, desc);
+    }
+
+    public Ingrediente obtenerIngredientePorNombre(String nombre) {
+        return ingredienteRepository.getByNombre(nombre);
     }
 }

@@ -10,6 +10,7 @@ import com.rolosdev.seminarioproject.services.LoginService;
 import com.rolosdev.seminarioproject.services.UsuarioLogueadoService;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -112,6 +113,8 @@ public class LoginController {
                 model.addAttribute("ingrediente", new Ingrediente());
                 ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
                 model.addAttribute("restaurantes", restaurantes);
+                Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
+                model.addAttribute("listaIngredientes",lista); 
                 return "/registro-ingrediente";
 
             case "Restaurante":
@@ -149,6 +152,10 @@ public class LoginController {
                     return "/listarRestaurantes";
                 case "Administrador":
                     model.addAttribute("ingrediente", new Ingrediente());
+                    ArrayList<Restaurante> restaurantes = consultaService.obtenerRestaurantes();
+                    model.addAttribute("restaurantes", restaurantes);
+                    Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
+                    model.addAttribute("listaIngredientes",lista); 
                     return "/registro-ingrediente";
                 case "Restaurante":
                     UsuarioLogueadoService.getUsuarioLogueadoService().setRestaurante(consultaService.obtenerRestauranteById(UsuarioLogueadoService.getUsuarioLogueadoService().getRestaurante().getIdRestaurante()));

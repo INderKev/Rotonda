@@ -23,7 +23,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -126,17 +125,30 @@ public class ConsultaController {
         return "/ingrediente-cantidad";
     }
 
-    @GetMapping("/buscarIngredientesTotales")
-    public String buscarIngredientesTotales(ModelMap modelo){
-        Map<String, Integer> lista = consultaService.obtenerListaIngredientesTotales();
-        modelo.addAttribute("listaIngredientes",lista);
-        return "/lista-ingrediente";
-    }
-
     @GetMapping("/eliminarIngredienteAdm/{nombre}")
     public String elimarIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo){
+        System.out.println(nombre);
         consultaService.eliminarIngrediente(nombre);
-        return "redirect:/buscarIngredientesTotales";
+        return "redirect:/home";
+    }
+    
+    @GetMapping("/eliminarIngredienteAdmLista")
+    public String elimarIngredienteLista(@RequestParam (name = "value") String nombre , ModelMap modelo){
+        consultaService.eliminarIngrediente(nombre);
+        return "redirect:/home";
+    }
+     
+    @GetMapping("/modificarDescripcionIngrediente")
+    public String modificarDescripcionIngrediente(Ingrediente ingrediente, ModelMap modelo){
+        consultaService.editarDescripcionIngrediente(ingrediente.getNombre(), ingrediente.getDescripcion());
+        return "redirect:/home";
+    }
+
+    @GetMapping("/mostrarDescripcionIngrediente/{nombre}")
+    public String mostrarDescripcionIngrediente(@PathVariable (name = "nombre") String nombre , ModelMap modelo) {
+        Ingrediente ingrediente = consultaService.obtenerIngredientePorNombre(nombre);
+        modelo.addAttribute("ingrediente", ingrediente);
+        return "/modificar-descripcion";
     }
 }
  
