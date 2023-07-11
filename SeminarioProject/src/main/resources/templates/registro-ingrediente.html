@@ -18,6 +18,40 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/navbar.css" />
     <!-- <link rel="stylesheet" th:href="@{css/dashboard-restaurante.css}"> -->
+    <style>
+        .section-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    
+        .tabla {
+            width: 80%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 2px solid #2B4E98;
+            text-align: center;
+        }
+    
+        .title-nom-ingrediente,
+        .title-can-ingrediente {
+            background-color: #2B4E98;
+            color: #fff;
+            padding: 10px;
+        }
+    
+        .nom-ingrediente,
+        .can-ingrediente {
+            border-bottom: 1px solid #2B4E98;
+            padding: 10px;
+        }
+    
+        .nom-ingrediente:last-child,
+        .can-ingrediente:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -121,38 +155,39 @@
         </div>
     </section>
 
-    <section>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Nombre del ingrediente</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Editar descripción</th>
-                    <th scope="col">Eliminar</th>
-                </tr>
-            </thead>
-            <tbody th:each=" i : ${listaIngredientes.keySet()}">
-                <tr>       
-                    <td scope="row" th:text="${i}"></td>
-                    <td th:text="${listaIngredientes.get(i)}"></td>
-                    <td>
-                        <div>
-                            <form th:action="@{'/mostrarDescripcionIngrediente/'+${i}}" method="get">
-                                <button>Editar</button>
-                            </form>
-                        </div>
-                    </td>
-                    <td> 
-                        <div th:if = "${listaIngredientes.get(i) == 0}">
-                            <form th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
-                                <button>Eliminar</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-            </tbody>
-        </table>
+    <section class="section-center">
+        
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th class="title-nom-ingrediente">Nombre del ingrediente</th>
+                        <th class="title-can-ingrediente">Cantidad</th>
+                        <th class="title-can-ingrediente">Editar descripción</th>
+                        <th class="title-can-ingrediente">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody th:each="i : ${listaIngredientes.keySet()}">
+                    <tr>
+                        <td class="nom-ingrediente" th:text="${i}"></td>
+                        <td class="can-ingrediente" th:text="${listaIngredientes.get(i)}"></td>
+                        <td>
+                            <div>
+                                <form th:action="@{'/mostrarDescripcionIngrediente/'+${i}}" method="get">
+                                    <button>Editar</button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <div th:if="${listaIngredientes.get(i) == 0}">
+                                <form th:action="@{'/eliminarIngredienteAdm/'+${i}}" method="get">
+                                    <button>Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
     </section>
 
     <section>
